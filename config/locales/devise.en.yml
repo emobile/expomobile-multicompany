@@ -6,6 +6,8 @@ en:
       confirmed: "Your account was successfully confirmed. You are now signed in."
       send_instructions: "You will receive an email with instructions about how to confirm your account in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes."
+    close: "Close"
+    close_this_notification: "Close this notification"
     failure:
       already_authenticated: "You are already signed in."
       inactive: "Your account was not activated yet."
@@ -32,6 +34,8 @@ en:
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Your password was changed successfully. You are now signed in."
       updated_not_active: "Your password was changed successfully."
+    register_attendee: "Register attendee"
+    register_user: "Register user"
     registrations:
       destroyed: "Bye! Your account was successfully cancelled. We hope to see you again soon."
       signed_up: "Welcome! You have signed up successfully."

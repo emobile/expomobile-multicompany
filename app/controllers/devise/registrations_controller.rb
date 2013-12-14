@@ -1,7 +1,7 @@
 require 'securerandom'
 class Devise::RegistrationsController < DeviseController
   #prepend_before_filter :require_no_authentication, :only => [ :new, :create, :cancel ]
-  prepend_before_filter :authenticate_scope!, :only => [ :new, :create, :edit, :update, :destroy]
+  prepend_before_filter :authenticate_scope!, :only => [ :new, :edit, :update, :destroy]
   layout "application"
   
   # GET /resource/sign_up
@@ -13,10 +13,17 @@ class Devise::RegistrationsController < DeviseController
   # POST /resource
   def create
     @user = build_resource
-    #@user.username = SecureRandom.hex(4) 
     @user.password = SecureRandom.hex(4) 
-    @user.password_confirmation =  @user.password
+    @user.password_confirmation = @user.password
+    if !signed_in? && @user.event_id != 1
+      flash[:error] = t(:cant_realize)
+      redirect_to new_user_session_path and return
+    end
     if resource.save
+      unless signed_in?
+        flash[:alert] = t("devise.failure.unconfirmed")
+        redirect_to new_user_session_path and return
+      end
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_navigational_format?
         sign_in(resource_name, resource)
@@ -27,6 +34,9 @@ class Devise::RegistrationsController < DeviseController
         respond_with resource, :location => after_inactive_sign_up_path_for(resource)
       end
     else
+      unless signed_in?
+        render layout: "registration_form", template: "users/sign_up" and return
+      end
       clean_up_passwords resource
       respond_with resource
     end

@@ -8,16 +8,15 @@ class MobileServicesController < ApplicationController
   def get_attendee_id 
     I18n.locale = params[:language]
     session[:language] = params[:language]
-    session[:current_event_id] = params[:event_id]
-    @event = Event.find_by_id(params[:event_id])
-    session[:time_zone] = @event.time_zone
+    @attendee_id = params[:attendee_id].split("-")[0]
+    @event_id = params[:attendee_id].split("-")[1]
+    session[:current_event_id] = @event_id
+    @event = Event.find_by_id(@event_id)
     
-    if params[:attendee_id] =~ /\A[A-Z]\d{3}\z/
-      @attendee = @event.attendees.find_by_attendee_id(params[:attendee_id])
+    if @attendee_id =~ /\A[A-Z]\d{3}\z/
+      @attendee = @event.attendees.find_by_attendee_id(@attendee_id)
       
       if !@attendee.nil?
-        @attendee_id = @attendee.id
-        @event_id = @event.id
         @nip = @attendee.nip
       
         while @nip.nil?
@@ -32,7 +31,6 @@ class MobileServicesController < ApplicationController
         @times_sent = (@nip.times_sent.nil?) ? 0: @nip.times_sent
       
         if @times_sent < 10
-          Time.zone = @event.time_zone
           @can_send_email = false
           @can_send_email = ((Time.zone.now - @nip.sent) >= 0) unless @nip.sent.nil?
       
@@ -50,7 +48,7 @@ class MobileServicesController < ApplicationController
             if !@attendee.a_email.nil?
             
               if AttendeeMailer.send_nip(@attendee, @nip).deliver!
-                @nip.update_attributes(:sent => Time.zone.now, :times_sent => (@nip.times_sent.nil?) ? 1: @nip.times_sent += 1 )
+                @nip.update_attributes(:sent => Time.now, :times_sent => (@nip.times_sent.nil?) ? 1: @nip.times_sent += 1 )
                 @msg = { name: @name, email: @email, subgroup_name: @subgroup_name, group_name: @group_name, subgroup_leader: @subgroup_leader, domain: @domain, enterprise: @enterprise, phone: @phone, address: @address, msg: t("atten.nip_sended", :email => @email), sent: "ok" }
               else
                 @msg = { name: @name, email: @email, subgroup_name: @subgroup_name, group_name: @group_name, subgroup_leader: @subgroup_leader, domain: @domain, enterprise: @enterprise, phone: @phone, address: @address, msg: t("errors.atten_email_dont_sended"), sent: "no" }
@@ -80,12 +78,12 @@ class MobileServicesController < ApplicationController
   end
   
   def get_attendee_nip
+    @attendee_id = params[:attendee_id].split("-")[0]
     
-    if params[:attendee_id] =~ /\A[A-Z]\d{3}\z/
-      @attendee = @event.attendees.find_by_attendee_id(params[:attendee_id])
+    if @attendee_id =~ /\A[A-Z]\d{3}\z/
+      @attendee = @event.attendees.find_by_attendee_id(@attendee_id)
       
       if !@attendee.nil?
-        @attendee_id = @attendee.id
         if params[:nip] =~ /\A[0-9a-z]{4}\z/
           @nip = @attendee.nip
       
@@ -538,17 +536,17 @@ class MobileServicesController < ApplicationController
     render json: @msg
   end
   
-#  def detect_platform
-#    if request.env['HTTP_USER_AGENT'] == ""
-#      access = true
-#    else
-#      access = false
-#    end
-#    unless access
-#      flash[:alert] = t("no_access")
-#      redirect_to root_path
-#    end
-#  end
+  #  def detect_platform
+  #    if request.env['HTTP_USER_AGENT'] == ""
+  #      access = true
+  #    else
+  #      access = false
+  #    end
+  #    unless access
+  #      flash[:alert] = t("no_access")
+  #      redirect_to root_path
+  #    end
+  #  end
 
   def load_event
     @event = Event.find_by_id(session[:current_event_id])

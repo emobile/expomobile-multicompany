@@ -246,6 +246,7 @@ en:
   boolean_false: "No"
   boolean_true: "Yes"
   cancel_my_account: "Cancel my account"
+  cant_realize: "You can't realize this action"
   catalogs: "Catalogue menu"
   cellphone: "Cellphone"
   choose_action: "Choose action"
@@ -566,6 +567,8 @@ en:
     state: "State"
     username: "Username"
     zip: "Zip"
+    
+  user_registration: "User registration"
   
   visit:
     attendances_to_exhibitors: "Attendances to exhibitors"

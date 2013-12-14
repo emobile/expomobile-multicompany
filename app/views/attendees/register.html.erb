@@ -25,7 +25,7 @@
 
 <div style="text-align: center; font-size: 26px; font-weight: bold; margin-bottom: 50px;"><%= t(:attendee_registration) %></div>
 
-<%= form_for(@attendee, :url => "/register_attendee") do |f| %>
+<%= form_for(@attendee, :url => "/register_attendee", :html => { :style => "text-align: left;" }) do |f| %>
   <% if @attendee.errors.any? %>
     <div id="error_explanation">
       <% if @attendee.errors.count == 1 %>
@@ -254,11 +254,11 @@
     </p>
   </fieldset>
   <div class="clear"><div>
-
-      <p><span class="required">*</span>&nbsp;&nbsp;&nbsp;<%= t(:required) %></p>
-
-      <div class="form-actions">
-        <%= f.submit nil, :class => 'button' %>
-      </div>
+  
+        <p><span class="required">*</span>&nbsp;&nbsp;&nbsp;<%= t(:required) %></p>
+  
+        <div class="form-actions">
+          <%= f.submit nil, :class => 'button' %>
+        </div>
 
     <% end %>

@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :username, :length => { :within => 8..30 }, :allow_blank => true
   validates :password, :length => { :within => 8..30 },  :allow_blank => true
   validates_format_of :email, :with => /^\w+([\.-]?\w+)*@[a-zA-Z0-9]+([\.-]?[a-zA-Z0-9]+)*(\.[a-zA-Z]{2,3})+$/i, :allow_blank => true
-  validates_format_of :username, :with => /^[\w\._]+$/i, :reject_blank => true, :message => "solo debe contener _ . letras o numeros."
+  validates_format_of :username, :with => /^[\w\._]+$/i, :reject_blank => true, :message => "solo debe contener _ . letras o numeros.", :if => :username?
   validates_format_of :password, :with => /^[\w]+$/i, :reject_blank => true, :message => "solo debe contener letras y numeros.", :if => proc { |u| !u.password.blank? }
 
   

@@ -275,7 +275,7 @@ class AttendeesController < ApplicationController
   
   def register
     @attendee = Attendee.new
-    render layout: "register_attendee"
+    render layout: "registration_form"
   end
   
   def register_attendee

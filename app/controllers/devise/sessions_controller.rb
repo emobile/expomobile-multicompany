@@ -22,7 +22,7 @@ class Devise::SessionsController < DeviseController
     else
       respond_with resource, :location => after_sign_in_path_for(resource)
     end
-  end  
+  end
 
   # DELETE /resource/sign_out
   def destroy

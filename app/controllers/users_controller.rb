@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
-  load_and_authorize_resource
+  before_filter :authenticate_user!, :except => [:sign_up]
+  load_and_authorize_resource :except => [:sign_up]
   
   def index
     @users = User.order('first_name ASC').paginate(:per_page => 10, :page => params[:page])
@@ -78,12 +78,17 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-      @user = User.find(params[:id])
-      @user.destroy
+    @user = User.find(params[:id])
+    @user.destroy
       
-      respond_to do |format|
-        format.html { redirect_to users_url }
-        format.json { head :no_content }
-      end
+    respond_to do |format|
+      format.html { redirect_to users_url }
+      format.json { head :no_content }
+    end
   end
+  
+  def sign_up
+    render layout: "registration_form"
+  end
+
 end

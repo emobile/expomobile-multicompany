@@ -26,6 +26,14 @@
                     DD_belatedPNG.fix('.png_bg, img, li');
             </script>
     <![endif]-->
+    <style>
+      #error_explanation ul li {
+        margin-top: 20px;
+        color: #000;
+        list-style-type: square;
+        margin-left: 20px;
+      }
+    </style>
 
   </head>
 
@@ -41,20 +49,20 @@
       <div id="login-content">
         <% if flash[:alert] %>
           <div class="notification information png_bg" style="width: 100%;">
-            <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+            <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="<%= t("devise.close_this_notification") %>" alt="<%= t("devise.close") %>" /></a>
             <div>
               <%=  flash[:alert] %>
             </div>
           </div>
         <% end %>
-        <style>
-          #error_explanation ul li {
-            margin-top: 20px;
-            color: #000;
-            list-style-type: square;
-            margin-left: 20px;
-          }
-        </style>
+        <% if flash[:error] %>
+          <div class="notification error png_bg" style="width: 100%;">
+            <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="<%= t("devise.close_this_notification") %>" alt="close" /></a>
+            <div>
+              <%= flash[:error] %>
+            </div>
+          </div>
+        <% end %>
         <%= yield %>
       </div> <!-- End #login-content -->
 
@@ -62,6 +70,10 @@
     <% if controller_name == "sessions" && action_name == "new" %>
       <%= render "devise/shared/links" %>
     <% end %>
+    <div style="text-align: center; margin-top: 50px; line-height: 50px; font-size: 20px; text-decoration: underline;">
+      <%= link_to t("devise.register_user"), users_sign_up_path %><br/>
+      <%= link_to t("devise.register_attendee"), register_path  %><br/>
+    </div>
     <%= yield :javascript_includes %>
   </body>
 

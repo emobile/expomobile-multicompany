@@ -246,6 +246,7 @@ es:
   boolean_false: "No"
   boolean_true: "Si"
   cancel_my_account: "Cancelar mi cuenta"
+  cant_realize: "No puedes realizar esta acción"
   catalogs: "Menú de catálogos"
   cellphone: "Celular"
   choose_action: "Elige una acción"
@@ -566,6 +567,8 @@ es:
     state: "Estado"
     username: "Nombre de usuario"
     zip: "Código postal"
+    
+  user_registration: "Registro del usuario"
   
   visit:
     attendances_to_exhibitors: "Asistencias a expositores"
