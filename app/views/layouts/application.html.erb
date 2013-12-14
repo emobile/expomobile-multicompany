@@ -48,8 +48,8 @@
         <div id="images-container">
           <% unless session[:current_event_id].nil? %>
             <% @event = Event.find_by_id(session[:current_event_id]) %>
-            <div class="logo-div"><a href="http://anadic.com.mx"><%= image_tag @event.logo.url, :class => "logo-img" %></a></div>
-            <div class="banner-div"><a href="http://anadic.com.mx/congreso"><%= image_tag @event.banner.url, :class => "logo-img" %></a></div>
+            <div class="logo-div"><%= image_tag @event.logo.url, :class => "logo-img" %></div>
+            <div class="banner-div"><%= image_tag @event.banner.url, :class => "logo-img" %></div>
             <% if current_user.role.is_admin %>
               <div id="settings-div">
                 <a href="/events/change_logo"><img src="/assets/settings.png"/></a>
