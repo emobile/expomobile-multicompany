@@ -1,0 +1,65 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+<%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+        <th><%= t'exhibitor.exposition_key' %></th>
+        <th><%= t'exhibitor.name' %></th>
+        <th><%= t'exhibitor.social_reason' %></th>
+        <th><%= t'exhibitor.contact' %></th>
+        <th><%= t'exhibitor.email' %></th>
+        <th><%= t'exhibitor.job' %></th>
+        <th><%= t'exhibitor.phone' %></th>
+        <th><%= t'exhibitor.stand_location' %></th>
+        <th><%= t'exhibitor.stand_size' %></th>
+      </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="13">
+<%#*<div class="bulk-actions align-left">%>
+<%#= render "layouts/select_action" %>
+<%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @exhibitors.each do |exhibitor| %>
+        <tr>
+  <%#*<td><input type="checkbox" /></td>%>
+  <%#if can? :show, Exhibitor %>
+  <%#*<td><%= link_to exhibitor.id, exhibitor, :class => 'button' </td>%>
+  <%#else%>
+          <td><%= label exhibitor.id, exhibitor.id %></td>
+  <%# end %>
+          <% @model = exhibitor %>
+          <td><%= exhibitor.exposition_key %><br/><%= link_to t(:qr_code), qr_generator_generate_qr_path(:key => exhibitor.exposition_key, :exhibitor => true, :exhibitor_name => exhibitor.name, :exhibitor_job => exhibitor.job, :stand_location => exhibitor.stand_location), :class => "qr_code" %></td>
+          
+          <td><%= exhibitor.name %></td>
+          
+          <td><%= exhibitor.social_reason %></td>
+          
+          <td><%= exhibitor.contact %></td>
+          
+          <td><%= exhibitor.email %></td>
+          
+          <td><%= exhibitor.job %></td>
+          
+          <td><%= exhibitor.phone %></td>
+          
+          <td><%= exhibitor.stand_location %></td>
+          
+          <td><%= exhibitor.stand_size %></td>
+          <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

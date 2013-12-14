@@ -1,0 +1,13 @@
+<% @event.groups.order(:name).each do |g| %>
+  <% @group_id = g.id %>
+  <div class="group-container">
+    <h3><%= g.name %></h3>
+    <% g.subgroups.order(:name).each do |s| %>
+      <%= link_to "#{s.name} #{s.subgroup_key}", visits_visits_to_workshops_by_workshop_path(:subgroup_id => s.id), :class => "menu-link" %>
+    <% end %>
+  </div>
+<% end %>
+
+<div style="text-align: center; margin-top: 50px;">
+  <%= link_to t(:back), :back, :class => "button", :style => "width: 100px; height: 25px; font-size: 20px !important; text-align: center;" %>
+</div>

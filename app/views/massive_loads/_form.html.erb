@@ -1,0 +1,29 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "massive_loads" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@massive_load) do |f| %>
+<% if @massive_load.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@massive_load.errors.count, "error") %> prohibited this massive_load from being saved:</h2>
+
+  <ul>
+    <% @massive_load.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+  <p class="field">
+    <%= f.label t("massive_load.excel_file") %>
+    <%= f.file_field :excel_file %>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+
+<div class="form-actions">
+  <%= f.submit nil, :class => 'button' %>
+</div>
+
+<% end %>

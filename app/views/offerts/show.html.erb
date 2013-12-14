@@ -1,0 +1,45 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+        <tr>
+        <td>
+          <b><%= t'offert.exhibitor_name' %>:<%= @offert.exhibitor.social_reason %>
+        </td>
+      </tr>
+        <tr>
+        <td style="text-align: center;">
+          <b><%= t'exhibitor.logo' %>:<%= image_tag @offert.exhibitor.logo.url(:thumb) %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'offert.description' %>:<%= @offert.description %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'offert.price' %>:<%= number_to_currency(@offert.price, :unit => "$") %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'offert.start_date' %>:<%= @offert.start_date %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'offert.end_date' %>:<%= @offert.end_date %>
+        </td>
+      </tr>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'offert.location' %>:<%= @offert.location %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

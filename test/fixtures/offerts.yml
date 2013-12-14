@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  expositor_id: 1
+  description: MyString
+  price: 
+  price: 
+  start_date: 2013-09-04 16:12:06
+  end_date: 2013-09-04 16:12:06
+
+two:
+  expositor_id: 1
+  description: MyString
+  price: 
+  price: 
+  start_date: 2013-09-04 16:12:06
+  end_date: 2013-09-04 16:12:06

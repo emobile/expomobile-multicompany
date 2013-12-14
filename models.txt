@@ -1,0 +1,1 @@
+Role,User,Exhibitor,Offer,Group,Room,Workshop,Subgroup,Attendee,Exposition,Sponsor,Activity,Conference,Diary,SystemConfiguration

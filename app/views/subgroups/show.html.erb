@@ -1,0 +1,29 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+      <tr>
+        <td>
+          <b><%= t'subgroup.name' %>:<%= @subgroup.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'subgroup.leader' %>:<%= @subgroup.leader %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'subgroup.subgroup_key' %>:<%= @subgroup.subgroup_key %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'subgroup.group_name' %>:<%= @subgroup.group.name %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

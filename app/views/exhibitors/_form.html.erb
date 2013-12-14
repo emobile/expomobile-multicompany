@@ -1,0 +1,102 @@
+<%= render "layouts/first_tab" %>
+<%= form_for(@exhibitor, :html => { :multipart => true }) do |f| %>
+  <% if @exhibitor.errors.any? %>
+    <div id="error_explanation">
+      <% if @exhibitor.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.exhibitor")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.exhibitor"), :count => @exhibitor.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @exhibitor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset class="column-left">
+    <p class="field">
+      <%= f.label t("exhibitor.logo") %>
+      <%= f.file_field :logo %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.name") %>
+      <%= f.text_field :name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.social_reason") %>
+      <%= f.text_field :social_reason, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.contact") %>
+      <%= f.text_field :contact, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.email") %>
+      <%= f.email_field :email, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.job") %>
+      <%= f.text_field :job, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.phone") %>
+      <%= f.text_field :phone, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
+  </fieldset>
+  <fieldset class="column-right">
+    <p class="field">
+      <%= f.label t("exhibitor.work_street") %>
+      <%= f.text_field :work_street, :class=>"text-input medium-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.work_street_number") %>
+      <%= f.text_field :work_street_number, :class=>"text-input small-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.work_colony") %>
+      <%= f.text_field :work_colony, :class=>"text-input medium-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.work_zip") %>
+      <%= f.text_field :work_zip, :class=>"text-input small-input", :style => "width: 10% !important;", :required => true, :pattern => "[0-9]{5}" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.web_page") %>
+      <%= f.text_field :web_page, :class=>"text-input medium-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.twitter") %>
+      <%= f.text_field :twitter, :class=>"text-input small-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.stand_location") %>
+      <%= f.text_field :stand_location, :class=>"text-input small-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("exhibitor.stand_size") %>
+      <%= f.text_field :stand_size, :class=>"text-input small-input" %>
+    </p>
+    <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+  </fieldset>
+<div class="clear"></div>
+  <p><span class="required">*</span>&nbsp;&nbsp;&nbsp;<%= t(:required) %></p>  
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => "button" %>
+  </div>
+
+<% end %>

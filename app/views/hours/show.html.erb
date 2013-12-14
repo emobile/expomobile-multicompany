@@ -1,0 +1,24 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+          <tr>
+        <td>
+          <b><%= (t'activerecord.models.hour').capitalize %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'hour.start_date' %>:<%= (@hour.start_date.nil?)? "": @hour.start_date.strftime("%d/%m/%Y %I:%M%p") %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'hour.end_date' %>:<%= (@hour.end_date.nil?)? "": @hour.end_date.strftime("%d/%m/%Y %I:%M%p") %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

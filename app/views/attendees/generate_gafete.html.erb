@@ -1,0 +1,136 @@
+<script type="text/javascript">
+  $(function() {
+    $("#with_logos").change(function() {
+      if ($(this).prop("checked")) {
+        $(".gafete-logo").css({visibility: "visible"});
+        $("#gafete-text").css({"border-top": "1px solid #000", "border-bottom": "1px solid #000", "padding-top": "0"});
+        $(".generate-gafete").each(function() {
+          var generate_gafete_href = $(this).attr("href").replace("&with_logos=false", "&with_logos=true");
+          $(this).attr("href", generate_gafete_href);
+        });
+      }
+      else {
+        $(".gafete-logo").css({visibility: "hidden"});
+        $("#gafete-text").css({border: "none", "padding-top": "1px"});
+        $(".generate-gafete").each(function() {
+          var generate_gafete_href = $(this).attr("href").replace("&with_logos=true", "&with_logos=false");
+          $(this).attr("href", generate_gafete_href);
+        });
+      }
+    });
+
+    $("#with_conferences").change(function() {
+      if ($(this).prop("checked")) {
+        $("#conferences").show();
+      }
+      else {
+        $("#conferences").hide();
+      }
+    });
+
+    $("#with_diary").change(function() {
+      if ($(this).prop("checked")) {
+        $("#diary").show();
+      }
+      else {
+        $("#diary").hide();
+      }
+    });
+  });
+</script>
+<h2 style="text-align: center; margin-bottom: 20px;"><%= "#{t("atten.generate_gafete")} gafete" %></h2>
+<%= label_tag t("atten.with_logos"), nil, :style => "font-size: 14px; font-weight: bold; color: #000;" %>
+<%= check_box_tag "with_logos", nil, true, :style => "margin-right: 15px;" %>
+<%= label_tag t("atten.with_conferences"), nil, :style => "font-size: 14px; font-weight: bold; color: #000;" %>
+<%= check_box_tag "with_conferences", nil, true, :style => "margin-right: 15px;" %>
+<%= label_tag t("atten.with_diary"), nil, :style => "font-size: 14px; font-weight: bold; color: #000;" %>
+<%= check_box_tag "with_diary", nil, true, :style => "margin-right: 15px;" %>
+<div style="margin: 15px 0px; font-size: 14px; color: #000;">
+  <span style="font-weight: bold;"><%= t(:note) %>:</span><span> <%= t(:gafete_note) %>.</span>
+</div>
+<% @logo_url = @event.logo.url %>
+<% @banner_url = @event.banner.url %>
+<div id="gafete" style="width: 305px; height: 415px; margin: 0 auto 30px; border: 1px solid #000; color: #000;">
+  <div class="gafete-logo" style="height: 85px; width: 305px; border-bottom: 1px solid #000; visibility: visible;">
+    <%= image_tag @logo_url, :height => 70, :style => "height: 70px; -ms-interpolation-mode: bicubic; margin: 7px; display: inline-block;" %>
+    <%= image_tag "https://chart.googleapis.com/chart?cht=qr&chs=#{85}x#{85}&chl=[#{@a_name},#{@e_tradename},WORK:#{@e_phone},#{@a_email},#{@e_address},#{@a_web}]", :style => "margin: 0px; float: right;" %>    
+  </div>
+  <div class="gafete-logo" style="height: 135px; width: 305px; text-align: center; visibility: visible;">
+    <%= image_tag @banner_url, :height => 125, :width => 295, :style => "height: 125px; width: 290px; -ms-interpolation-mode: bicubic; margin: 5px;" %>
+  </div>
+  <div id="gafete-text" style="height: 115px; border-top: 1px solid #000; border-bottom: 1px solid #000; line-height: 20px; font-family: Arial, Helvetica, sans-serif; text-align: center;">
+    <span style="font-weight: bold; font-size: 16px; top: 15px; position: relative; display: block; height: 40px; margin: 0px 10px;"><%= @a_name %></span>
+    <span style="font-size: 16px; top: 20px; position: relative; margin: 0px 10px;"><%= @e_tradename %></span>
+  </div>
+  <div class="gafete-logo" style="height: 80px; width: 305px; visibility: visible;">
+    <%= image_tag "/assets/logoexpo.png", :width => 100, :style => "width 140px; height: auto; -ms-interpolation-mode: bicubic; top: 8px; position: relative;" %>
+    <div style="float: right; display: inline-block; padding: 20px 20px 0 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
+      <%= image_tag "/assets/face48.png", :width => 20, :style => "width 20px; height: auto; -ms-interpolation-mode: bicubic;" %>
+      <span style="position: relative; bottom: 5px;">eMobileMobilizingIdeas</span><br/>
+      <%= image_tag "/assets/tweet48.png", :width => 20, :style => "width 20px; height: auto; -ms-interpolation-mode: bicubic;" %>
+      <span style="position: relative; bottom: 5px;">@eMobile_mi</span>
+    </div>
+  </div>
+</div>
+<div id="buttons" style="width: 290px; margin: 0 auto 30px; text-align: center;">
+  <%= link_to t("atten.print_gafete"), attendees_print_gafete_a_path(:a_name => @a_name, :e_tradename => @e_tradename, :e_phone => @e_phone, :a_email => @a_email, :e_address => @e_address, :a_web => @a_web, :with_logos => "true"), :class => "button generate-gafete", :target => "_blank" %>
+</div>
+<div id="conferences">
+  <h3 style="margin-bottom: 20px;"><%= t(:conferences) %></h3>
+  <% @offset = 0 %>
+  <% until @conferences.blank? %>
+    <div style="display: inline-block; margin: 0 30px;">
+      <div style="width: 305px; height: 415px; margin-bottom: 30px; border: 1px solid #000; padding: 0 20px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1; color: #000;">
+        <div class="gafete-logo" style="height: 85px; visibility: visible;">
+          <%= image_tag @logo_url, :height => 70, :style => "height: 70px; -ms-interpolation-mode: bicubic; margin: 7px;" %>
+        </div>
+        <% @conferences.each do |conference| %>
+          <div class="conference" style="padding: 10px 0px; border-bottom: 1px solid #aaa; font-size: 10px; vertical-align: top;">
+            <div class="hour" style="display: inline-block; width: 70px; font-size: 8px;"><%= "#{conference.start_date.strftime("%I:%M%p")} - #{conference.end_date.strftime("%I:%M%p")}" %></div>
+            <div class="conferencist-photo" style="width: 40px; display: inline-block;">
+              <% if conference.photo.url(:thumb) != "/assets/missing.jpg" %>
+                <%= image_tag conference.photo.url(:thumb), :width => 40, :style => "width: 40px; -ms-interpolation-mode: bicubic;" %>
+              <% end %>
+            </div>
+            <div class="conference-details" style="width: 150px; padding-left: 10px; display: inline-block;">
+              <span style="font-weight: bold;"><%= conference.name %></span><br/>
+              <span style="color: #c00205;"><%= conference.conferencist %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div id="buttons" style="width: 290px; margin: 0 auto 30px; text-align: center;">
+        <%= link_to t("atten.print_gafete"), attendees_print_gafete_b_path(:offset => @offset, :with_logos => "true"), :class => "button generate-gafete", :target => "_blank" %>
+      </div>
+    </div>
+    <% @offset += 5 %>
+    <% @conferences = Conference.limit(5).offset(@offset) %>
+  <% end %>
+</div>
+<div id="diary">
+  <h3 style="margin-bottom: 20px;"><%= t("activerecord.models.diary").capitalize %></h3>
+  <% @offset = 0 %>
+  <% until @diaries.blank? %>
+    <div style="display: inline-block; margin: 0 30px;">
+      <div style="width: 305px; height: 415px; margin-bottom: 30px; border: 1px solid #000; padding: 0 20px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; line-height: 1; color: #000;">
+        <div class="gafete-logo" style="height: 85px; visibility: visible;">
+          <%= image_tag @logo_url, :height => 70, :style => "height: 70px; -ms-interpolation-mode: bicubic; margin: 7px;" %>
+        </div>
+        <% @diaries.each do |diary| %>
+          <div class="diary" style="padding: 10px 0px; border-bottom: 1px solid #aaa; font-size: 10px; vertical-align: top;">
+            <div class="hour" style="display: inline-block; width: 70px; font-size: 8px;"><%= "#{diary.event_date.strftime("%I:%M%p")} - #{diary.event_end_date.strftime("%I:%M%p")}" %></div>
+            <div class="diary-details" style="width: 150px; padding-left: 10px; display: inline-block;">
+              <span style="font-weight: bold;"><%= diary.description %></span><br/>
+              <span style="color: #c00205;"><%= diary.place %></span>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div id="buttons" style="width: 290px; margin: 0 auto 30px; text-align: center;">
+        <%= link_to t("atten.print_gafete"), attendees_print_gafete_c_path(:offset => @offset, :with_logos => "true"), :class => "button generate-gafete", :target => "_blank" %>
+      </div>
+    </div>
+    <% @offset += 5 %>
+    <% @diaries = Diary.limit(5).offset(@offset) %>
+  <% end %>
+</div>

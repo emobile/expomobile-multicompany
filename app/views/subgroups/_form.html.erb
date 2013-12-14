@@ -1,0 +1,44 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "subgroups" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@subgroup) do |f| %>
+  <% if @subgroup.errors.any? %>
+    <div id="error_explanation">
+      <% if @subgroup.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.subgroup")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.subgroup"), :count => @subgroup.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @subgroup.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="field">
+    <%= f.label t("subgroup.name") %>
+    <%= f.text_field :name, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("subgroup.leader") %>
+    <%= f.text_field :leader, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("subgroup.subgroup_key") %>
+    <%= f.text_field :subgroup_key, :class=>"text-input small-input", :style => "width: 10% !important;", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("subgroup.group_name") %>
+    <%= f.collection_select :group_id, Group.where(:event_id => session[:current_event_id]).order(:name), :id ,:name %>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+  <br/><br/>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
+
+<% end %>

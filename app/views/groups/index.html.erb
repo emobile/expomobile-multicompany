@@ -1,0 +1,44 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'group.name' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="5">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @groups.each do |group| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Group %>
+        <%#*<td><%=link_to group.id, group, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label group.id, group.id %></td>
+        <%#end%>
+                
+             <% @model = group %>
+                          
+          <td><%= group.name %></td>
+
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

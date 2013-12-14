@@ -1,0 +1,52 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'diary.event_start_date' %></th>
+                  <th><%= t'diary.event_end_date' %></th>
+                  <th><%= t'diary.event_type' %></th>
+                  <th><%= t'diary.description' %></th>
+                  <th><%= t'diary.place' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="9">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @diaries.each do |diary| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Diary %>
+        <%#*<td><%=link_to diary.id, diary, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label diary.id, diary.id %></td>
+        <%#end%>
+        
+                
+             <% @model = diary %>
+                          
+          <td><%= diary.event_date %></td>
+          <td><%= diary.event_end_date %></td>
+          <td><%= diary.event_type %></td>
+          <td><%= diary.description %></td>
+          <td><%= diary.place %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

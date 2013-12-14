@@ -1,0 +1,45 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'room.name' %></th>
+                  <th><%= t'room.room_key' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="6">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @rooms.each do |room| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Room %>
+        <%#*<td><%=link_to room.id, room, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label room.id, room.id %></td>
+        <%#end%>
+                
+             <% @model = room %>
+                          
+          <td><%= room.name %></td>
+          <td><%= room.room_key %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

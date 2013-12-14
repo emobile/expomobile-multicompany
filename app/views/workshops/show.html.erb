@@ -1,0 +1,29 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+          <tr>
+        <td>
+          <b><%= @workshop.name.upcase %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'workshop.workshop_key' %>:<%= @workshop.workshop_key %><br/><%= link_to t(:qr_code), qr_generator_generate_qr_path(:type => "workshop", :key => @workshop.workshop_key), :class => "qr_code" %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'workshop.teacher_name' %>:<%= @workshop.teacher_name %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'workshop.room' %>:<%= @workshop.room.name %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

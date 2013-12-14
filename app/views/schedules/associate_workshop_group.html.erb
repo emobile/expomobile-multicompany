@@ -1,0 +1,109 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "schedules" %>
+<% end %>
+<script type="text/javascript">
+  $(function() {
+    $(".associate_workshop_to_group").submit(function(e) {
+      var workshop_id, subgroup_id, hour_id;
+
+      workshop_id = $(this).find("#workshop_id").val();
+      subgroup_id = $(this).find("#subgroup_id").val();
+      hour_id = $(this).find("#hour_id").val();
+
+      $.ajax({
+        type: "get",
+        url: "/schedules/subgroup_change",
+        data: {workshop_id: workshop_id, subgroup_id: subgroup_id, hour_id: hour_id},
+        dataType: "json",
+        cache: false,
+        async: false,
+        success: function(data) {
+
+          if (data.change) {
+            var response = confirm("<%= t(:want_to_replace) %>");
+
+            if (!response) {
+              e.preventDefault();
+              return false;
+            }
+
+          }
+          /*else {
+            e.preventDefault();
+            return false;
+          }*/
+        }
+      });
+    });
+  });
+</script>
+
+<% workshops = Workshop.where(:event_id => session[:current_event_id]).order(:name) %>
+<% i = 1 %>
+<% Hour.where(:event_id => session[:current_event_id]).order(:start_date).pluck(:start_date).map{ |s| s.strftime("%d/%m/%Y") }.uniq.each do |d| %>
+  <% if flash[:schedule_start_date].nil? %>
+    <% default_tab = 1 %>
+  <% else %>
+    <% default_tab = i if flash[:schedule_start_date].strftime("%d/%m/%Y") == d %>
+  <% end %>
+  <div class="tab-content<%= " default-tab" if i == default_tab %>" id="tab<%= i %>">
+    <% i += 1 %>
+    <% hours = Hour.order(:start_date).select { |h| h.start_date.strftime('%d/%m/%Y') == d } %>
+    <table id="schedule">
+      <thead>
+        <tr>
+          <th></th>
+          <% hours.each do |h| %>
+            <th><%= "#{h.start_hour} - #{h.end_hour}" %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% workshops.each do |w| %>
+          <tr>
+            <td><%= "#{w.name} / #{w.room.name}" %></td>
+            <% hours.each do |h| %>
+              <% s = Schedule.find_by_hour_id_and_workshop_id(h.id, w.id) %>
+              <td class="<%= "schedule" unless s.nil? %>">
+                <% unless s.nil? %>
+                  <%= s.subgroup.name %>
+                  <%= hidden_field_tag "workshop#{s.id}", nil, :value => s.workshop_id, :class => "workshop_id" %>
+                  <%= hidden_field_tag "subgroup#{s.id}", nil, :value => s.subgroup_id, :class => "subgroup_id" %>
+                  <%= hidden_field_tag "hour#{s.id}", nil, :value => s.hour_id, :class => "hour_id" %>
+                  <%= hidden_field_tag "schedule#{s.id}", nil, :value => s.id, :class => "schedule_id" %>
+                  <%= hidden_field_tag "view_index#{i}", nil, :value => i, :class => "view_index" %>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <%= form_tag "/schedules/do_association", :id => "form#{i}", :class => "associate_workshop_to_group" do %>
+      <p class="field">
+        <%= label_tag t("hour.workshop_name") %>
+        <%= select_tag "workshop_id", options_from_collection_for_select(Workshop.where(:event_id => session[:current_event_id]).order(:name), :id, :name) %>
+      </p>
+      <p class="field">
+        <%= label_tag t("hour.subgroup_name") %>
+        <%= select_tag "subgroup_id", options_from_collection_for_select(Subgroup.where(:event_id => session[:current_event_id]).order(:name), :id ,:name) %>
+      </p>
+      <p class="field">
+        <%= label_tag t("hour.hour") %>
+        <%= select_tag "hour_id", options_for_select(Hour.where(:event_id => session[:current_event_id]).select { |h| h.start_date.strftime('%d/%m/%Y') == d }.map {|h| [ "#{h.start_hour} - #{h.end_hour}", h.id ] }) %>
+      </p>
+      ID <%= text_field_tag "schedule_id", nil, :readonly => true %>
+      <br/><br/>
+      <div class="form-actions">
+        <%= submit_tag t(:associate_workshop_to_group), :class => 'button' %>
+      </div>
+    <% end %>
+    <br/>
+    <%= form_tag "/schedules/deallocate", :id => "form-delete#{i}" do %>
+      <%= hidden_field_tag "schedule_id_delete" %>
+      <div class="form-actions">
+        <%= submit_tag t("schedule.deallocate"), :class => 'button' %>
+      </div>
+    <% end %>
+  </div>
+<% end %>

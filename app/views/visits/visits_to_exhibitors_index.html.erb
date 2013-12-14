@@ -1,0 +1,118 @@
+<script type="text/javascript">
+  $(function() {
+<% @event.groups.each do |g| %>
+    $("#pie_container_<%= g.id %>").highcharts({
+    chart: {
+    plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false
+    },
+            title: {
+    text: "<%= t("visit.total_visits_to_exhibitors_by_group") %>"
+    },
+            subtitle: {
+    text: "<%= g.name %>"
+    },
+            tooltip: {
+    pointFormat: "{series.name}: <b>{point.y}</b>"
+    },
+            plotOptions: {
+    pie: {
+    allowPointSelect: true,
+            cursor: "pointer",
+            dataLabels: {
+    enabled: true,
+            color: "#000000",
+            connectorColor: "#000000",
+            formatter: function() {
+    if (this.y > 0) return "<b>" + this.point.name + "</b>: " + this.y;
+    }
+    }
+    }
+    },
+  <% data = [] %>
+  <% @event.exhibitors.each do |e| %>
+    <% attendances = AttendeeExposition.joins("INNER JOIN exhibitors e ON attendee_expositions.exhibitor_id = e.id")
+    .joins("INNER JOIN attendees a ON attendee_expositions.attendee_id = a.id")
+    .joins("INNER JOIN subgroups s ON a.subgroup_id = s.id")
+    .joins("INNER JOIN groups g ON s.group_id = g.id")
+    .where("g.id = ? AND e.id = ?", g.id, e.id).count %>
+    <% attendances = nil if attendances == 0 %>
+    <% data << [e.name, attendances] %>
+  <% end %>
+    series: [{
+    type: "pie",
+            name: "<%= t(:attendances) %>",
+            data: <%= data.to_json.html_safe %>
+    }]
+    });
+            $("#bars_container_<%= g.id %>").highcharts({
+    chart: {
+    type: "bar"
+    },
+            title: {
+    text: "<%= t("visit.visits_exhibitors_by_exhibitor") %>"
+    },
+            subtitle: {
+    text: "<%= g.name %>"
+    },
+            xAxis: {
+    categories: [
+  <%= @event.exhibitors.order(:name).map{ |e| "'#{e.name}'" }.join(",").html_safe %>
+    ],
+            allowDecimals: false
+    },
+            yAxis: {
+    allowDecimals: false,
+            title: {
+    text: "<%= t(:visits) %>"
+    }
+    },
+            tooltip: {
+    headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y}</b></td></tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+    },
+            plotOptions: {
+    column: {
+    pointPadding: 0.2,
+            borderWidth: 0
+    }
+    },
+  <% series = [] %>
+  <% g.subgroups.each do |s| %>
+    <% data = [] %>
+    <% @event.exhibitors.order(:name).each do |e| %>
+      <% attendances = AttendeeExposition.joins("INNER JOIN exhibitors e ON attendee_expositions.exhibitor_id = e.id")
+      .joins("INNER JOIN attendees a ON attendee_expositions.attendee_id = a.id")
+      .joins("INNER JOIN subgroups s ON a.subgroup_id = s.id")
+      .where("s.id = ? AND e.id = ?", s.id, e.id).count %>
+      <% attendances = nil if attendances == 0 %>
+      <% data << attendances %>
+    <% end %>
+    <% series << { name: s.name, data: data } %>
+  <% end %>
+    series: <%= series.to_json.html_safe %>
+    });
+<% end %>
+  });
+</script>
+
+<div class="menu-links">
+  <%= link_to t("visit.visits_exhibitors_by_subgroup"), visits_visits_to_exhibitors_by_subgroup_path, :class => "menu-link" %>
+  <%= link_to t("visit.visits_exhibitors_by_exhibitor"), visits_visits_to_exhibitors_by_exhibitor_path, :class => "menu-link" %>
+  <%= link_to t(:generate_report), visits_visits_to_exhibitors_generate_report_by_exhibitor_path, :class => "menu-link" %>
+</div>
+
+<div id="pies_container" style="text-align: center; margin: 50px 0;">
+  <% @event.groups.order(:name).all.each do |g| %>
+    <div id="pie_container_<%= "#{g.id}" %>" style="min-width: 600px; min-height: 400px; margin: 0 25px; display: inline-block;"><%= g.name %></div>
+  <% end %>
+</div>
+
+<% @event.groups.order(:name).each do |g| %>
+  <div id="bars_container_<%= "#{g.id}" %>" style="min-width: 310px; min-height: 800px; margin: 50px auto;"><%= g.name %></div>
+<% end %>

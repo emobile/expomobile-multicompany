@@ -1,0 +1,4 @@
+<div id="tab1" class="tab-content" style="display: block;">
+  <%eval("@#{controller_name} = #{controller_name.singularize.camelize}.order('first_name ASC').paginate(:page => params[:page])")%>
+  <%#= render "#{controller_name}/tab_index" %>
+</div>

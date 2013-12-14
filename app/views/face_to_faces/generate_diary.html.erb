@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+    <title><%= "Expomobile: " + eval("t(:" + controller_name + ")") %></title>
+    <%= csrf_meta_tags %>
+
+    <!-- Internet Explorer Fixes Stylesheet -->
+
+    <!--[if lte IE 7]>
+            <link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen" />
+    <![endif]-->
+
+    <!-- Internet Explorer .png-fix -->
+
+    <!--[if IE 6]>
+            <script type="text/javascript" src="assets/scripts/DD_belatedPNG_0.0.7a.js"></script>
+            <script type="text/javascript">
+                    DD_belatedPNG.fix('.png_bg, img, li');
+            </script>
+    <![endif]-->
+    <style type="text/css">
+      #main-content table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      #main-content table thead th {
+        font-weight: bold;
+        font-size: 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #main-content tbody {
+        border-bottom: 1px solid #ddd;
+      }
+
+      #main-content tbody tr {
+        background: #fff;
+      }
+
+      #main-content tbody tr.alt-row {
+        background: #f3f3f3;
+      }
+
+      #main-content table td,
+      #main-content table th {
+        padding: 10px;
+        line-height: 1.3em;
+      }        
+    </style>
+  </head>
+  <body>
+    <div id="main-content"> <!-- This is the target div. id must match the href of this div's tab -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th><%= t'face_to_face.app_name' %></th>
+            <th><%= t'face_to_face.app_enterprise' %></th>
+            <th><%= t'face_to_face.app_email' %></th>
+            <th><%= t'face_to_face.app_phone' %></th>
+            <th><%= t'face_to_face.int_contact' %></th>
+            <th><%= t'face_to_face.int_job' %></th>
+            <th><%= t'face_to_face.int_name' %></th>
+            <th><%= t'face_to_face.subject' %></th>
+            <th><%= t'face_to_face.start_date' %></th>
+            <th><%= t'face_to_face.end_date' %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% color = false %>
+          <% @face_to_faces.order(:start_date).each do |face_to_face| %>
+          <% color = !color %>
+            <tr class="<%= "alt-row" if color %>">
+              <td><%= face_to_face.attendee.id %></td>
+
+              <td><%= face_to_face.attendee.a_name %></td>
+
+              <td><%= face_to_face.attendee.e_name %></td>
+
+              <td><%= face_to_face.attendee.a_email %></td>
+
+              <td><%= face_to_face.attendee.e_phone %></td>
+
+              <td><%= face_to_face.int_contact %></td>
+
+              <td><%= face_to_face.int_job %></td>
+
+              <td><%= face_to_face.int_name %></td>
+
+              <td><%= face_to_face.subject %></td>
+
+              <td><%= face_to_face.start_date %></td>
+
+              <td><%= face_to_face.end_date %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div> 
+  </body>
+</html>

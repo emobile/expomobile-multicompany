@@ -1,0 +1,59 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  e_name: MyString
+  e_tradename: MyString
+  e_street: MyString
+  e_ext_number: 1
+  e_int_number: 1
+  e_colony: MyString
+  e_municipality: MyString
+  e_city: MyString
+  e_state: MyString
+  e_zip_code: 1
+  e_rfc: MyString
+  e_lada: 1
+  e_phone: 1
+  a_name: MyString
+  a_email: MyString
+  a_chat: MyString
+  a_cellphone: 1
+  a_tel_nextel: 1
+  a_radio_nextel: 1
+  a_is_director: false
+  a_platform: MyString
+  e_main_line: MyString
+  a_sec_line: MyString
+  a_num_employees: 1
+  a_other_line: MyString
+  a_web: MyString
+  a_market_segment: MyString
+
+two:
+  e_name: MyString
+  e_tradename: MyString
+  e_street: MyString
+  e_ext_number: 1
+  e_int_number: 1
+  e_colony: MyString
+  e_municipality: MyString
+  e_city: MyString
+  e_state: MyString
+  e_zip_code: 1
+  e_rfc: MyString
+  e_lada: 1
+  e_phone: 1
+  a_name: MyString
+  a_email: MyString
+  a_chat: MyString
+  a_cellphone: 1
+  a_tel_nextel: 1
+  a_radio_nextel: 1
+  a_is_director: false
+  a_platform: MyString
+  e_main_line: MyString
+  a_sec_line: MyString
+  a_num_employees: 1
+  a_other_line: MyString
+  a_web: MyString
+  a_market_segment: MyString

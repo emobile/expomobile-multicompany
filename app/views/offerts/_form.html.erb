@@ -1,0 +1,52 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "offerts" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@offert) do |f| %>
+<% if @offert.errors.any? %>
+<div id="error_explanation">
+      <% if @offert.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.offert")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.offert"), :count => @offert.errors.count) %></h2>
+      <% end %>
+  <ul>
+    <% @offert.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+  <p class="field">
+    <%= f.label t("offert.exhibitor_name") %>
+    <%= f.collection_select :exhibitor_id, Exhibitor.where(:event_id => session[:current_event_id]).order(:name), :id ,:name %>
+  </p>
+  <p class="field">
+    <%= f.label t("offert.description") %>
+    <%= f.text_area :description, :class=>"small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("offert.price") %>
+    <%= f.text_field :price,:class=>"text-input small-input", :style => "width: 10% !important;", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("offert.start_date") %>
+    <%= f.text_field :start_date, :value => (f.object.start_date.nil?)? "": f.object.start_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("offert.end_date") %>
+    <%= f.text_field :end_date, :value => (f.object.end_date.nil?)? "": f.object.end_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("offert.location") %>
+    <%= f.text_field :location, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+
+<div class="form-actions">
+  <%= f.submit nil, :class => 'button' %>
+</div>
+
+<% end %>

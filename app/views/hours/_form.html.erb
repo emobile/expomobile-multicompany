@@ -1,0 +1,36 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "hours" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@hour) do |f| %>
+<% if @hour.errors.any? %>
+<div id="error_explanation">
+      <% if @hour.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.hour")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.hour"), :count => @hour.errors.count) %></h2>
+      <% end %>
+  <ul>
+    <% @hour.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+  <p class="field">
+    <%= f.label t("hour.start_date") %>
+    <%= f.text_field :start_date, :value => (f.object.start_date.nil?)? "": f.object.start_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("hour.end_date") %>
+    <%= f.text_field :end_date, :value => (f.object.end_date.nil?)? "": f.object.end_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true  %><span class="required">*</span>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+<br/><br/>
+<div class="form-actions">
+  <%= f.submit nil, :class => 'button' %>
+</div>
+
+<% end %>

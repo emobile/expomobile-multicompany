@@ -1,0 +1,9 @@
+<div class="menu-links">
+  <% @event.workshops.order(:name).each do |w| %>
+    <%= link_to w.name, visits_visits_to_workshops_generate_report_path(:workshop_id => w.id), :class => "menu-link" %>
+  <% end %>
+</div>
+
+<div style="text-align: center; margin-top: 50px;">
+  <%= link_to t(:back), :back, :class => "button", :style => "width: 100px; height: 25px; font-size: 20px !important; text-align: center;" %>
+</div>

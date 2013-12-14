@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+    <title><%= "ANADIC: " + eval("t(:" + controller_name + ")") %></title>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+
+    <!-- Internet Explorer Fixes Stylesheet -->
+
+    <!--[if lte IE 7]>
+            <link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen" />
+    <![endif]-->
+
+    <!-- Internet Explorer .png-fix -->
+
+    <!--[if IE 6]>
+            <script type="text/javascript" src="assets/scripts/DD_belatedPNG_0.0.7a.js"></script>
+            <script type="text/javascript">
+                    DD_belatedPNG.fix('.png_bg, img, li');
+            </script>
+    <![endif]-->
+
+  </head>
+
+  <body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+      <%= render "layouts/sidebar" %>
+      <div id="main-content"> <!-- Main Content Section with everything -->
+
+        <noscript> <!-- Show a notification if the user has disabled javascript -->
+          <div class="notification error png_bg">
+            <div>
+              Javascript is disabled or is not supported by your browser. Please <a href="http://browsehappy.com/" title="Upgrade to a better browser">upgrade</a> your browser or <a href="http://www.google.com/support/bin/answer.py?answer=23852" title="Enable Javascript in your browser">enable</a> Javascript to navigate the interface properly.
+            </div>
+          </div>
+        </noscript>
+        <!-- Page Head -->
+        <% if signed_in? && controller_name == "welcome" %>
+          <% @event = Event.find_by_id(session[:current_event_id]) unless session[:current_event_id].nil? %>
+          <h2><%= "#{t(:welcome)} #{current_user.fullname}" %><%= " #{t(:to_event)} #{@event.name}" unless @event.nil? %></h2>     
+        <% end %>
+        <div id="images-container">
+          <% unless session[:current_event_id].nil? %>
+            <% @event = Event.find_by_id(session[:current_event_id]) %>
+            <div class="logo-div"><a href="http://anadic.com.mx"><%= image_tag @event.logo.url, :class => "logo-img" %></a></div>
+            <div class="banner-div"><a href="http://anadic.com.mx/congreso"><%= image_tag @event.banner.url, :class => "logo-img" %></a></div>
+            <% if current_user.role.is_admin %>
+              <div id="settings-div">
+                <a href="/events/change_logo"><img src="/assets/settings.png"/></a>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div id="catalogs">
+          <% unless session[:current_event_id].nil? %>
+            <p id="page-intro"><%= t(:catalogs) %></p>
+            <style>
+              /*.shortcut-buttons-set { list-style: none; padding: 0; margin: 0; }*/
+            </style>
+            <ul class="shortcut-buttons-set"> <!-- Replace the icons URL's with your own -->
+
+              <% unless @event.nil? %>
+
+                <% if @event.has_conference %>
+                  <li><%= link_to conferences_path, :class => "shortcut-button" do %>
+                      <span><%= image_tag("/assets/conferences.png") %><br />
+                        <%= t(:conferences) %>
+                      </span>
+                    <% end %></li>
+                <% end %>
+
+                <li><%= link_to expositions_path, :class => "shortcut-button" do %>
+                    <span><%= image_tag("/assets/expositions.png") %><br/>
+                      <%= t(:expositions) %>
+                    </span>
+                  <% end %></li>
+
+                <% if @event.has_conference %>
+                  <li><%= link_to face_to_faces_path, :class => "shortcut-button" do %>
+                      <span><%= image_tag("/assets/face_to_face.png") %><br />
+                        <%= t(:face_to_faces) %>
+                      </span>
+                    <% end %></li>
+                <% end %>
+
+                <% if @event.has_offert %>
+                  <li><%= link_to offerts_path, :class => "shortcut-button" do %>
+                      <span><%= image_tag("/assets/oferts.png") %><br/>
+                        <%= t(:offerts) %>
+                      </span>
+                    <% end %></li>
+                <% end %>
+
+                <li><%= link_to attendees_path, :class => "shortcut-button" do %>
+                    <span><%= image_tag("/assets/registration.png") %><br/>
+                      <%= t(:attendees) %>
+                    </span>
+                  <% end %></li>
+
+                <li><%= link_to sponsors_path, :class => "shortcut-button" do %>
+                    <span><%= image_tag("/assets/sponsors.png") %><br/>
+                      <%= t(:sponsors) %>
+                    </span>
+                  <% end %></li>
+
+                <li><%= link_to users_path, :class => "shortcut-button" do %>
+                    <span><%= image_tag("/assets/users.png") %><br/>
+                      <%= t(:users) %>
+                    </span>
+                  <% end %></li>
+              <% end %>
+
+            </ul><!-- End .shortcut-buttons-set -->
+          <% end %>
+        </div>
+
+        <div class="clear"></div> <!-- End .clear -->
+
+        <div class="content-box"><!-- Start Content Box -->
+
+          <div class="content-box-header">
+            <h3><%= eval("t(:#{controller_name})") if %w{welcome}.exclude?(controller_name) %></h3>
+            <% if controller_name == "schedules" && action_name == "associate_workshop_group" %>
+              <% if Hour.any? %>
+                <ul class="content-box-tabs">
+                  <% i = 1 %>
+                  <% Hour.order(:start_date).pluck(:start_date).map{ |s| s.strftime("%d/%m/%Y") }.uniq.each do |d| %>
+                    <% if flash[:schedule_start_date].nil? %>
+                      <% default_tab = 1 %>
+                    <% else %>
+                      <% default_tab = i if flash[:schedule_start_date].strftime("%d/%m/%Y") == d %>
+                    <% end %>
+                    <li><a href="#tab<%= i %>" class="<%= "default-tab" if i == default_tab %>"><%= d %></a></li>
+                    <% i += 1 %>
+                  <% end %>
+                </ul>
+              <% end %>
+            <% end %>
+            <div class="clear"></div>
+
+          </div> <!-- End .content-box-header -->
+          <div class="content-box-content">  
+            <% if flash[:notice] %>
+              <div class="notification attention png_bg">
+                <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+                <div>
+                  <%= flash[:notice] %>
+                </div>
+              </div>
+            <% end %>
+            <% if flash[:alert] %>
+              <div class="notification information png_bg">
+                <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+                <div>
+                  <%= flash[:alert] %>
+                </div>
+              </div>
+            <% end %>
+            <% if flash[:success] %>
+              <div class="notification success png_bg">
+                <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+                <div>
+                  <%= flash[:success] %>
+                </div>
+              </div>
+            <% end %>
+            <% if flash[:error] %>
+              <div class="notification error png_bg">
+                <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+                <div>
+                  <%= flash[:error] %>
+                </div>
+              </div>
+            <% end %>
+            <%= yield %>
+          </div> <!-- End .content-box-content -->
+
+        </div> <!-- End .content-box -->
+
+        <div class="clear"></div>
+
+        <div id="footer">
+        </div><!-- End #footer -->
+
+      </div> <!-- End #main-content -->
+
+    </div>
+    <script type="text/javascript">
+      $(function() {
+        $(".field_with_errors").children("select, textarea, input:not(.other)").css({border: "3px solid #ffb7b7"});
+        $(".field_with_errors").children("input[type='checkbox'], input[type='radio']").css({outline: "3px solid #ffb7b7"});
+        $(".field_with_errors").each(function() {
+          $(this).after($(this).html());
+        });
+        $(".field_with_errors").remove();
+      });
+    </script>
+    <%= yield :javascript_includes %>
+    <%= javascript_include_tag "highcharts" %>
+    <%= javascript_include_tag "exporting" %>
+  </body>
+
+</html>

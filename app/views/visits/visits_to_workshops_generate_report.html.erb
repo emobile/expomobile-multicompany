@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+    <title><%= "Expomobile: " + eval("t(:" + controller_name + ")") %></title>
+    <%= csrf_meta_tags %>
+
+    <!-- Internet Explorer Fixes Stylesheet -->
+
+    <!--[if lte IE 7]>
+            <link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen" />
+    <![endif]-->
+
+    <!-- Internet Explorer .png-fix -->
+
+    <!--[if IE 6]>
+            <script type="text/javascript" src="assets/scripts/DD_belatedPNG_0.0.7a.js"></script>
+            <script type="text/javascript">
+                    DD_belatedPNG.fix('.png_bg, img, li');
+            </script>
+    <![endif]-->
+    <style type="text/css">
+      #main-content table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      #main-content table thead th {
+        font-weight: bold;
+        font-size: 15px;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #main-content tbody {
+        border-bottom: 1px solid #ddd;
+      }
+
+      #main-content tbody tr {
+        background: #fff;
+      }
+
+      #main-content tbody tr.alt-row {
+        background: #f3f3f3;
+      }
+
+      #main-content table td,
+      #main-content table th {
+        padding: 10px;
+        line-height: 1.3em;
+      }        
+    </style>
+  </head>
+  <body>
+    <div id="main-content"> <!-- This is the target div. id must match the href of this div's tab -->
+      <h2 style="text-align: center;"><%= "#{(t"activerecord.models.workshop").capitalize} #{@workshop.name}" %></h2>
+      <h3 style="text-align: center;"><%= t(:attendance) %></h3><br/><br/>
+      <% @subgroups.each do |s| %>
+        <% if s.attendees.any? %>
+          <h3><%= "#{(t"activerecord.models.group").capitalize} #{s.name}" %></h3>
+          <table>
+            <thead>
+              <tr style="text-align: left;">
+                <th style="width: 4%;">ID</th>
+                <th style="width: 25%;"><%= t("atten.atten.name") %></th>
+                <th style="width: 25%;"><%= (t'exhibitor.social_reason').mb_chars.upcase %></th>
+                <th style="width: 13%;"><%= t("atten.atten.email") %></th>
+                <th style="width: 13%;"><%= t(:cellphone).upcase %></th>
+                <th style="width: 13%;"><%= t("atten.atten.main_line") %></th>
+                <th style="width: 7%;"><%= t("atten.assisted").mb_chars.upcase %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% color = false %>
+              <% s.attendees.each do |a| %>
+                <% color = !color %>
+                <tr class="<%= "alt-row" if color %>">
+                  <td><%= a.id %></td>
+                  <td><%= a.a_name %></td>
+                  <td><%= a.e_name %></td>
+                  <td><%= a.a_email %></td>
+                  <td><%= a.a_cellphone %></td>
+                  <td><%= a.e_main_line %></td>
+                  <% boolean_color = a[:assisted]? "blue": "red" %>
+                  <td style="color: <%= boolean_color %>;"><%= t("boolean_#{a[:assisted].to_s}") %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table><br/><br/>
+        <% end %>
+      <% end %>
+    </div> 
+  </body>
+</html>

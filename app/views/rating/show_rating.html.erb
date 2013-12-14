@@ -1,0 +1,19 @@
+<div style="width: 300px; display: inline-block; line-height: 30px;"><span style="width: 150px; font-size: 16px; font-weight: bold; position: absolute;"><%= "#{t(:bad_total)}:" %></span><span style="width: 150px; font-size: 16px; margin-left: 150px;"><%= " #{@poor_number}/#{@total}" %></span></div>
+<div style="width: 300px; display: inline-block; line-height: 30px;"><span style="width: 150px; font-size: 16px; font-weight: bold;"><%= "#{t(:percent)}:" %></span><span style="width: 150px; font-size: 16px;"><%= (@poor_percent.nan?)? " 0%": " #{"%.2f" % @poor_percent}%" %></span></div><br/>
+<div style="width: 300px; display: inline-block; line-height: 30px;"><span style="width: 150px;font-size: 16px; font-weight: bold; position: absolute;"><%= "#{t(:fair_total)}:" %></span><span style="width: 150px; font-size: 16px; margin-left: 150px;"><%= " #{@fair_number}/#{@total}" %></span></div>
+<div style="width: 300px; display: inline-block; line-height: 30px;"><span style="width: 150px; font-size: 16px; font-weight: bold;"><%= "#{t(:percent)}:" %></span><span style="width: 150px; font-size: 16px;"><%= (@fair_percent.nan?)? " 0%": " #{"%.2f" % @fair_percent}%" %></span></div><br/>
+<div style="width: 300px; display: inline-block; line-height: 30px;"><span style="width: 150px;font-size: 16px; font-weight: bold; position: absolute;"><%= "#{t(:good_total)}:" %></span><span style="width: 150px; font-size: 16px; margin-left: 150px;"><%= " #{@good_number}/#{@total}" %></span></div>
+<div style="width: 300px; display: inline-block; line-height: 30px;"><span style="width: 150px; font-size: 16px; font-weight: bold;"><%= "#{t(:percent)}:" %></span><span style="width: 150px; font-size: 16px;"><%= (@good_percent.nan?)? " 0%": " #{"%.2f" % @good_percent}%" %></span></div><br/>
+
+<div id="comments">
+  <% if Rating.any? %>
+    <h4><%= t(:comments) %></h4>
+    <br/><br/>
+    <% Rating.all.each do |r| %>
+      <p>-- <%= r.comment %></p>
+      <hr/>
+    <% end %>
+  <% else %>
+    <p><h3><%= t(:no_comments_available) %></h3></p>
+<% end %>
+</div>

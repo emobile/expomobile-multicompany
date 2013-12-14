@@ -1,0 +1,80 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "attendees" %>
+<% end %>
+
+<div style="margin: 25px">
+  <%= form_tag attendees_path, :method => "get", :id => "search_form" do %>
+    <%= label_tag t(:search_by_name) %>
+    <%= text_field_tag :search, params[:search], :id => "search_field", :class => "text-input small-input", :style => "margin-right: 10px;" %>
+  <% end %>
+</div>
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+<%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+        <th><%= t'atten.atten.register_id' %></th>
+        <th><%= t'atten.atten.subgroup' %></th>
+        <th><%= t'atten.enter.tradename' %></th>
+        <th><%= t'atten.atten.name' %></th>
+        <th><%= (t'atten.gafete').upcase %></th>
+        <th><%= t'atten.atten.email' %></th>
+        <th><%= t'atten.atten.cellphone' %></th>
+        <th><%= t'atten.atten.is_director' %></th>
+        <th><%= t'atten.atten.platform' %></th>
+      </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="13">
+<%#*<div class="bulk-actions align-left">%>
+<%#= render "layouts/select_action" %>
+<%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @attendees.each do |attendee| %>
+        <tr>
+  <%#*<td><input type="checkbox" /></td>%>
+  <%#if can? :show, Attendee %>
+  <%#*<td><%=link_to attendee.id, attendee, :class => 'button'</td>%>
+  <%#else%>
+          <td><%= label attendee.id, attendee.id %></td>
+  <%#end%>
+          <% @model = attendee %>
+          <td><%= attendee.attendee_id %></td>
+
+          <td><%= attendee.subgroup.name %></td>
+
+          <td><%= attendee.e_tradename %></td>                      
+
+          <td><%= attendee.a_name %></td>
+
+          <td><%= link_to t("atten.generate_gafete"), attendees_generate_gafete_path(
+              :attendee_id => attendee.attendee_id, :a_name => attendee.a_name, :e_tradename => attendee.e_tradename, :e_phone => attendee.e_phone, 
+              :a_email => attendee.a_email, :e_address => "#{attendee.e_street} #{attendee.e_ext_number}, #{attendee.e_colony}", 
+              :a_web => attendee.a_web, :layout => "true"
+              ), :class => "button" %></td>
+
+          <td><%= attendee.a_email %></td>            
+
+          <td><%= attendee.a_cellphone %></td> 
+
+          <td><%= t("#{attendee.a_is_director.to_s}_value") %></td>
+
+          <td><%= (attendee.a_platform.nil?)? "": attendee.a_platform.gsub(";", "; ").gsub(/;\s$/, "") %></td>
+
+          <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

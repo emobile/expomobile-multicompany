@@ -1,0 +1,16 @@
+<%%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+    <% attributes.each do |attribute| -%>
+      <tr>
+        <td>
+          <b><%%= t'<%= singular_table_name %>.<%= attribute.human_name.downcase.tr(" ", "_") %>' %>:<%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+        </td>
+      </tr>
+    <% end -%>
+  </table>
+</div>
+
+
+<%%= render "layouts/action_links" %>

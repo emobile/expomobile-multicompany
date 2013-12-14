@@ -1,0 +1,152 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+      <tr>
+        <td colspan="2">
+          <b><%= @attendee.a_name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b>ID:<%= @attendee.id %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.id_for_access' %>:<%= @attendee.attendee_id %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'atten.atten.nip' %>:<%= @attendee.nip.nip unless @attendee.nip.nil? %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.subgroup' %>:<%= @attendee.subgroup.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'atten.enter.name' %>:<%= @attendee.e_name %>
+        </td>
+        <td>
+          <b><%= t'atten.enter.tradename' %>:<%= @attendee.e_tradename %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.enter.street' %>:<%= @attendee.e_street %>
+        </td>
+        <td>
+          <b><%= t'atten.enter.ext_number' %>:<%= @attendee.e_ext_number %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.enter.int_number' %>:<%= @attendee.e_int_number %>
+        </td>
+        <td>
+          <b><%= t'atten.enter.colony' %>:<%= @attendee.e_colony %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.enter.municipality' %>:<%= @attendee.e_municipality %>
+        </td>
+        <td>
+          <b><%= t'atten.enter.city' %>:<%= @attendee.e_city %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.enter.state' %>:<%= @attendee.e_state %>
+        </td>
+        <td>
+          <b><%= t'atten.enter.zip_code' %>:<%= @attendee.e_zip_code %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.enter.rfc' %>:<%= @attendee.e_rfc %>
+        </td>
+        <td>
+          <b><%= t'atten.enter.lada' %>:<%= @attendee.e_lada %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.enter.phone' %>:<%= @attendee.e_phone %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.name' %>:<%= @attendee.a_name %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.atten.email' %>:<%= @attendee.a_email %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.chat' %>:<%= @attendee.a_chat %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.atten.cellphone' %>:<%= @attendee.a_cellphone %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.tel_nextel' %>:<%= @attendee.a_tel_nextel %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.atten.radio_nextel' %>:<%= @attendee.a_radio_nextel %>
+          </td>
+        <td>
+          <b><%= t'atten.atten.is_director' %>:<%= t("#{@attendee.a_is_director.to_s}_value") %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.atten.platform' %>:<%= (@attendee.a_platform.nil?)? "": @attendee.a_platform.gsub(";", "; ").gsub(/;\s$/, "") %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.main_line' %>:<%= @attendee.e_main_line %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.atten.sec_line' %>:<%= @attendee.a_sec_line %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.num_employees' %>:<%= @attendee.a_num_employees %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'atten.atten.other_line' %>:<%= @attendee.a_other_line %>
+        </td>
+        <td>
+          <b><%= t'atten.atten.web' %>:<%= @attendee.a_web %>
+        </td>
+      </tr>
+          <tr>
+        <td colspan="2">
+          <b><%= t'atten.atten.market_segment' %>:<%= (@attendee.a_market_segment.nil?)? "": @attendee.a_market_segment.gsub(";", "; ").gsub(/;\s$/, "") %>
+        </td>
+      </tr>
+          <tr>
+        <td colspan="2">
+          <b><%= t(:workshops) %> <%= t(:assisted) %>:<%= @workshops.pluck(:name).join(", ") %>
+            <br/><br/>
+            <span style="width: 150px; font-size: 16px;"><%= " #{@workshops.count} #{t(:of)} #{Workshop.count}" %></span>
+        </td>
+      </tr>
+          <tr>
+        <td colspan="2">
+          <b><%= t(:expositions) %> <%= t(:assisted_female) %>:<%= @expositions.pluck(:name).join(", ") %>
+            <br/><br/>
+            <span style="width: 150px; font-size: 16px;"><%= " #{@expositions.count} #{t(:of)} #{Exposition.count}" %></span>
+        </td>
+      </tr>
+      </table>
+</div>
+
+<%= render "layouts/action_links" %>

@@ -1,0 +1,10 @@
+<p><%= "#{t(:welcome)} #{@email}" %>!</p>
+
+<p><%= t("devise.you_can_confirm_your_account_email") %></p>
+
+<p><%= "Username: #{@resource.username}" %></p>
+<% unless @resource.password.nil? %>
+  <p><%= "Password: #{@resource.password}" %></p>
+<% end %>
+
+<p><%= link_to t("devise.confirm_my_account"), confirmation_url(@resource, :confirmation_token => @resource.confirmation_token) %></p>

@@ -1,0 +1,73 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+    <tr>
+      <td>
+        <b><%= t(:general_info) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t(:applicant) %>:
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.app_name' %>:<%= @face_to_face.attendee.a_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.app_enterprise' %>:<%= @face_to_face.attendee.e_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.app_email' %>:<%= @face_to_face.attendee.a_email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.app_phone' %>:<%= @face_to_face.attendee.e_phone %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t(:interviewee) %>:<%= link_to t(:generate_diary), face_to_faces_generate_diary_path(:int_contact => @face_to_face.int_contact), :class => "menu-link", :style => "margin-left: 50px;" %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.int_contact' %>:<%= @face_to_face.int_contact %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.int_job' %>:<%= @face_to_face.int_job %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.int_name' %>:<%= @face_to_face.int_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.subject' %>:<%= @face_to_face.subject %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.start_date' %>:<%= @face_to_face.start_date %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'face_to_face.end_date' %>:<%= @face_to_face.end_date %>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<%= render "layouts/action_links" %>

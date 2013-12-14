@@ -1,0 +1,83 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+      <tr>
+        <td>
+          <b><%= @exhibitor.name %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.social_reason' %>: <%= @exhibitor.social_reason %>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center;">
+          <b><%= t'exhibitor.logo' %>:<%= image_tag @exhibitor.logo.url(:thumb) %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.contact' %>: <%= @exhibitor.contact %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.email' %>: <%= @exhibitor.email %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.phone' %>: <%= @exhibitor.phone %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.job' %>: <%= @exhibitor.job %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.work_street' %>:<%= @exhibitor.work_street %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.work_street_number' %>:<%= @exhibitor.work_street_number %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.work_colony' %>:<%= @exhibitor.work_colony %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.work_zip' %>:<%= @exhibitor.work_zip %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.web_page' %>:<%= @exhibitor.web_page %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.twitter' %>:<%= @exhibitor.twitter %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.stand_location' %>: <%= @exhibitor.stand_location %>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><%= t'exhibitor.stand_size' %>: <%= @exhibitor.stand_size %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+<%= render "layouts/action_links" %>

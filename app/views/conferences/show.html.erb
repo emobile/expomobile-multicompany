@@ -1,0 +1,44 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+          <tr>
+        <td>
+          <b><%= t'conference.name' %>:<%= @conference.name %>
+        </td>
+      </tr>
+          <tr>
+        <td style="text-align: center;">
+          <b><%= t'conference.photo' %>:<%= image_tag @conference.photo.url(:thumb) %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'conference.conferencist' %>:<%= @conference.conferencist %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'conference.start_date' %>:<%= @conference.start_date %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'conference.end_date' %>:<%= @conference.end_date %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'conference.place' %>:<%= @conference.place %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'conference.observations' %>:<%= @conference.observations %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

@@ -1,0 +1,4 @@
+<div id="tab2" class="tab-content" style="display: block;">
+    <%eval("@#{controller_name.singularize} = #{controller_name.singularize.camelize}.new")%>
+  <%= render 'form' %>
+</div>

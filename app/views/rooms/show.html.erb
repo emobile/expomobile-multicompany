@@ -1,0 +1,19 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+          <tr>
+        <td>
+          <b><%= @room.name.upcase %>
+        </td>
+          </tr>
+          <tr>
+        <td>
+          <b><%= t'room.room_key' %>:<%= @room.room_key %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

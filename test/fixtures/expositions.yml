@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  stand: 
+  exhibitor: 
+  start_date: 2013-09-25 17:54:47
+  end_date: 2013-09-25 17:54:47
+
+two:
+  stand: 
+  exhibitor: 
+  start_date: 2013-09-25 17:54:47
+  end_date: 2013-09-25 17:54:47

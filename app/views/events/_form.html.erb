@@ -1,0 +1,183 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "events" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@event) do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <% if @event.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.event")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.event"), :count => @event.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset class="column-left">
+    <p class="field">
+      <%= f.label t("event.name") %>
+      <%= f.text_field :name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.place") %>
+      <%= f.text_field :place, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.street") %>
+      <%= f.text_field :e_work_street, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.street_number") %>
+      <%= f.text_field :e_work_street_number, :class=>"text-input small-input", :style => "width: 10% important!;" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.colony") %>
+      <%= f.text_field :e_work_colony, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.zip") %>
+      <%= f.text_field :e_work_zip, :class=>"text-input small-input", :style => "width: 10% important!;", :pattern => "[0-9]{5}?" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.city") %>
+      <%= f.text_field :e_city, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.state") %>
+      <%= f.text_field :e_state, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.country") %>
+      <%= f.text_field :e_country, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.workshop_tolerance") %>
+      <%= f.text_field :workshop_tolerance, :class=>"text-input small-input", :style => "width: 10% important!;" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.exposition_tolerance") %>
+      <%= f.text_field :exposition_tolerance, :class=>"text-input small-input", :style => "width: 10% important!;" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.language") %>
+      <%= f.select :language, options_for_select([["Español", "es"], ["English", "en"]], (f.object.language.blank?)? "": f.object.language) %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.time_zone") %>
+      <%= time_zone_select :event, :time_zone, ["International Date Line West", "Midway Island", "American Samoa", "Hawaii", "Alaska", "Pacific Time (US & Canada)", "Tijuana", "Mountain Time (US & Canada)", "Arizona", "Chihuahua", "Mazatlan", "Central Time (US & Canada)", "Saskatchewan", "Guadalajara", "Mexico City", "Monterrey", "Central America", "Eastern Time (US & Canada)", "Indiana (East)", "Bogota", "Lima", "Quito", "Atlantic Time (Canada)", "Caracas", "La Paz", "Santiago", "Newfoundland", "Brasilia", "Buenos Aires", "Georgetown"].map{ |t| ActiveSupport::TimeZone[t] }.sort_by{ |t| t.name }, :default => "Chihuahua" %>
+    </p>
+    <%= f.label t("event.logo") %>
+    <% @file_required = controller.action_name == "new" %>
+    <%= f.file_field :logo, :required => @file_required %><span class="required">*</span>
+    <p class="field">
+      <%= f.label t("event.banner") %>
+      <%= f.file_field :banner, :required => @file_required %><span class="required">*</span>
+    </p>
+    <p class="field">
+    <div class="has">
+      <%= f.label t("event.has_activity") %>
+      <%= f.check_box :has_activity %>
+      <div class="bubble"><%= t("event.descriptions.activity") %></div>
+    </div>
+    <div class="has">
+      <%= f.label t("event.has_conference") %>
+      <%= f.check_box :has_conference %>
+      <div class="bubble"><%= t("event.descriptions.conference") %></div>
+    </div>
+    <div class="has">
+      <%= f.label t("event.has_facetoface") %>
+      <%= f.check_box :has_facetoface %>
+      <div class="bubble"><%= t("event.descriptions.facetoface") %></div>
+    </div>
+    <div class="has">
+      <%= f.label t("event.has_offert") %>
+      <%= f.check_box :has_offert %>
+      <div class="bubble"><%= t("event.descriptions.offert") %></div>
+    </div>
+    <div class="has">
+      <%= f.label t("event.has_workshop") %>
+      <%= f.check_box :has_workshop %>
+      <div class="bubble"><%= t("event.descriptions.workshop") %></div>
+    </div>
+    <p class="field">
+      <%= f.label t("event.start_date") %>
+      <%= f.text_field :start_date, :value => (f.object.start_date.nil?)? "": f.object.start_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.end_date") %>
+      <%= f.text_field :end_date, :value => (f.object.end_date.nil?)? "": f.object.end_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.is_free") %>
+      <%= f.check_box :is_free %>
+    </p>
+  </fieldset>
+  <fieldset class="column-right">
+    <h3 style="text-align: center;"><%= t("event.contact_data") %></h3>
+    <br/>
+    <p class="field">
+      <%= f.label t("event.r_name") %>
+      <%= f.text_field :r_name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.enterprise") %>
+      <%= f.text_field :r_enterprise, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.social_reason") %>
+      <%= f.text_field :r_social_reason, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.job") %>
+      <%= f.text_field :r_job, :class=>"text-input small-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.phone") %>
+      <%= f.text_field :r_phone, :class=>"text-input small-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.email") %>
+      <%= f.email_field :r_email, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("event.street") %>
+      <%= f.text_field :r_work_street, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.street_number") %>
+      <%= f.text_field :r_work_street_number, :class=>"text-input small-input", :style => "width: 10% important!;" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.colony") %>
+      <%= f.text_field :r_work_colony, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.zip") %>
+      <%= f.text_field :r_work_zip, :class=>"text-input small-input", :style => "width: 10% important!;", :pattern => "[0-9]{5}?" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.city") %>
+      <%= f.text_field :r_city, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.state") %>
+      <%= f.text_field :r_state, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.country") %>
+      <%= f.text_field :r_country, :class=>"text-input medium-input" %>
+    </p>
+  </fieldset>
+
+  <div class="clear"></div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
+
+<% end %>

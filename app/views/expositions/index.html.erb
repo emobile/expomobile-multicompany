@@ -1,0 +1,54 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'exposition.name' %></th>
+                  <th><%= t'exposition.location' %></th>
+                  <th><%= t'exposition.start_date' %></th>
+                  <th><%= t'exposition.end_date' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="9">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @expositions.each do |exposition| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Exposition %>
+        <%#*<td><%=link_to exposition.id, exposition, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label exposition.id, exposition.id %></td>
+        <%#end%>
+                
+             <% @model = exposition %>
+        
+          <td><%= exposition.name %></td>
+                          
+          <td><%= exposition.location %></td>
+                             
+          <td><%= (exposition.start_date.nil?)? "": exposition.start_date.strftime("%d/%m/%Y %I:%M%p") %></td>
+                             
+          <td><%= (exposition.end_date.nil?)? "": exposition.end_date.strftime("%d/%m/%Y %I:%M%p") %></td>
+          
+          <td><%= exposition.observations %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

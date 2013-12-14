@@ -1,0 +1,46 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "workshops" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@workshop) do |f| %>
+  <% if @workshop.errors.any? %>
+    <div id="error_explanation">
+      <% if @workshop.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.workshop")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.workshop"), :count => @workshop.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @workshop.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="field">
+    <%= f.label t("workshop.name") %>
+    <%= f.text_field :name, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <% if action_name == "edit" || action_name == "update" %>
+    <p class="field">
+      <%= f.label t("workshop.workshop_key") %>
+    <h4><%= @workshop.workshop_key %></h4>
+    </p>
+  <% end %>
+  <p class="field">
+    <%= f.label t("workshop.teacher_name") %>
+    <%= f.text_field :teacher_name, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("workshop.room") %>
+    <%= f.collection_select :room_id, Room.where(:event_id => session[:current_event_id]).order(:name), :id ,:name %>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+  <br/><br/>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
+
+<% end %>

@@ -1,0 +1,37 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "rooms" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@room) do |f| %>
+<% if @room.errors.any? %>
+<div id="error_explanation">
+      <% if @room.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.room")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.room"), :count => @room.errors.count) %></h2>
+      <% end %>
+  <ul>
+    <% @room.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+  <p class="field">
+    <%= f.label t("room.name") %>
+    <%= f.text_field :name, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  
+  <p class="field">
+    <%= f.label t("room.room_key") %>
+    <%= f.text_field :room_key, :class=>"text-input small-input", :style => "width: 10% !important;", :required => true %><span class="required">*</span>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+<br/><br/>
+<div class="form-actions">
+  <%= f.submit nil, :class => 'button' %>
+</div>
+
+<% end %>

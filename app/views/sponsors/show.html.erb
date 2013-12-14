@@ -1,0 +1,74 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+    <tr>
+      <td>
+        <b><%= @sponsor.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.social_reason' %>:<%= @sponsor.social_reason %>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: center;">
+        <b><%= t'sponsor.logo' %>:<%= image_tag(@sponsor.logo.url(:thumb)) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.contact' %>:<%= @sponsor.contact %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.email' %>:<%= @sponsor.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.phone' %>:<%= @sponsor.phone %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.job' %>:<%= @sponsor.job %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.work_street' %>:<%= @sponsor.work_street %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.work_street_number' %>:<%= @sponsor.work_street_number %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.work_colony' %>:<%= @sponsor.work_colony %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.work_zip' %>:<%= @sponsor.work_zip %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.web_page' %>:<%= @sponsor.web_page %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'sponsor.twitter' %>:<%= @sponsor.twitter %>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

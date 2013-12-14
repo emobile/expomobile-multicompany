@@ -1,0 +1,34 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+    <tr>
+      <td>
+        <b><%= @exposition.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'exposition.location' %>:<%= @exposition.location %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'exposition.start_date' %>:<%= (@exposition.start_date.nil?)? "": @exposition.start_date.strftime("%d/%m/%Y %I:%M%p") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'exposition.end_date' %>:<%= (@exposition.end_date.nil?)? "": @exposition.end_date.strftime("%d/%m/%Y %I:%M%p") %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'exposition.observations' %>:<%= @exposition.observations %>
+      </td>
+    </tr>
+  </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

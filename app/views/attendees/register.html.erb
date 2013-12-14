@@ -1,0 +1,264 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "attendees" %>
+<% end %>
+<script type="text/javascript">
+  $(function() {
+    function updateSubgroups() {
+      var event_id = $("#attendee_event_id").val();
+      
+      $("#attendee_subgroup_id").empty();
+      $.getJSON(
+              "/attendees/get_subgroups",
+              {event_id: event_id},
+      function(data) {
+        $.each(data, function() {
+          $("#attendee_subgroup_id").append($("<option/>").val(this.id).text(this.name));
+        });
+      }
+      );
+    }
+
+    updateSubgroups();
+    $("#attendee_event_id").change(updateSubgroups);
+  });
+</script>
+
+<div style="text-align: center; font-size: 26px; font-weight: bold; margin-bottom: 50px;"><%= t(:attendee_registration) %></div>
+
+<%= form_for(@attendee, :url => "/register_attendee") do |f| %>
+  <% if @attendee.errors.any? %>
+    <div id="error_explanation">
+      <% if @attendee.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.attendee")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.attendee"), :count => @attendee.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @attendee.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div style="text-align: center; font-size: 20px; margin-bottom: 30px;"><%= t'general_info' %></div><br/>
+  <p class="field">
+    <%= f.label :event_id, t("system_configuration.select_event").upcase %>
+  <%# Implement logic to show form if there are any event available %>
+    <%= f.collection_select :event_id, Event.select{ |e| Time.now >= e.start_date && Time.now <= e.end_date && e.is_free }.sort_by{ |e| e.name }, :id ,:name %><span class="required">*</span>
+  </p><br/><br/>
+  <fieldset class="column-left">
+    <p class="field">
+      <%= f.label :subgroup_id, t("atten.atten.subgroup") %>
+      <%= f.collection_select :subgroup_id, Subgroup.order(:name), :id ,:name %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_name, t("atten.enter.name") %>
+      <%= f.text_field :e_name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_tradename, t("atten.enter.tradename") %>
+      <%= f.text_field :e_tradename, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_street, t("atten.enter.street") %>
+      <%= f.text_field :e_street, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_ext_number, t("atten.enter.ext_number") %>
+      <%= f.text_field :e_ext_number, :class=>"text-input small-input", :style => "width: 10% !important;", :required => true, :pattern => "[1-9][0-9]{0,4}" %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_int_number, t("atten.enter.int_number") %>
+      <%= f.text_field :e_int_number, :class=>"text-input small-input", :style => "width: 10% !important;" %>
+    </p>
+    <p class="field">
+      <%= f.label :e_colony, t("atten.enter.colony") %>
+      <%= f.text_field :e_colony, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_municipality, t("atten.enter.municipality") %>
+      <%= f.text_field :e_municipality, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+  </fieldset>
+  <fieldset class="column-right">
+    <p class="field">
+      <%= f.label :e_city, t("atten.enter.city") %>
+      <%= f.text_field :e_city, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_state, t("atten.enter.state") %>
+      <%= f.select :e_state, options_for_select(["AGUASCALIENTES", "BAJA CALIFORNIA NORTE", "BAJA CALIFORNIA SUR", "CAMPECHE", "CHIAPAS", "CHIHUAHUA", "COAHUILA", "COLIMA", "DISTRITO FEDERAL", "DURANGO", "ESTADO DE MEXICO", "GUANAJUATO", "GUERRERO", "HIDALGO", "JALISCO", "MICHOACAN", "MORELOS", "NAYARIT", "NUEVO LEON", "OAXACA", "PUEBLA", "QUERETARO", "QUINTANA ROO", "SAN LUIS POTOSI", "SINALOA", "SONORA", "TABASCO", "TAMAULIPAS", "TLAXCALA", "VERACRUZ", "YUCATAN"], (f.object.e_state.blank?)? "": f.object.e_state), {prompt: t(:please_select).upcase}, :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_zip_code, t("atten.enter.zip_code") %>
+      <%= f.text_field :e_zip_code, :class=>"text-input small-input", :style => "width: 10% !important;", :required => true, :pattern => "[1-9][0-9]{4}" %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_rfc, t("atten.enter.rfc") %>
+      <%= f.text_field :e_rfc, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_lada, t("atten.enter.lada") %>
+      <%= f.text_field :e_lada, :class=>"text-input small-input", :style => "width: 10% !important;", :required => true, :pattern => "[1-9][0-9]{1,2}" %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :e_phone, t("atten.enter.phone") %>
+      <%= f.text_field :e_phone, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
+  </fieldset>
+  <div class="clear"></div>
+  <div style="text-align: center; font-size: 20px; margin-bottom: 30px;"><%= t'contact_info' %></div><br/>
+  <fieldset class="column-left">
+    <p class="field">
+      <%= f.label :a_name, t("atten.atten.name") %>
+      <%= f.text_field :a_name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :a_email, t("atten.atten.email") %>
+      <%= f.email_field :a_email, :required => true, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label :a_chat, t("atten.atten.chat") %>
+      <%= f.text_field :a_chat, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label :a_cellphone, t("atten.atten.cellphone") %>
+      <%= f.text_field :a_cellphone, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
+  </fieldset>
+  <fieldset class="column-right">
+    <p class="field">
+      <%= f.label :a_tel_nextel, t("atten.atten.tel_nextel") %>
+      <%= f.text_field :a_tel_nextel, :class=>"text-input small-input" %>
+    </p>
+    <p class="field">
+      <%= f.label :a_radio_nextel, t("atten.atten.radio_nextel") %>
+      <%= f.text_field :a_radio_nextel, :class=>"text-input small-input" %>
+    </p>
+    <p class="field">
+      <%= f.label :a_is_director, t("atten.atten.is_director") %>
+      <%= f.check_box :a_is_director, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label :a_platform, t("atten.atten.platform") %>
+      <% blackberry = false %>
+      <% iphone = false %>
+      <% android = false %>
+      <% other_platform = nil %>
+      <% p action_name %>
+      <% unless @attendee.a_platform.nil? %>
+        <% @attendee.a_platform.split(";").each do |p| %>
+          <% if p == "Blackberry" %>
+            <% blackberry = true %>
+          <% elsif p == "IPhone" %>
+            <% iphone = true %>
+          <% elsif p == "Android" %>
+            <% android = true %>
+          <% else %>
+            <% other_platform = (@attendee.a_platform.split(";") - ["Blackberry", "IPhone", "Android"]) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= label_tag "Blackberry", nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_platform, {:multiple => true, :checked => blackberry, :class => "checkbox"}, "Blackberry", nil) %>
+      <%= label_tag "Iphone", nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_platform, {:multiple => true, :checked => iphone, :class => "checkbox"}, "IPhone", nil) %>
+      <%= label_tag "Android", nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_platform, {:multiple => true, :checked => android, :class => "checkbox"}, "Android", nil) %>
+      <%= label_tag t(:other), nil, :style => "display: inline-block;" %>
+      <%= check_box_tag("other_platform", true, !other_platform.nil?) %><span class="required">*</span>
+      <% if other_platform.nil? %>
+        <%= f.text_field :a_platform, :name => "attendee[a_platform][]", :class=>"text-input small-input other", :style => "display: block; visibility: hidden;", :value => "" %>
+      <% else %>
+        <%= f.text_field :a_platform, :name => "attendee[a_platform][]", :class=>"text-input small-input other", :style => "display: block;", :value => other_platform[0] %>
+      <% end %>
+    </p>
+  </fieldset>
+  <div class="clear"></div>
+  <div style="text-align: center; font-size: 20px; margin-bottom: 30px;"><%= t'about_enter' %></div><br/>
+  <fieldset class="column-left">
+    <p class="field">
+      <%= f.label :e_main_line, t("atten.atten.main_line") %>
+      <%= f.select :e_main_line, options_for_select(["APLICACIONES WEB", "ASESORIA FONDO PYME", "AULAS EDUCATIVAS / LABORATORIOS", "CABLEADO ESTRUCTURADO", "CAPACITACION", "CCTV", "CONMUTADORES", "CONSULTORIA EN SISTEMAS", "DESARROLLO APL. MOVILES", "DESARROLLO SOFTWARE", "DISEÑO WEB", "ENCICLOMEDIA", "ERP", "FACTURAS ELECTRONICAS", "IMPRESION DIGITAL", "INSTALACION", "INTEGRADOR", "MARKETING DIGITAL", "MICROSOFT", "OTRO", "REDES", "REDES MICROONDAS", "ROBOTICA", "SEGURIDAD INFORMATICA", "SEGURIDAD PERIMETRAL", "SERVICIO / MANTENIMIENTO", "SERVICIO EPSON", "SERVICIOS MOVILES", "SOFTWARE AGENCIAS ADUANALES", "SOFTWARE CONTABLE", "SOFTWARE MICROFINANCIERA", "SOFTWARE AHORRO IMPRENTAS", "SOLUCIONES", "SOPORTE", "TELECOMUNICACIONES", "TELEFONIA", "VENTA DE ACCESORIOS", "VENTA DE CONSUMIBLES", "VENTA DE SOFTWARE", "VENTA EQUIPO DE COMPUTO", "VENTA DE PUNTO DE VENTA", "VENTA DE PUNTO DE VENTA RESTAURANTES", "VIRTUALIZACION", "N/A"], (f.object.e_main_line.blank?)? "": f.object.e_main_line), {prompt: t(:please_select).upcase} %>
+    </p>
+    <p class="field">
+      <%= f.label :a_sec_line, t("atten.atten.sec_line") %>
+      <%= f.select :a_sec_line, options_for_select(["APLICACIONES WEB", "ASESORIA FONDO PYME", "AULAS EDUCATIVAS / LABORATORIOS", "CABLEADO ESTRUCTURADO", "CAPACITACION", "CCTV", "CONMUTADORES", "CONSULTORIA EN SISTEMAS", "DESARROLLO APL. MOVILES", "DESARROLLO SOFTWARE", "DISEÑO WEB", "ENCICLOMEDIA", "ERP", "FACTURAS ELECTRONICAS", "IMPRESION DIGITAL", "INSTALACION", "INTEGRADOR", "MARKETING DIGITAL", "MICROSOFT", "OTRO", "REDES", "REDES MICROONDAS", "ROBOTICA", "SEGURIDAD INFORMATICA", "SEGURIDAD PERIMETRAL", "SERVICIO / MANTENIMIENTO", "SERVICIO EPSON", "SERVICIOS MOVILES", "SOFTWARE AGENCIAS ADUANALES", "SOFTWARE CONTABLE", "SOFTWARE MICROFINANCIERA", "SOFTWARE AHORRO IMPRENTAS", "SOLUCIONES", "SOPORTE", "TELECOMUNICACIONES", "TELEFONIA", "VENTA DE ACCESORIOS", "VENTA DE CONSUMIBLES", "VENTA DE SOFTWARE", "VENTA EQUIPO DE COMPUTO", "VENTA DE PUNTO DE VENTA", "VENTA DE PUNTO DE VENTA RESTAURANTES", "VIRTUALIZACION", "N/A"], (f.object.a_sec_line.blank?)? "": f.object.a_sec_line), {prompt: t(:please_select).upcase} %>
+    </p>
+    <p class="field">
+      <%= f.label :a_num_employees, t("atten.atten.num_employees") %>
+      <%= f.text_field :a_num_employees, :class=>"text-input small-input", :style => "width: 10% !important;", :required => true, :pattern => "[0-9]+" %><span class="required">*</span>
+    </p>
+  </fieldset>
+  <fieldset class="column-right">
+    <p class="field">
+      <%= f.label :a_other_line, t("atten.atten.other_line") %>
+      <%= f.text_field :a_other_line, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label :a_web, t("atten.atten.web") %>
+      <%= f.text_field :a_web, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= f.label :a_market_segment, t("atten.atten.market_segment") %>
+      <% government = false %>
+      <% corporate = false %>
+      <% pymes = false %>
+      <% education = false %>
+      <% health = false %>
+      <% retail = false %>
+      <% web = false %>
+      <% other_market = nil %>
+      <% unless @attendee.a_market_segment.nil? %>
+        <% @attendee.a_market_segment.split(";").each do |m| %>
+          <% if m == "Gobierno" %>
+            <% government = true %>
+          <% elsif m == "Corporativo" %>
+            <% corporate = true %>
+          <% elsif m == "PyMEs" %>
+            <% pymes = true %>
+          <% elsif m == "Educación" %>
+            <% education = true %>
+          <% elsif m == "Salud" %>
+            <% health = true %>
+          <% elsif m == "Retail" %>
+            <% retail = true %>
+          <% elsif m == "Web" %>
+            <% web = true %>
+          <% else %>
+            <% other_market = (@attendee.a_market_segment.split(";") - ["Gobierno", "Corporativo", "PyMEs", "Educación", "Salud", "Retail", "Web"]) %>
+          <% end %>
+        <% end %>
+      <% end %>
+      <%= label_tag t(:government), nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_market_segment, {:multiple => true, :checked => government, :class => "checkbox"}, "Gobierno", nil) %>
+      <%= label_tag t(:corporate), nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_market_segment, {:multiple => true, :checked => corporate, :class => "checkbox"}, "Corporativo", nil) %>
+      <%= label_tag t(:pymes), nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_market_segment, {:multiple => true, :checked => pymes, :class => "checkbox"}, "PyMEs", nil) %>
+      <%= label_tag t(:education), nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_market_segment, {:multiple => true, :checked => education, :class => "checkbox"}, "Educación", nil) %>
+      <%= label_tag t(:health), nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_market_segment, {:multiple => true, :checked => health, :class => "checkbox"}, "Salud", nil) %>
+      <%= label_tag t(:retail), nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_market_segment, {:multiple => true, :checked => retail, :class => "checkbox"}, "Retail", nil) %>
+      <%= label_tag t(:web), nil, :style => "display: inline-block;" %>
+      <%= f.check_box(:a_market_segment, {:multiple => true, :checked => web, :class => "checkbox"}, "Web", nil) %>
+      <%= label_tag t(:other), nil, :style => "display: inline-block;" %>
+      <%= check_box_tag("other_market", true, !other_market.nil?) %><span class="required">*</span>
+      <% if other_market.nil? %>
+        <%= f.text_field :a_market_segment, :name => "attendee[a_market_segment][]", :class=>"text-input small-input other", :style => "display: block; visibility: hidden;", :value => "" %>
+      <% else %>
+        <%= f.text_field :a_market_segment, :name => "attendee[a_market_segment][]", :class=>"text-input small-input other", :style => "display: block;", :value => other_market[0] %>
+      <% end %>
+    </p>
+  </fieldset>
+  <div class="clear"><div>
+
+      <p><span class="required">*</span>&nbsp;&nbsp;&nbsp;<%= t(:required) %></p>
+
+      <div class="form-actions">
+        <%= f.submit nil, :class => 'button' %>
+      </div>
+
+    <% end %>

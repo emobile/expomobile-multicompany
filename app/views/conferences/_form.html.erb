@@ -1,0 +1,55 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "conferences" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@conference) do |f| %>
+<% if @conference.errors.any? %>
+<div id="error_explanation">
+      <% if @conference.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.conference")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.conference"), :count => @conference.errors.count) %></h2>
+      <% end %>
+  <ul>
+    <% @conference.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+  <p class="field">
+    <%= f.label t("conference.name") %>
+    <%= f.text_field :name, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("conference.photo") %>
+    <%= f.file_field :photo %>
+  </p>
+  <p class="field">
+    <%= f.label t("conference.conferencist") %>
+    <%= f.text_field :conferencist, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("conference.start_date") %>
+    <%= f.text_field :start_date, :value => (f.object.start_date.nil?)? "": f.object.start_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("conference.end_date") %>
+    <%= f.text_field :end_date, :value => (f.object.end_date.nil?)? "": f.object.end_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("conference.place") %>
+    <%= f.text_field :place, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("conference.observations") %>
+    <%= f.text_area :observations, :class=>"small-input" %>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+
+<div class="form-actions">
+  <%= f.submit nil, :class => 'button' %>
+</div>
+
+<% end %>

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  nip: MyString
+  attendee_id: 1
+  sended: false
+
+two:
+  nip: MyString
+  attendee_id: 1
+  sended: false

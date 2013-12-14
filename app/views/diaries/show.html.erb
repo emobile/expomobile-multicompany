@@ -1,0 +1,39 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+          <tr>
+        <td>
+          <b><%= (t'activerecord.models.diary').capitalize %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'diary.event_start_date' %>:<%= @diary.event_date %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'diary.event_end_date' %>:<%= @diary.event_end_date %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'diary.event_type' %>:<%= @diary.event_type %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'diary.description' %>:<%= @diary.description %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'diary.place' %>:<%= @diary.place %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

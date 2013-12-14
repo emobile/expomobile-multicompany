@@ -1,0 +1,72 @@
+<div style="text-align: center; margin: 20px 0 40px;">
+  <h2><%= label_tag t("visit.control_numbers_report") %></h2>
+</div>
+<div style="line-height: 30px;">
+  <% @attendees_total = Attendee.count %>
+  <table style="margin-bottom: 20px; width: auto; font-size: 16px;">
+    <tr>
+      <td>
+        <%= t("visit.attendees_total") %>
+      </td>
+      <td style="font-weight: bold;">
+        <%= @attendees_total %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= t("visit.exhibitors_total") %>
+      </td>
+      <td style="font-weight: bold;">
+        <%= @event.exhibitors.count %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= t("visit.sponsors_total") %>
+      </td>
+      <td style="font-weight: bold;">
+        <%= @event.sponsors.count %>
+      </td>
+    </tr>
+    <% if @event.has_workshop %>
+      <tr>
+        <td>
+          <%= t("visit.workshops_total") %>
+        </td>
+        <td style="font-weight: bold;">
+          <%= @event.workshops.count %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <%= label_tag t(:attendances), nil, :style => "font-weight: bold; font-size: 18px;" %><br/>
+  <table style="margin-bottom: 20px; width: auto; font-size: 16px;">
+    <tr>
+      <td>
+        <%= t(:exhibitors) %>
+      </td>
+      <td style="font-weight: bold;">
+        <%= "#{"%.1f" % (@event.attendee_expositions.count * 100 / @attendees_total)}%" %>
+      </td>
+    </tr>
+    <% if @event.has_workshop %>
+      <tr>
+        <td>
+          <%= t(:workshops) %>
+        </td>
+        <td style="font-weight: bold;">
+          <%= "#{"%.1f" % (@event.attendee_workshops.count * 100 / @attendees_total)}%" %>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td>
+        <%= t("visit.users_using_the_app") %>
+      </td>
+      <td style="font-weight: bold;">
+        <%= @event.nips.count %>
+      </td>
+    </tr>
+  </table>
+  <%= link_to t("visit.generate_pdf_report"), visits_control_numbers_report_pdf_path(:format => "pdf"), :class => "button" %>
+</div>

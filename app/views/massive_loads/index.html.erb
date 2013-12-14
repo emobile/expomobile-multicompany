@@ -1,0 +1,44 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <th><input class="check-all" type="checkbox" /></th>
+        <th>ID</th>
+                  <th><%= t'massive_load.excel_file' %></th>
+              </tr>
+
+    </thead>
+    
+    <tfoot>
+      <tr>
+        <td colspan="4">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @massive_loads.each do |massive_load| %>
+      <tr>
+        <td><input type="checkbox" /></td>
+        <%if can? :show, MassiveLoad %>
+        <td><%=link_to massive_load.id, massive_load, :class => 'button'%></td>
+        <%else%>
+        <td><%= label massive_load.id, massive_load.id %></td>
+        <%end%>
+        
+                
+             <% @model = massive_load %>
+                          
+          <td><%= massive_load.excel_file_file_name %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

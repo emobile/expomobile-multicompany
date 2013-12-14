@@ -1,0 +1,14 @@
+<div class="notification" style="margin-bottom: 40px; text-align: center">
+  <div>
+    <p><%= t("devise.forgot_your_password") %></p>
+  </div>
+</div>
+<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
+  <%= devise_error_messages! %>
+
+  <p><%= f.label :email %>
+    <%= f.email_field :email, :autofocus => true, :class=>"text-input" %></p>
+
+  <div class="clear"></div>
+  <p><%= f.submit t("devise.send_me_reset_password_instructions"), :class=>"button" %></p>
+<% end %>

@@ -1,0 +1,14 @@
+<td><%=link_to @model, :class=>"nav-header" do%>
+    <img src="/assets/icons/information.png" alt="Edit" />
+  <%end%></td>
+<% if !%w{massive_loads}.include?(controller_name) %>
+  <td><%=link_to eval("edit_#{controller_name.singularize}_path(@model)"), :class=>"nav-header" do%>
+      <img src="/assets/icons/pencil.png" alt="Edit" />
+    <%end%></td>
+<% end %>
+<% if !%w{system_configurations}.include?(controller_name) %>
+  <td><%=link_to @model, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"nav-header" do%>
+      <img src="/assets/icons/cross.png" alt="Delete" />
+    <%end%>
+  </td>
+<% end %>

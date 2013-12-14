@@ -1,0 +1,57 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+    <tr>
+      <td>
+        <%= @user.fullname %>
+      </td>
+    </tr>
+    <tr>
+    </tr>
+    <tr>
+      <td>
+      <b><%= t'user.email'%>:</b>        <%= @user.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <b><%= t'user.phone'%>:</b>        <%= @user.phone %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+         <b><%= t'user.address'%>:</b>        <%= @user.address %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <b><%= t'user.city'%>:</b>      <%= @user.city %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      <b><%= t'user.state'%>:</b>      <%= @user.state %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+     <b><%= t'user.zip'%>:</b>        <%= @user.zip %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+     <b><%= t'user.country'%>:</b>        <%= @user.country %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+     <b><%= t'user.role_name'%>:</b><%= @user.role.name %>
+      </td>
+    </tr>
+    <tr>
+  </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

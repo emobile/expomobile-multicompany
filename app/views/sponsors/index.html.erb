@@ -1,0 +1,71 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'sponsor.name' %></th>
+                  <th><%= t'sponsor.social_reason' %></th>
+                  <th><%= t'sponsor.contact' %></th>
+                  <th><%= t'sponsor.email' %></th>
+                  <th><%= t'sponsor.job' %></th>
+                  <th><%= t'sponsor.phone' %></th>
+                  <th><%= t'sponsor.work_street' %></th>
+                  <th><%= t'sponsor.work_street_number' %></th>
+                  <th><%= t'sponsor.work_colony' %></th>
+                  <th><%= t'sponsor.work_zip' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="14">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @sponsors.each do |sponsor| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Sponsor %>
+        <%#*<td><%=link_to sponsor.id, sponsor, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label sponsor.id, sponsor.id %></td>
+        <%#end%>
+                
+             <% @model = sponsor %>
+                          
+          <td><%= sponsor.name %></td>                         
+                             
+          <td><%= sponsor.social_reason %></td>
+          
+          <td><%= sponsor.contact %></td>
+          
+          <td><%= sponsor.email %></td>
+          
+          <td><%= sponsor.job %></td>
+          
+          <td><%= sponsor.phone %></td>
+                             
+          <td><%= sponsor.work_street %></td>
+          
+          <td><%= sponsor.work_street_number %></td>
+          
+          <td><%= sponsor.work_colony %></td>
+          
+          <td><%= sponsor.work_zip %></td>
+
+          <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

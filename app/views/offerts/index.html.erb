@@ -1,0 +1,58 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'exhibitor.name' %></th>
+                  <th><%= t'offert.description' %></th>
+                  <th><%= t'offert.price' %></th>
+                  <th><%= t'offert.start_date' %></th>
+                  <th><%= t'offert.end_date' %></th>
+                  <th><%= t'offert.location' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="10">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @offerts.each do |offert| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Offert %>
+        <%#*<td><%=link_to offert.id, offert, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label offert.id, offert.id %></td>
+        <%#end%>
+                
+             <% @model = offert %>
+                          
+          <td><%= offert.exhibitor.social_reason %></td>
+                             
+          <td><%= offert.description %></td>
+                             
+          <td><%= number_to_currency(offert.price, :unit => "$") %></td>
+                             
+          <td><%= offert.start_date %></td>
+                             
+          <td><%= offert.end_date %></td>
+          
+          <td><%= offert.location %></td>
+          <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

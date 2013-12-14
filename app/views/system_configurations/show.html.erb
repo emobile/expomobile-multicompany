@@ -1,0 +1,32 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+    <tr>
+      <td>
+        <b><%= (t'activerecord.models.system_configuration').capitalize %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'system_configuration.token' %>:<%= @system_configuration.token %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <% @languages = { "es" => "Español", "en" => "English" } %>
+        <b><%= t'system_configuration.language' %>:<%= @languages[@system_configuration.language] %>
+      </td>
+    </tr>
+    <% @event = Event.find_by_id(session[:current_event_id]) unless session[:current_event_id].nil? %>
+    <% unless @event.nil? %>
+    <tr>
+      <td>
+        <b><%= t'system_configuration.current_event' %>:<%= @event.name %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>
+
+<%= render "layouts/action_links" %>

@@ -1,0 +1,66 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+        <th><%= t'event.name' %></th>
+        <th><%= t'event.place' %></th>
+        <th><%= t'event.r_name' %></th>
+        <th><%= t'event.r_enterprise' %></th>
+        <th><%= t'event.r_social_reason' %></th>
+        <th><%= t'event.r_phone' %></th>
+        <th><%= t'event.r_email' %></th>
+        <th><%= t'event.r_job' %></th>
+      </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="11">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <%#*<td><input type="checkbox" /></td>%>
+          <%#if can? :show, Event %>
+            <%#*<td><%=link_to event.id, event, :class => 'button'</td>%>
+          <%#else%>
+            <td><%= label event.id, event.id %></td>
+          <%#end%>
+
+
+          <% @model = event %>
+
+          <td><%= event.name %></td>
+          
+          <td><%= event.place %></td>
+
+          <td><%= event.r_name %></td>
+
+          <td><%= event.r_enterprise %></td>
+
+          <td><%= event.r_social_reason %></td>
+
+          <td><%= event.r_phone %></td>
+
+          <td><%= event.r_email %></td>
+
+          <td><%= event.r_job %></td>
+
+          <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

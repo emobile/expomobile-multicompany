@@ -1,0 +1,145 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+    <tr>
+      <td colspan="2">
+        <b><%= @event.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.place' %>:<%= @event.place %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.street' %>:<%= @event.r_work_street %>
+      </td>
+      <td>
+        <b><%= t'event.street_number' %>:<%= @event.r_work_street_number %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.colony' %>:<%= @event.r_work_colony %>
+      </td>
+      <td>
+        <b><%= t'event.zip' %>:<%= @event.r_work_zip %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.city' %>:<%= @event.r_city %>
+      </td>
+      <td>
+        <b><%= t'event.state' %>:<%= @event.r_state %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <b><%= t'event.country' %>:<%= @event.r_country %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.r_name' %>:<%= @event.r_name %>
+      </td>
+      <td>
+        <b><%= t'event.enterprise' %>:<%= @event.r_enterprise %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.social_reason' %>:<%= @event.r_social_reason %>
+      </td>
+      <td>
+        <b><%= t'event.phone' %>:<%= @event.r_phone %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.email' %>:<%= @event.r_email %>
+      </td>
+      <td>
+        <b><%= t'event.job' %>:<%= @event.r_job %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.street' %>:<%= @event.r_work_street %>
+      </td>
+      <td>
+        <b><%= t'event.street_number' %>:<%= @event.r_work_street_number %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.colony' %>:<%= @event.r_work_colony %>
+      </td>
+      <td>
+        <b><%= t'event.zip' %>:<%= @event.r_work_zip %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.city' %>:<%= @event.r_city %>
+      </td>
+      <td>
+        <b><%= t'event.state' %>:<%= @event.r_state %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.country' %>:<%= @event.r_country %>
+      </td>
+      <td>
+        <b><%= t'event.language' %>:<%= @event.language %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <b><%= t'event.time_zone' %>:<%= @event.time_zone %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.logo' %>:<%= image_tag @event.logo.url %>
+      </td>
+      <td>
+        <b><%= t'event.banner' %>:<%= image_tag @event.banner.url %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.workshop_tolerance' %>:<%= @event.workshop_tolerance %>
+      </td>
+      <td>
+        <b><%= t'event.exposition_tolerance' %>:<%= @event.exposition_tolerance %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.has_activity' %>:<%= @event.has_activity %>
+      </td>
+      <td>
+        <b><%= t'event.has_conference' %>:<%= @event.has_conference %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.has_facetoface' %>:<%= @event.has_facetoface %>
+      </td>
+      <td>
+        <b><%= t'event.has_offert' %>:<%= @event.has_offert %>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <b><%= t'event.has_workshop' %>:<%= @event.has_workshop %>
+      </td>
+    </tr>
+  </table>
+</div>
+
+<%= render "layouts/action_links" %>

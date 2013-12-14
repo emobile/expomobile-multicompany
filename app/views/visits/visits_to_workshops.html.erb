@@ -1,0 +1,46 @@
+<% if @subgroups.blank? %>
+  <h4><%= t(:no_visits) %></h4>
+<% else %>
+  <% @subgroups.keys.each do |k| %>
+    <h3 style="margin-top: 50px;"><%= k %></h3>
+    <div class="tab-content default-tab"> <!-- This is the target div. id must match the href of this div's tab -->
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th><%= t'atten.atten.name' %></th>
+            <th><%= (t'exhibitor.social_reason').mb_chars.upcase %></th>
+            <th><%= t'atten.atten.email' %></th>
+            <th><%= t(:cellphone).upcase %></th>
+            <th><%= t'atten.atten.main_line' %></th>
+            <th><%= t(:register_date) %></th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+          <% @subgroups[k].each do |a| %>
+            <tr>
+              <td><%=link_to a.id, a, :class => 'button'%></td>
+
+              <td><%= a.a_name %></td>
+
+              <td><%= a.e_name %></td>
+
+              <td><%= a.a_email %></td>
+
+              <td><%= a.a_cellphone %></td>
+
+              <td><%= a.e_main_line %></td>
+
+              <td><%= a.register_date %></td>
+            <% end %>
+        </tbody>
+      </table>
+    </div> 
+  <% end %>
+<% end %>
+
+<div style="text-align: center; margin-top: 50px;">
+  <%= link_to t(:back), :back, :class => "button", :style => "width: 100px; height: 25px; font-size: 20px !important; text-align: center;" %>
+</div>

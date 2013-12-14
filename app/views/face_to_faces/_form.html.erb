@@ -1,0 +1,81 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "face_to_faces" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@face_to_face) do |f| %>
+  <% if @face_to_face.errors.any? %>
+    <div id="error_explanation">
+      <% if @face_to_face.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.face_to_face")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.face_to_face"), :count => @face_to_face.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @face_to_face.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset class="column-left">
+    <h3 style="text-align: center;"><%= t(:applicant) %></h3><br/>
+    <p class="field">
+      <%= f.label t(:type_attendee_name), nil, :style => "font-size: 14px;" %>
+      <%= text_field_tag "app_name", nil, :class =>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= label_tag t("face_to_face.app_attendee_id") %>
+      <%= text_field_tag "app_attendee_id", nil, :readonly => true, :class=>"text-input small-input" %>
+    </p>
+    <p class="field">
+      <%= label_tag t("face_to_face.app_enterprise") %>
+      <%= text_field_tag "app_enterprise", nil, :readonly => true, :class=>"text-input medium-input" %>
+    </p>
+    <p class="field">
+      <%= label_tag t("face_to_face.app_email") %>
+      <%= text_field_tag "app_email", nil, :readonly => true, :class=>"text-input small-input" %>
+    </p>
+    <p class="field">
+      <%= label_tag t("face_to_face.app_phone") %>
+      <%= text_field_tag "app_phone", nil, :readonly => true, :class=>"text-input small-input" %>
+    </p>
+    <%= f.hidden_field :attendee_id %>
+  </fieldset>
+  <fieldset class="column-right">
+    <h3 style="text-align: center;"><%= t(:interviewee) %></h3><br/>
+    <p class="field">
+      <%= f.label t("face_to_face.int_name") %>
+      <% @interviewees = Sponsor.where(:event_id => session[:current_event_id]).map { |s| [s.name, s.name] } + Exhibitor.where(:event_id => session[:current_event_id]).map { |e| [e.name, e.name] } %>
+      <% @interviewees.uniq!.sort! %>
+      <%= f.select :int_name, @interviewees, :prompt => t(:please_select) %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("face_to_face.int_contact") %>
+      <%= f.text_field :int_contact, :readonly => true, :class=>"text-input small-input" %><span class="required">*</span>
+    </p>
+    <p class="field">
+      <%= f.label t("face_to_face.int_job") %>
+      <%= f.text_field :int_job, :readonly => true, :class=>"text-input small-input" %><span class="required">*</span>
+    </p>
+  </fieldset>
+  <div class="clear"></div>
+  <p class="field">
+    <%= f.label t("face_to_face.subject") %>
+    <%= f.text_field :subject, :class=> "text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("face_to_face.start_date") %>
+    <%= f.text_field :start_date, :value => (f.object.start_date.nil?)? "": f.object.start_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("face_to_face.end_date") %>
+    <%= f.text_field :end_date, :value => (f.object.end_date.nil?)? "": f.object.end_date.strftime("%d/%m/%Y %I:%M%p"), :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
+
+<% end %>

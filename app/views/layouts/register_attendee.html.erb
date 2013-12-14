@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+  <head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    
+    <title><%= "Expomobile: " + eval("t(:" + controller_name + ")") %></title>
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+
+    <!-- Internet Explorer Fixes Stylesheet -->
+
+    <!--[if lte IE 7]>
+            <link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen" />
+    <![endif]-->
+    
+    <!-- Internet Explorer .png-fix -->
+
+    <!--[if IE 6]>
+            <script type="text/javascript" src="assets/scripts/DD_belatedPNG_0.0.7a.js"></script>
+            <script type="text/javascript">
+                    DD_belatedPNG.fix('.png_bg, img, li');
+            </script>
+    <![endif]-->
+
+  </head>
+
+  <body id="login">
+
+    <div id="login-wrapper" class="png_bg">
+      <div id="login-top">
+        <!--<h1>Simpla Admin</h1>-->
+        <!-- Logo (221px width) -->
+        <img id="logo" src="/assets/expomobile.png" alt="Simpla Admin logo" />
+      </div> <!-- End #logn-top -->
+
+      <div style="padding: 50px 100px;">
+        <% if flash[:notice] %>
+          <div class="notification attention png_bg">
+            <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+            <div>
+              <%= flash[:notice] %>
+            </div>
+          </div>
+        <% end %>
+        <% if flash[:alert] %>
+          <div class="notification information png_bg" style="width: 100%;">
+            <a href="#" class="close"><img src="/assets/icons/cross_grey_small.png" title="Close this notification" alt="close" /></a>
+            <div>
+              <%=  flash[:alert] %>
+            </div>
+          </div>
+        <% end %>
+        <%= yield %>
+        <%= yield :javascript_includes %>
+      </div> <!-- End #login-content -->
+
+    </div> <!-- End #login-wrapper -->
+    <% if controller_name == "sessions" && action_name == "new" %>
+      <%= render "devise/shared/links" %>
+    <% end %>
+  </body>
+
+</html>

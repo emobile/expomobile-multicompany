@@ -1,0 +1,29 @@
+<div class="notification" style="margin-bottom: 40px; text-align: center">
+  <div>
+    <p><%= t(:sign_in) %></p>
+  </div>
+</div>
+
+<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+  <p>
+    <%= f.label t(:login) %>
+    <%= f.text_field :login, :autofocus => true, :class=>"text-input" %>
+  </p>
+  <div class="clear"></div>
+  <p>
+    <%= f.label t(:password) %>
+    <%= f.password_field :password, :class=>"text-input" %>
+  </p>
+  <br />
+
+  <div class="clear"></div>
+  <p id="remember-password">
+    <% if devise_mapping.rememberable? -%>
+    <p id="remember-password">
+      <input id="user_remember_me" name="user[remember_me]" type="checkbox"/> <%= t(:remember_me) %>
+    </p>
+  <% end -%>
+  </p>
+  <div class="clear"></div>
+  <p><%= f.submit t(:sign_in), :class=>"button" %></p>
+<% end %>

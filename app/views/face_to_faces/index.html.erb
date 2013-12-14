@@ -1,0 +1,71 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'face_to_face.app_name' %></th>
+                  <th><%= t'face_to_face.app_enterprise' %></th>
+                  <th><%= t'face_to_face.app_email' %></th>
+                  <th><%= t'face_to_face.app_phone' %></th>
+                  <th><%= t'face_to_face.int_contact' %></th>
+                  <th><%= t'face_to_face.int_job' %></th>
+                  <th><%= t'face_to_face.int_name' %></th>
+                  <th><%= t'face_to_face.subject' %></th>
+                  <th><%= t'face_to_face.start_date' %></th>
+                  <th><%= t'face_to_face.end_date' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="14">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @face_to_faces.each do |face_to_face| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, FaceToFace %>
+        <%#*<td><%=link_to face_to_face.id, face_to_face, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label face_to_face.id, face_to_face.id %></td>
+        <%#end%>
+        
+                
+             <% @model = face_to_face %>     
+                             
+          <td><%= face_to_face.attendee.a_name %></td>
+          
+          <td><%= face_to_face.attendee.e_name %></td>
+                             
+          <td><%= face_to_face.attendee.a_email %></td>
+                             
+          <td><%= face_to_face.attendee.e_phone %></td>
+                                                
+          <td><%= face_to_face.int_contact %></td>
+          
+          <td><%= face_to_face.int_job %></td>
+                             
+          <td><%= face_to_face.int_name %></td>                 
+          
+          <td><%= face_to_face.subject %></td>
+                             
+          <td><%= face_to_face.start_date %></td>
+                             
+          <td><%= face_to_face.end_date %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

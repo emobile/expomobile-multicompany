@@ -1,0 +1,34 @@
+<%= render "layouts/first_tab" %>
+
+<div class="CSSTableGenerator" >
+  <table >
+          <tr>
+        <td>
+          <b><%= @activity.name %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'activity.start_date' %>:<%= @activity.start_date %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'activity.end_date' %>:<%= @activity.end_date %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'activity.place' %>:<%= @activity.place %>
+        </td>
+      </tr>
+          <tr>
+        <td>
+          <b><%= t'activity.observations' %>:<%= @activity.observations %>
+        </td>
+      </tr>
+      </table>
+</div>
+
+
+<%= render "layouts/action_links" %>

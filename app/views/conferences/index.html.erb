@@ -1,0 +1,58 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'conference.name' %></th>
+                  <th><%= t'conference.conferencist' %></th>
+                  <th><%= t'conference.start_date' %></th>
+                  <th><%= t'conference.end_date' %></th>
+                  <th><%= t'conference.place' %></th>
+                  <th><%= t'conference.observations' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="10">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @conferences.each do |conference| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Conference %>
+        <%#*<td><%=link_to conference.id, conference, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label conference.id, conference.id %></td>
+        <%#end%>
+                
+             <% @model = conference %>
+                          
+          <td><%= conference.name %></td>
+                             
+          <td><%= conference.conferencist %></td>
+                             
+          <td><%= conference.start_date %></td>
+                             
+          <td><%= conference.end_date %></td>
+                             
+          <td><%= conference.place %></td>
+                             
+          <td><%= conference.observations %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

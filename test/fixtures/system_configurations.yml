@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  token: MyString
+  workshop_tolerance: 1
+  exposition_tolerance: 1
+  logo: 
+  banner: 
+
+two:
+  token: MyString
+  workshop_tolerance: 1
+  exposition_tolerance: 1
+  logo: 
+  banner: 

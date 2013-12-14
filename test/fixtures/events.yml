@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  r_name: MyString
+  r_enterprise: MyString
+  r_social_reason: MyString
+  r_phone: MyString
+  r_email: MyString
+  r_job: MyString
+  r_work_street: MyString
+  r_work_street_number: MyString
+  r_work_colony: MyString
+  r_work_zip: MyString
+  r_city: MyString
+  r_state: MyString
+  r_country: MyString
+  language: MyString
+  time_zone: MyString
+  logo: 
+  banner: 
+  workshop_tolerance: 1
+  exposition_tolerance: 1
+  has_activity: false
+  has_conference: false
+  has_facetoface: false
+  has_offert: false
+  has_workshop: false
+
+two:
+  name: MyString
+  r_name: MyString
+  r_enterprise: MyString
+  r_social_reason: MyString
+  r_phone: MyString
+  r_email: MyString
+  r_job: MyString
+  r_work_street: MyString
+  r_work_street_number: MyString
+  r_work_colony: MyString
+  r_work_zip: MyString
+  r_city: MyString
+  r_state: MyString
+  r_country: MyString
+  language: MyString
+  time_zone: MyString
+  logo: 
+  banner: 
+  workshop_tolerance: 1
+  exposition_tolerance: 1
+  has_activity: false
+  has_conference: false
+  has_facetoface: false
+  has_offert: false
+  has_workshop: false

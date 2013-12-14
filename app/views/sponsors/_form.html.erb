@@ -1,0 +1,96 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "sponsors" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@sponsor, :html => { :multipart => true }) do |f| %>
+  <% if @sponsor.errors.any? %>
+    <div id="error_explanation">
+      <% if @sponsor.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.sponsor")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.sponsor"), :count => @sponsor.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @sponsor.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <fieldset class="column-left">
+    <p class="field">
+      <%= f.label t("sponsor.logo") %>
+      <%= f.file_field :logo %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.name") %>
+      <%= f.text_field :name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.social_reason") %>
+      <%= f.text_field :social_reason, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.contact") %>
+      <%= f.text_field :contact, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.email") %>
+      <%= f.email_field :email, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.job") %>
+      <%= f.text_field :job, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.phone") %>
+      <%= f.text_field :phone, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
+  </fieldset>
+  <fieldset class="column-right">
+    <p class="field">
+      <%= f.label t("sponsor.work_street") %>
+      <%= f.text_field :work_street, :class=>"text-input medium-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.work_street_number") %>
+      <%= f.text_field :work_street_number, :class=>"text-input small-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.work_colony") %>
+      <%= f.text_field :work_colony, :class=>"text-input medium-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.work_zip") %>
+      <%= f.text_field :work_zip, :class=>"text-input small-input", :style => "width: 10% !important;" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.web_page") %>
+      <%= f.text_field :web_page, :class=>"text-input medium-input" %>
+    </p>
+
+    <p class="field">
+      <%= f.label t("sponsor.twitter") %>
+      <%= f.text_field :twitter, :class=>"text-input small-input" %>
+    </p>
+    <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+  </fieldset>
+<div class="clear"></div>
+  <p><span class="required">*</span>&nbsp;&nbsp;&nbsp;<%= t(:required) %></p>  
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
+
+<% end %>

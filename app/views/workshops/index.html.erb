@@ -1,0 +1,57 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th><%= t'.id' %></th>
+                  <th><%= t'workshop.name' %></th>
+                  <th><%= t'workshop.workshop_key' %></th>
+                  <th><%= t'workshop.teacher_name' %></th>
+                  <th><%= t'workshop.room' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="8">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @workshops.each do |workshop| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Workshop %>
+        <%#*<td><%=link_to workshop.id, workshop, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label workshop.id, workshop.id %></td>
+        <%#end%>
+                
+             <% @model = workshop %>
+                          
+          <td><%= workshop.name %></td>
+          
+          <td><%= workshop.workshop_key %><br/><%= link_to t(:qr_code), qr_generator_generate_qr_path(:key => workshop.workshop_key, :workshop_name => workshop.name, :teacher_name => workshop.teacher_name, :room => workshop.room.name), :class => "qr_code" %></td>
+                             
+          <td><%= workshop.teacher_name %></td>
+                             
+          <td><%= workshop.room.name %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= form_tag workshops_set_tolerance_path, :id => "tolerance_form", method: :post do %>
+    <%= label_tag t(:set_tolerance) %>
+    <%= text_field_tag "tolerance", @event.workshop_tolerance, :class=>"text-input small-input", :style => "width: 10% !important;" %>
+    <%= submit_tag t(:accept), :class => 'button' %>
+  <% end %>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

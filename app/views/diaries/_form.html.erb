@@ -1,0 +1,48 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "diaries" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@diary) do |f| %>
+<% if @diary.errors.any? %>
+<div id="error_explanation">
+      <% if @diary.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.diary")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.diary"), :count => @diary.errors.count) %></h2>
+      <% end %>
+  <ul>
+    <% @diary.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+  <p class="field">
+    <%= f.label t("diary.event_start_date") %>
+    <%= f.text_field :event_date, :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("diary.event_end_date") %>
+    <%= f.text_field :event_end_date, :class=>"text-input small-input datetimeRange", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("diary.event_type") %>
+    <%= f.text_field :event_type, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("diary.description") %>
+    <%= f.text_field :description, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+  </p>
+  <p class="field">
+    <%= f.label t("diary.place") %>
+    <%= f.text_field :place, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+  </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
+
+<div class="form-actions">
+  <%= f.submit nil, :class => 'button' %>
+</div>
+
+<% end %>

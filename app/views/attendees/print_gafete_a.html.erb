@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <title><%= t("atten.print_gafete") %></title>
+  </head>
+  <body style="margin: 0;">
+    <div id="gafete-container" style="height: 415px; margin: 0px; min-height: 400px; color: #000;">
+      <% @system_configuration = SystemConfiguration.first %>
+      <% @logo_url = @event.logo.url %>
+      <% @banner_url = @event.banner.url %>
+      <% @gafete_logo_visibility = (@with_logos == "true")? "visible": "hidden" %>
+      <% @gafete_text_padding_top = (@with_logos == "true")? "0": "1px" %>
+      <div id="gafete" style="width: 305px; height: 415px; margin: 0 auto 30px;">
+        <div class="gafete-logo" style="height: 85px; width: 305px; border-bottom: 1px solid #000; visibility: <%= @gafete_logo_visibility %>;">
+          <%= image_tag @logo_url, :height => 70, :style => "height: 70px; -ms-interpolation-mode: bicubic; margin: 7px;" %>
+          <%= image_tag "https://chart.googleapis.com/chart?cht=qr&chs=#{85}x#{85}&chl=[#{@a_name},#{@e_tradename},WORK:#{@e_phone},#{@a_email},#{@e_address},#{@a_web}]", :style => "margin: 0px; float: right;" %>
+        </div>
+        <div class="gafete-logo" style="height: 135px; width: 305px; text-align: center; visibility: <%= @gafete_logo_visibility %>;">
+          <%= image_tag @banner_url, :height => 125, :width => 295, :style => "height: 125px; width: 290px; -ms-interpolation-mode: bicubic; margin: 5px;" %>
+        </div>
+        <div id="gafete-text" style="height: 115px;<%= " border-top: 1px solid #000; border-bottom: 1px solid #000;" if @with_logos == "true" %> line-height: 30px; font-family: Arial, Helvetica, sans-serif; text-align: center; padding-top: <%= @gafete_text_padding_top %>;">
+          <span style="font-weight: bold; font-size: 20px; top: 15px; position: relative;"><%= @a_name %></span><br/>
+          <span style="font-size: 20px; top: 15px; position: relative;"><%= @e_tradename %></span>
+        </div>
+        <div class="gafete-logo" style="height: 80px; width: 305px; visibility: <%= @gafete_logo_visibility %>;">
+          <%= image_tag "/assets/logoexpo.png", :width => 100, :style => "width 140px; height: auto; -ms-interpolation-mode: bicubic; top: 8px; position: relative;" %>
+          <div style="float: right; display: inline-block; padding: 20px 20px 0 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px;">
+            <%= image_tag "/assets/face48.png", :width => 20, :style => "width 20px; height: auto; -ms-interpolation-mode: bicubic;" %>
+            <span style="position: relative; bottom: 5px;">eMobileMobilizingIdeas</span><br/>
+            <%= image_tag "/assets/tweet48.png", :width => 20, :style => "width 20px; height: auto; -ms-interpolation-mode: bicubic;" %>
+            <span style="position: relative; bottom: 5px;">@eMobile_mi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

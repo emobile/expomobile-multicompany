@@ -1,0 +1,56 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'activity.name' %></th>
+                  <th><%= t'activity.start_date' %></th>
+                  <th><%= t'activity.end_date' %></th>
+                  <th><%= t'activity.place' %></th>
+                  <th><%= t'activity.observations' %></th>
+              </tr>
+
+    </thead>
+
+    <tfoot>
+      <tr>
+        <td colspan="9">
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%= render "layouts/pagination" %>
+          <div class="clear"></div>
+        </td>
+      </tr>
+    </tfoot>
+
+    <tbody>
+      <% @activities.each do |activity| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, Activity %>
+        <%#*<td><%=link_to activity.id, activity, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label activity.id, activity.id %></td>
+        <%#end%>
+        
+                
+             <% @model = activity %>
+                          
+          <td><%= activity.name %></td>
+                             
+          <td><%= activity.start_date %></td>
+                             
+          <td><%= activity.end_date %></td>
+                             
+          <td><%= activity.place %></td>
+                             
+          <td><%= activity.observations %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>
