@@ -65,8 +65,8 @@
               <% @models.each do |model| %>
                 <li><%= link_to eval("t(:#{model.pluralize.downcase})"), eval("#{model.downcase.pluralize}_path"), :class => controller_name == model.pluralize.downcase && controller.action_name == "index" ? "current": "" %></li>
                 <li><%= link_to t(:new_record_male, :record => eval("t('activerecord.models.#{model.downcase}')")), eval("new_#{model.downcase}_path"), :class => controller_name == model.pluralize.downcase && controller.action_name == "new" ? "current": "" %></li>
-                <li><%= link_to t("hour.associate_workshop_group"), schedules_associate_workshop_group_path, :class => controller_name == "schedules" && controller.action_name == "associate_workshop_group" ? "current": "" %></li>
               <% end %>
+              <li><%= link_to t("hour.associate_workshop_group"), schedules_associate_workshop_group_path, :class => controller_name == "schedules" && controller.action_name == "associate_workshop_group" ? "current": "" %></li>
             </ul>
           </li>
         <% end %>
