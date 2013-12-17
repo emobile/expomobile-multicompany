@@ -469,7 +469,7 @@ class MobileServicesController < ApplicationController
           
           if @visit_registered.nil?
 
-            if current_time >= @hour.start_date && current_time < (@hour.end_date + 1.minute)
+            if current_time >= @hour.start_date && current_time < (@hour.end_date + @event.workshop_tolerance.minutes + 1.minute)
               AttendeeWorkshop.create(attendee_id: session[:attendee_id], workshop_id: @workshop.id)
               @msg = { success: "yes", msg: t(:visit_registered_to_workshop, :workshop_name => @workshop.name ) }
             else

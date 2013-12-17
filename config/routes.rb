@@ -2,7 +2,6 @@ Expomobile::Application.routes.draw do
 
   resources :events
 
-
   resources :massive_loads
 
   get "system_configurations/select_event"
@@ -105,7 +104,7 @@ Expomobile::Application.routes.draw do
 
   get "welcome/index"
 
-  get "users/sign_up"
+#  get "users/sign_up"
   devise_for :users
   
   resources :users

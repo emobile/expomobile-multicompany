@@ -107,10 +107,12 @@ class VisitsController < ApplicationController
         @attendees_total = @event.attendees.count
         @logo_url = "#{Rails.root}/public#{@event.logo.url.gsub(/\?.*\z/, "")}"
         pdf.image @logo_url, :height => 50
-        pdf.text "EXPOMOBILE", :style => :bold, :size => 14, :align => :center;
+        pdf.text @event.name, :style => :bold, :size => 14, :align => :center;
         pdf.move_down 10
         pdf.text I18n.t("visit.control_numbers_report"), :style => :bold, :size => 12, :align => :center;
         pdf.move_down 50
+        pdf.text Date.today.strftime("%d/%m/%Y")
+        pdf.move_down 20
         table_data_1 = [[I18n.t("visit.attendees_total"), @attendees_total], [I18n.t("visit.exhibitors_total"), @event.exhibitors.count], [I18n.t("visit.sponsors_total"), @event.sponsors.count]]
         table_data_1 << [I18n.t("visit.workshops_total"), @event.workshops.count] if @event.has_workshop
         pdf.table(table_data_1) do

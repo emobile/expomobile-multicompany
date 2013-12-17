@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, :except => [:sign_up]
-  load_and_authorize_resource :except => [:sign_up]
+  before_filter :authenticate_user!#, :except => [:sign_up]
+  load_and_authorize_resource# :except => [:sign_up]
   
   def index
     @users = User.order('first_name ASC').paginate(:per_page => 10, :page => params[:page])
@@ -87,8 +87,8 @@ class UsersController < ApplicationController
     end
   end
   
-  def sign_up
-    render layout: "registration_form"
-  end
+#  def sign_up
+#    render layout: "registration_form"
+#  end
 
 end
