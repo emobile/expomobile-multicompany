@@ -79,28 +79,32 @@
       <%= f.label t("event.banner") %>
       <%= f.file_field :banner, :required => @file_required %><span class="required">*</span>
     </p>
-    <p class="field">
     <div class="has">
+      <%= image_tag "/assets/#{t(:activities).downcase}.png", :height => 64 %>
       <%= f.label t("event.has_activity") %>
       <%= f.check_box :has_activity %>
       <div class="bubble"><%= t("event.descriptions.activity") %></div>
     </div>
     <div class="has">
+      <%= image_tag "/assets/#{t(:conferences).downcase}.png", :height => 64 %>
       <%= f.label t("event.has_conference") %>
       <%= f.check_box :has_conference %>
       <div class="bubble"><%= t("event.descriptions.conference") %></div>
     </div>
     <div class="has">
+      <%= image_tag "/assets/#{t(:face_to_faces).gsub(" ", "").downcase}.png", :height => 64 %>
       <%= f.label t("event.has_facetoface") %>
       <%= f.check_box :has_facetoface %>
       <div class="bubble"><%= t("event.descriptions.facetoface") %></div>
     </div>
     <div class="has">
+      <%= image_tag "/assets/#{t(:offerts).downcase}.png", :height => 64 %>
       <%= f.label t("event.has_offert") %>
       <%= f.check_box :has_offert %>
       <div class="bubble"><%= t("event.descriptions.offert") %></div>
     </div>
     <div class="has">
+      <%= image_tag "/assets/#{t(:workshops).downcase}.png", :height => 64 %>
       <%= f.label t("event.has_workshop") %>
       <%= f.check_box :has_workshop %>
       <div class="bubble"><%= t("event.descriptions.workshop") %></div>

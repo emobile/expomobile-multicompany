@@ -1033,6 +1033,13 @@ form#tolerance_form {
     width: 160px;
 }
 
+.has > img {
+    display: block;
+    margin: 10px auto;
+    height: 64px;
+    -ms-interpolation-mode: bicubic;
+}
+
 .has > label {
     position: absolute;
     display: inline-block;

@@ -89,6 +89,12 @@
                       <span><%= image_tag("/assets/#{t(:offerts).downcase}.png") %></span>
                     <% end %></li>
                 <% end %>
+              
+                <% if @event.has_facetoface %>
+                  <li><%= link_to face_to_faces_path, :class => "shortcut-button" do %>
+                      <span><%= image_tag("/assets/#{t(:face_to_faces).gsub(" ", "").downcase}.png") %></span>
+                    <% end %></li>
+                <% end %>
 
                 <li><%= link_to sponsors_path, :class => "shortcut-button" do %>
                     <span><%= image_tag("/assets/#{t(:sponsors).downcase}.png") %></span>
