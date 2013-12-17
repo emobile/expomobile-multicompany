@@ -426,14 +426,14 @@ ul.content-box-tabs li a.current {
     border: 1px solid #ccc;
     background: #f7f7f7 url('/assets/shortcut-button-bg.gif') top left no-repeat;
     display: block;
-    width: 120px;
+    width: 100px;
     margin: 0 0 20px 0;
 }
 
 .shortcut-button span {
     border: 1px solid #fff;
     display:block;
-    padding: 15px 10px 15px 10px;
+    padding: 15px 0px;
     text-align: center;
     color: #555;
     font-size: 13px;
@@ -441,7 +441,6 @@ ul.content-box-tabs li a.current {
 }
 
 .shortcut-button span img {
-    margin-bottom: 10px;
     width: 80px;
     height: auto;
 }
@@ -1041,6 +1040,7 @@ form#tolerance_form {
 
 .has > input[type=checkbox] {
     margin-left: 150px;
+    z-index: 2;
 }
 
 .has * {

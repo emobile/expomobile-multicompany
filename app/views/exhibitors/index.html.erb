@@ -39,7 +39,7 @@
           <td><%= label exhibitor.id, exhibitor.id %></td>
   <%# end %>
           <% @model = exhibitor %>
-          <td><%= exhibitor.exposition_key %><br/><%= link_to t(:qr_code), qr_generator_generate_qr_path(:key => exhibitor.exposition_key, :exhibitor => true, :exhibitor_name => exhibitor.name, :exhibitor_job => exhibitor.job, :stand_location => exhibitor.stand_location), :class => "qr_code" %></td>
+          <td><%= exhibitor.exposition_key %><br/><%= link_to t(:qr_code), qr_generator_generate_qr_path(:key => exhibitor.exposition_key, :exhibitor => true, :exhibitor_name => exhibitor.name, :exhibitor_job => exhibitor.job, :stand_location => exhibitor.stand_location), :class => "qr_code button" %></td>
           
           <td><%= exhibitor.name %></td>
           

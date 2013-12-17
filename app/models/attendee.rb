@@ -15,5 +15,6 @@ class Attendee < ActiveRecord::Base
   validates_numericality_of :e_ext_number, :if => :e_ext_number
   validates_numericality_of :e_zip_code, :if => :e_zip_code
   validates_numericality_of :e_lada, :if => :e_lada
-  validates_format_of :attendee_id, :with => /\A[A-Z]\d{3}\z/, :if => :attendee_id
+  validates_format_of :attendee_id, :with => /\A[A-Z]{2}\d{4}\z/, :if => :attendee_id
+  validates :attendee_id, :uniqueness => { :scope => :event_id }
 end

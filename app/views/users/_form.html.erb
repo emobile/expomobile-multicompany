@@ -32,12 +32,20 @@
         <%= f.label t'user.phone' %>
         <%= f.text_field :phone, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
       </p>
-      <p class="field">
-        <%= f.label t'user.address' %>
-        <%= f.text_field :address, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
-      </p>
     </div>
     <div id="right-custom-column">
+      <p class="field">
+        <%= f.label t'user.street' %>
+        <%= f.text_field :street, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= f.label t'user.street_number' %>
+        <%= f.text_field :street_number, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= f.label t'user.colony' %>
+        <%= f.text_field :colony, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
       <p class="field">
         <%= f.label t'user.zip' %>
         <%= f.text_field :zip, :class=>"text-input small-input", :required => true, :pattern => "[1-9][0-9]{4}" %><span class="required">*</span> 

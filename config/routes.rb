@@ -42,6 +42,7 @@ Expomobile::Application.routes.draw do
 
   resources :expositions
   
+  get "mobile_services/get_enabled_options"
   get "mobile_services/rate"
   get "mobile_services/index_diary_days"
   get "mobile_services/show_diary"

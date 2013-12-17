@@ -38,7 +38,7 @@
                           
           <td><%= workshop.name %></td>
           
-          <td><%= workshop.workshop_key %><br/><%= link_to t(:qr_code), qr_generator_generate_qr_path(:key => workshop.workshop_key, :workshop_name => workshop.name, :teacher_name => workshop.teacher_name, :room => workshop.room.name), :class => "qr_code" %></td>
+          <td><%= workshop.workshop_key %><br/><%= link_to t(:qr_code), qr_generator_generate_qr_path(:key => workshop.workshop_key, :workshop_name => workshop.name, :teacher_name => workshop.teacher_name, :room => workshop.room.name), :class => "qr_code button" %></td>
                              
           <td><%= workshop.teacher_name %></td>
                              

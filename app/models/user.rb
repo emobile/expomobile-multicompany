@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
   attr_accessible :login, :username, :email, :password, :password_confirmation, :remember_me
   belongs_to :role
   belongs_to :event
-  attr_accessible :address, :city, :country, :first_name, :last_name, :phone, :state, :zip, :confirmed_at, :role_id, :event_id
+  attr_accessible :street, :street_number, :colony, :city, :country, :first_name, :last_name, :phone, :state, :zip, :confirmed_at, :role_id, :event_id
   attr_accessor :login, :fullname
   
-  validates :username, :first_name, :last_name, :phone, :address, :city, :state, :zip, :country, :presence => true
+  validates :username, :first_name, :last_name, :phone, :street, :street_number, :colony, :city, :state, :zip, :country, :presence => true
   validates :username, :email, :uniqueness => true
   validates_length_of :email, :maximum => 120
   validates_length_of :first_name, :last_name, :maximum => 30

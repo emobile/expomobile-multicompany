@@ -25,6 +25,7 @@ class SystemConfigurationsController < ApplicationController
 
     respond_to do |format|
       if @system_configuration.update_attributes(params[:system_configuration])
+        session[:language] = @system_configuration.language
         format.html { redirect_to @system_configuration, notice: t(:successfully_updated) }
         format.json { head :no_content }
       else

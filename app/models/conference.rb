@@ -6,7 +6,7 @@ class Conference < ActiveRecord::Base
     :thumb => "x100",
     :mobile => "x60" },
     :convert_options => { :all => "-colorspace Gray" },
-    :default_url => "/assets/missing.jpg"
+    :default_url => "/assets/default.png"
   validates :name, :conferencist, :end_date, :start_date, :place, :event_id, :presence => true
   validates_datetime :end_date, :if => :end_date?
   validates_datetime :start_date, :if => :start_date?

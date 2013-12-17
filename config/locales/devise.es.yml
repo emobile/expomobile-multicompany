@@ -37,7 +37,7 @@ es:
     register_attendee: "Registrar asistente"
     register_user: "Registrar usuario"
     registrations:
-      destroyed: 'Adiós! Su cuenta fue cancelada satisfactoriamente. Esperamos verlo pronto nuevamente.'
+      destroyed: 'Adios! Su cuenta fue cancelada satisfactoriamente. Esperamos verlo pronto nuevamente.'
       signed_up: '¡Bienvenido! Ha ingresado al sistema exitosamente.'
       signed_up_but_unconfirmed: 'Un correo con el enlace de confirmación de su cuenta ha sido enviado a su correo electrónico. Por favor abra el enlace para activar su cuenta.'
       signed_up_but_inactive: 'Se ha registrado satisfactoriamente. Sin embargo, no es posible ingresarlo al sistema debido a que su cuenta aún no ha sido activada.'

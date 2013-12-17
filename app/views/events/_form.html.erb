@@ -3,7 +3,7 @@
 <% end %>
 
 <%= render "layouts/first_tab" %>
-<%= form_for(@event) do |f| %>
+<%= nested_form_for(@event) do |f| %>
   <% if @event.errors.any? %>
     <div id="error_explanation">
       <% if @event.errors.count == 1 %>
@@ -19,6 +19,8 @@
     </div>
   <% end %>
   <fieldset class="column-left">
+    <h3 style="text-align: center;"><%= t(:event_data) %></h3>
+    <hr/>
     <p class="field">
       <%= f.label t("event.name") %>
       <%= f.text_field :name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
@@ -55,13 +57,12 @@
       <%= f.label t("event.country") %>
       <%= f.text_field :e_country, :class=>"text-input medium-input" %>
     </p>
+    <br/><br/><br/>
+    <h3 style="text-align: center;"><%= t(:configuration) %></h3>
+    <hr/><br/><br/><br/>
     <p class="field">
       <%= f.label t("event.workshop_tolerance") %>
       <%= f.text_field :workshop_tolerance, :class=>"text-input small-input", :style => "width: 10% important!;" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.exposition_tolerance") %>
-      <%= f.text_field :exposition_tolerance, :class=>"text-input small-input", :style => "width: 10% important!;" %>
     </p>
     <p class="field">
       <%= f.label t("event.language") %>
@@ -116,62 +117,76 @@
       <%= f.label t("event.is_free") %>
       <%= f.check_box :is_free %>
     </p>
+    <p class="field">
+      <%= f.label t("event.token_for_id") %>
+      <%= f.text_field :token_for_id, :class=>"text-input small-input", :required => true %><span class="required">*</span>
+    </p>
   </fieldset>
   <fieldset class="column-right">
-    <h3 style="text-align: center;"><%= t("event.contact_data") %></h3>
-    <br/>
-    <p class="field">
-      <%= f.label t("event.r_name") %>
-      <%= f.text_field :r_name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
-    </p>
-    <p class="field">
-      <%= f.label t("event.enterprise") %>
-      <%= f.text_field :r_enterprise, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
-    </p>
-    <p class="field">
-      <%= f.label t("event.social_reason") %>
-      <%= f.text_field :r_social_reason, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
-    </p>
-    <p class="field">
-      <%= f.label t("event.job") %>
-      <%= f.text_field :r_job, :class=>"text-input small-input" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.phone") %>
-      <%= f.text_field :r_phone, :class=>"text-input small-input" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.email") %>
-      <%= f.email_field :r_email, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
-    </p>
-    <p class="field">
-      <%= f.label t("event.street") %>
-      <%= f.text_field :r_work_street, :class=>"text-input medium-input" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.street_number") %>
-      <%= f.text_field :r_work_street_number, :class=>"text-input small-input", :style => "width: 10% important!;" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.colony") %>
-      <%= f.text_field :r_work_colony, :class=>"text-input medium-input" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.zip") %>
-      <%= f.text_field :r_work_zip, :class=>"text-input small-input", :style => "width: 10% important!;", :pattern => "[0-9]{5}?" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.city") %>
-      <%= f.text_field :r_city, :class=>"text-input medium-input" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.state") %>
-      <%= f.text_field :r_state, :class=>"text-input medium-input" %>
-    </p>
-    <p class="field">
-      <%= f.label t("event.country") %>
-      <%= f.text_field :r_country, :class=>"text-input medium-input" %>
-    </p>
+    <h3 style="text-align: center;"><%= t(:user_data) %></h3>
+    <hr/>
+    <%= f.fields_for :users do |user_form| %>
+      <p class="field">
+        <%= user_form.label t'user.first_name' %>
+        <%= user_form.text_field :first_name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.last_name' %>
+        <%= user_form.text_field :last_name, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+      </p>
+      <p class="field">
+        <%= f.label t("event.enterprise") %>
+        <%= f.text_field :r_enterprise, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+      </p>
+      <p class="field">
+        <%= f.label t("event.social_reason") %>
+        <%= f.text_field :r_social_reason, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+      </p>
+      <p class="field">
+        <%= f.label t("event.job") %>
+        <%= f.text_field :r_job, :class=>"text-input small-input" %>
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.email' %>
+        <%= user_form.email_field :email, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.phone' %>
+        <%= user_form.text_field :phone, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= user_form.label t("event.street") %>
+        <%= user_form.text_field :street, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+      </p>
+      <p class="field">
+        <%= user_form.label t("event.street_number") %>
+        <%= user_form.text_field :street_number, :class=>"text-input small-input", :style => "width: 10% important!;", :required => true %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= user_form.label t("event.colony") %>
+        <%= user_form.text_field :colony, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.zip' %>
+        <%= user_form.text_field :zip, :class=>"text-input small-input", :required => true, :pattern => "[1-9][0-9]{4}" %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.city' %>
+        <%= user_form.text_field :city, :class=>"text-input medium-input", :required => true %><span class="required">*</span>
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.state' %>
+        <%= user_form.text_field :state, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.country' %>
+        <%= user_form.text_field :country, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
+      <p class="field">
+        <%= user_form.label t'user.username' %>
+        <%= user_form.text_field :username, :class=>"text-input medium-input", :required => true %><span class="required">*</span> 
+      </p>
+    <% end %>
   </fieldset>
 
   <div class="clear"></div>

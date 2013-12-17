@@ -137,7 +137,6 @@ ActiveRecord::Schema.define(:version => 20131112202019) do
     t.string   "language"
     t.string   "time_zone"
     t.integer  "workshop_tolerance"
-    t.integer  "exposition_tolerance"
     t.boolean  "has_activity"
     t.boolean  "has_conference"
     t.boolean  "has_facetoface"
@@ -154,6 +153,7 @@ ActiveRecord::Schema.define(:version => 20131112202019) do
     t.string   "e_city"
     t.string   "e_state"
     t.string   "e_country"
+    t.string   "token_for_id",                           :null => false
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "logo_file_name"
@@ -242,6 +242,7 @@ ActiveRecord::Schema.define(:version => 20131112202019) do
   add_index "hours", ["event_id"], :name => "hours_event_id_fk"
 
   create_table "massive_loads", :force => true do |t|
+    t.integer  "event_id",                :null => false
     t.datetime "created_at",              :null => false
     t.datetime "updated_at",              :null => false
     t.string   "excel_file_file_name"
@@ -249,6 +250,8 @@ ActiveRecord::Schema.define(:version => 20131112202019) do
     t.integer  "excel_file_file_size"
     t.datetime "excel_file_updated_at"
   end
+
+  add_index "massive_loads", ["event_id"], :name => "massive_loads_event_id_fk"
 
   create_table "nips", :force => true do |t|
     t.string   "nip",         :null => false
@@ -373,11 +376,13 @@ ActiveRecord::Schema.define(:version => 20131112202019) do
     t.string   "first_name",                             :null => false
     t.string   "last_name",                              :null => false
     t.string   "phone",                                  :null => false
-    t.string   "address",                                :null => false
     t.string   "city",                                   :null => false
     t.string   "state",                                  :null => false
     t.integer  "zip",                                    :null => false
     t.string   "country",                                :null => false
+    t.string   "street",                                 :null => false
+    t.string   "street_number",                          :null => false
+    t.string   "colony",                                 :null => false
     t.integer  "role_id",                :default => 2,  :null => false
     t.integer  "event_id"
     t.datetime "created_at",                             :null => false
@@ -451,6 +456,8 @@ ActiveRecord::Schema.define(:version => 20131112202019) do
   add_foreign_key "groups", "events", :name => "groups_event_id_fk"
 
   add_foreign_key "hours", "events", :name => "hours_event_id_fk"
+
+  add_foreign_key "massive_loads", "events", :name => "massive_loads_event_id_fk"
 
   add_foreign_key "nips", "attendees", :name => "nips_attendee_id_fk"
   add_foreign_key "nips", "events", :name => "nips_event_id_fk"

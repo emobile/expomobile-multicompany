@@ -8,14 +8,14 @@ class MobileServicesController < ApplicationController
   def get_attendee_id 
     I18n.locale = params[:language]
     session[:language] = params[:language]
-    @attendee_id = params[:attendee_id].split("-")[0]
-    @event_id = params[:attendee_id].split("-")[1]
-    session[:current_event_id] = @event_id
-    @event = Event.find_by_id(@event_id)
+    @attendee_id = params[:attendee_id]
     
-    if @attendee_id =~ /\A[A-Z]\d{3}\z/
+    if @attendee_id =~ /\A[A-Z]{2}\d{4}\z/
+      token_for_id = @attendee_id[0, 2]
+      @event = Event.find_by_token_for_id(token_for_id)
       @attendee = @event.attendees.find_by_attendee_id(@attendee_id)
-      
+      session[:current_event_id] = @event.id
+
       if !@attendee.nil?
         @nip = @attendee.nip
       
@@ -24,7 +24,7 @@ class MobileServicesController < ApplicationController
           @exists = @event.nips.find_by_nip(random_value)
         
           if @exists.nil?
-            @nip = Nip.create(:nip => random_value, :attendee_id => @attendee_id, :event_id => @event_id)
+            @nip = Nip.create(:nip => random_value, :attendee_id => @attendee.id, :event_id => @event.id)
           end
         end
       
@@ -80,7 +80,9 @@ class MobileServicesController < ApplicationController
   def get_attendee_nip
     @attendee_id = params[:attendee_id].split("-")[0]
     
-    if @attendee_id =~ /\A[A-Z]\d{3}\z/
+    if @attendee_id =~ /\A[A-Z]{2}\d{4}\z/
+      token_for_id = @attendee_id[0, 2]
+      @event = Event.find_by_token_for_id(token_for_id)
       @attendee = @event.attendees.find_by_attendee_id(@attendee_id)
       
       if !@attendee.nil?
@@ -89,7 +91,7 @@ class MobileServicesController < ApplicationController
       
           if params[:nip] == @nip.nip
             @msg = { access: "ok", msg: t("atten.access_ok") }
-            session[:attendee_id] = @attendee_id
+            session[:attendee_id] = @attendee.id
           else
             @msg = { access: "no", msg: t("errors.atten_nips_dont_match") }
           end
@@ -450,9 +452,8 @@ class MobileServicesController < ApplicationController
   end
   
   def register_visit_to_workshop
-    Time.zone = session[:time_zone]
-    current_time = Time.zone.now
-    #current_time = local_to_utc(Time.now, dst=true)
+    Time.zone = @event.time_zone
+    current_time = Time.zone.now.time
     
     if !session[:attendee_id].blank?
 
@@ -462,13 +463,13 @@ class MobileServicesController < ApplicationController
         .joins("INNER JOIN subgroups su ON s.subgroup_id = su.id")
         .joins("INNER JOIN attendees a ON su.id = a.subgroup_id")
         .where("s.workshop_id = ? AND a.id = ?", @workshop.id, session[:attendee_id]).first
-        
+
         if !@hour.nil?
           @visit_registered = AttendeeWorkshop.find_by_attendee_id_and_workshop_id(session[:attendee_id], @workshop.id)
           
           if @visit_registered.nil?
-            
-            if current_time >= @hour.start_date && current_time < (@hour.end_date + @event.workshop_tolerance.minutes + 1.minutes)
+
+            if current_time >= @hour.start_date && current_time < (@hour.end_date + 1.minute)
               AttendeeWorkshop.create(attendee_id: session[:attendee_id], workshop_id: @workshop.id)
               @msg = { success: "yes", msg: t(:visit_registered_to_workshop, :workshop_name => @workshop.name ) }
             else
@@ -550,6 +551,11 @@ class MobileServicesController < ApplicationController
 
   def load_event
     @event = Event.find_by_id(session[:current_event_id])
+  end
+  
+  def get_enabled_options
+    @options = { :has_activity => @event.has_activity, :has_conference => @event.has_conference, :has_facetoface => @event.has_facetoface, :has_offert => @event.has_offert, :has_workshop => @event.has_workshop }
+    render json: @options
   end
   
 end

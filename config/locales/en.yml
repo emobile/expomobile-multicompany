@@ -60,6 +60,7 @@ en:
         start_date: "Start date"
       event:
         banner: "Banner"
+        end_date: "End date"
         logo: "Logo"
         name: "Name"
         place: "Place"
@@ -67,6 +68,8 @@ en:
         r_enterprise: "Enterprise"
         r_name: "Contact name"
         r_social_reason: "Social reason"
+        start_date: "Start date"
+        token_for_id: "Token for registration ID"
       face_to_face:
         attendee_id: "Applicant ID"
         end_date: "End date"
@@ -105,8 +108,8 @@ en:
         language: "Language"
         token: "Token"
       user:
-        address: "Address"
         city: "City"
+        colony: "Colony"
         country: "Country"
         current_password: "Your current password"
         email: "Email"
@@ -116,6 +119,8 @@ en:
         password_confirmation: "Password confirmation"
         phone: "Phone"
         state: "State"
+        street: "Street"
+        street_number: "Street number"
         username: "Username"
         zip: "Zip"
       workshop:
@@ -355,7 +360,6 @@ en:
     email: "Email"
     end_date: "End date"
     enterprise: "Enterprise"
-    exposition_tolerance: "Exposition tolerance"
     has_activity: "Has activities?"
     has_conference: "Has conference?"
     has_facetoface: "Has face to face?"
@@ -375,10 +379,12 @@ en:
     street: "Street"
     street_number: "Street number"
     time_zone: "Time zone"
+    token_for_id: "Token for registration ID"
     workshop_tolerance: "Workshop tolerance"
     zip: "Zip code"
     
   event_configuration: "Event configuration"
+  event_data: "Event data"
     
   events: "Events"
   
@@ -398,6 +404,7 @@ en:
   face_to_faces: "Face to face"
   fair_total: "Fair total"
   false_value: "No"
+  forgot_password: "Forgot password?"
   gafete_note: "The badges come with a measure 3.3in x 47.2in"
   general_info: "GENERAL INFORMATION"
   generate_diary: "Generate diary"
@@ -519,7 +526,7 @@ en:
     work_street_number: "Street number"
     work_zip: "ZIP"
     
-  sponsors: "Patrocinadores"
+  sponsors: "Sponsors"
   statistics: "Statistics"
   
   subgroup:
@@ -554,6 +561,7 @@ en:
   user:
     address: "Address"
     city: "City"
+    colony: "Colony"
     country: "Country"
     current_password: "Your current password"
     email: "Email"
@@ -565,10 +573,12 @@ en:
     phone: "Phone"
     role_name: "Role name"
     state: "State"
+    street: "Street"
+    street_number: "Street number"
     username: "Username"
     zip: "Zip"
     
-  user_registration: "User registration"
+  user_data: "Datos del usuario"
   
   visit:
     attendances_to_exhibitors: "Attendances to exhibitors"

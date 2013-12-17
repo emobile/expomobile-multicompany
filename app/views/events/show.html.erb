@@ -8,7 +8,7 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <b><%= t'event.place' %>:<%= @event.place %>
       </td>
     </tr>
@@ -94,7 +94,8 @@
         <b><%= t'event.country' %>:<%= @event.r_country %>
       </td>
       <td>
-        <b><%= t'event.language' %>:<%= @event.language %>
+        <% @languages = { "es" => "Español", "en" => "English" } %>
+        <b><%= t'event.language' %>:<%= @languages[@event.language] %>
       </td>
     </tr>
     <tr>
@@ -111,32 +112,48 @@
       </td>
     </tr>
     <tr>
-      <td>
+      <td colspan="2">
         <b><%= t'event.workshop_tolerance' %>:<%= @event.workshop_tolerance %>
       </td>
+    </tr>
+    <tr>
       <td>
-        <b><%= t'event.exposition_tolerance' %>:<%= @event.exposition_tolerance %>
+        <b><%= t'event.has_activity' %>:<%= (@event.has_activity)? t(:boolean_true): t(:boolean_false) %>
+      </td>
+      <td>
+        <b><%= t'event.has_conference' %>:<%= (@event.has_conference)? t(:boolean_true): t(:boolean_false) %>
       </td>
     </tr>
     <tr>
       <td>
-        <b><%= t'event.has_activity' %>:<%= @event.has_activity %>
+        <b><%= t'event.has_facetoface' %>:<%= (@event.has_facetoface)? t(:boolean_true): t(:boolean_false) %>
       </td>
       <td>
-        <b><%= t'event.has_conference' %>:<%= @event.has_conference %>
+        <b><%= t'event.has_offert' %>:<%= (@event.has_offert)? t(:boolean_true): t(:boolean_false) %>
       </td>
     </tr>
     <tr>
       <td>
-        <b><%= t'event.has_facetoface' %>:<%= @event.has_facetoface %>
+        <b><%= t'event.has_workshop' %>:<%= (@event.has_workshop)? t(:boolean_true): t(:boolean_false) %>
       </td>
       <td>
-        <b><%= t'event.has_offert' %>:<%= @event.has_offert %>
+        <b><%= t'event.token_for_id' %>:<%= @event.token_for_id %>
       </td>
     </tr>
     <tr>
-      <td colspan="2">
-        <b><%= t'event.has_workshop' %>:<%= @event.has_workshop %>
+      <td>
+        <b><%= t'event.start_date' %>:<%= @event.start_date %>
+      </td>
+      <td>
+        <b><%= t'event.end_date' %>:<%= @event.end_date %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <b><%= t'event.token_for_id' %>:<%= @event.token_for_id %>
+      </td>
+      <td>
+        <b><%= t'event.is_free' %>:<%= (@event.is_free)? t(:boolean_true): t(:boolean_false) %>
       </td>
     </tr>
   </table>

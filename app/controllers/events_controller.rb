@@ -26,6 +26,7 @@ class EventsController < ApplicationController
   # GET /events/new.json
   def new
     @event = Event.new
+    @event.users.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -41,12 +42,22 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
+    params[:event][:r_name] = "#{params[:event][:users_attributes]["0"][:first_name]} #{params[:event][:users_attributes]["0"][:last_name]}"
+    params[:event][:r_email] = params[:event][:users_attributes]["0"][:email]
+    params[:event][:r_phone] = params[:event][:users_attributes]["0"][:phone]
+    params[:event][:r_work_street] = params[:event][:users_attributes]["0"][:street]
+    params[:event][:r_work_street_number] = params[:event][:users_attributes]["0"][:street_number]
+    params[:event][:r_work_colony] = params[:event][:users_attributes]["0"][:colony]
+    params[:event][:r_work_zip] = params[:event][:users_attributes]["0"][:zip]
+    params[:event][:r_city] = params[:event][:users_attributes]["0"][:city]
+    params[:event][:r_state] = params[:event][:users_attributes]["0"][:state]
+    params[:event][:r_country] = params[:event][:users_attributes]["0"][:country] 
     @event = Event.new(params[:event])
 
     respond_to do |format|
       if @event.save
-        @group_id = Group.create(name: t("group.main_group"), event_id: session[:current_event_id])
-        Subgroup.create(name: t("subgroup.main_subgroup"), leader: "Leader", subgroup_key: "S1", group_id: @group_id, event_id: session[:current_event_id])
+        @group = Group.create(name: t("group.main_group"), event_id: session[:current_event_id])
+        Subgroup.create(name: t("subgroup.main_subgroup"), leader: "Leader", subgroup_key: "S1", group_id: @group.id, event_id: session[:current_event_id])
         format.html { redirect_to @event, notice: t(:successfully_created)}
         format.json { render json: @event, status: :created, location: @event }
       else
@@ -63,6 +74,7 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.update_attributes(params[:event])
+        I18n.locale = @event.language if current_user.role.is_admin
         session[:language] = @event.language
         format.html { redirect_to @event, notice: t(:successfully_updated) }
         format.json { head :no_content }

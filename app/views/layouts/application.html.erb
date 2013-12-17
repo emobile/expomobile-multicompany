@@ -68,52 +68,40 @@
 
               <% unless @event.nil? %>
 
+                <% if @event.has_workshop %>
+                  <li><%= link_to workshops_path, :class => "shortcut-button" do %>
+                      <span><%= image_tag("/assets/#{t(:workshops).downcase}.png") %></span>
+                    <% end %></li>
+                <% end %>
+
                 <% if @event.has_conference %>
                   <li><%= link_to conferences_path, :class => "shortcut-button" do %>
-                      <span><%= image_tag("/assets/conferences.png") %><br />
-                        <%= t(:conferences) %>
-                      </span>
+                      <span><%= image_tag("/assets/#{t(:conferences).downcase}.png") %></span>
                     <% end %></li>
                 <% end %>
 
                 <li><%= link_to expositions_path, :class => "shortcut-button" do %>
-                    <span><%= image_tag("/assets/expositions.png") %><br/>
-                      <%= t(:expositions) %>
-                    </span>
+                    <span><%= image_tag("/assets/#{t("activerecord.models.exposition").tr("ó", "o")}.png") %></span>
                   <% end %></li>
-
-                <% if @event.has_conference %>
-                  <li><%= link_to face_to_faces_path, :class => "shortcut-button" do %>
-                      <span><%= image_tag("/assets/face_to_face.png") %><br />
-                        <%= t(:face_to_faces) %>
-                      </span>
-                    <% end %></li>
-                <% end %>
 
                 <% if @event.has_offert %>
                   <li><%= link_to offerts_path, :class => "shortcut-button" do %>
-                      <span><%= image_tag("/assets/oferts.png") %><br/>
-                        <%= t(:offerts) %>
-                      </span>
+                      <span><%= image_tag("/assets/#{t(:offerts).downcase}.png") %></span>
                     <% end %></li>
                 <% end %>
 
-                <li><%= link_to attendees_path, :class => "shortcut-button" do %>
-                    <span><%= image_tag("/assets/registration.png") %><br/>
-                      <%= t(:attendees) %>
-                    </span>
-                  <% end %></li>
-
                 <li><%= link_to sponsors_path, :class => "shortcut-button" do %>
-                    <span><%= image_tag("/assets/sponsors.png") %><br/>
-                      <%= t(:sponsors) %>
-                    </span>
+                    <span><%= image_tag("/assets/#{t(:sponsors).downcase}.png") %></span>
                   <% end %></li>
+              <% end %>
 
-                <li><%= link_to users_path, :class => "shortcut-button" do %>
-                    <span><%= image_tag("/assets/users.png") %><br/>
-                      <%= t(:users) %>
-                    </span>
+              <li><%= link_to diaries_path, :class => "shortcut-button" do %>
+                  <span><%= image_tag("/assets/#{t("activerecord.models.diary").downcase}.png") %></span>
+                <% end %></li>
+
+              <% if @event.has_activity %>
+                <li><%= link_to activities_path, :class => "shortcut-button" do %>
+                    <span><%= image_tag("/assets/#{t(:activities).downcase}.png") %></span>
                   <% end %></li>
               <% end %>
 

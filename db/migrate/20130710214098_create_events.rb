@@ -18,7 +18,6 @@ class CreateEvents < ActiveRecord::Migration
       t.string :language
       t.string :time_zone
       t.integer :workshop_tolerance
-      t.integer :exposition_tolerance
       t.boolean :has_activity
       t.boolean :has_conference
       t.boolean :has_facetoface
@@ -35,6 +34,7 @@ class CreateEvents < ActiveRecord::Migration
       t.string :e_city
       t.string :e_state
       t.string :e_country
+      t.string :token_for_id,                           :null => false
 
       t.timestamps
     end

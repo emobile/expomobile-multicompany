@@ -16,6 +16,7 @@
 //= require jquery.datetimeentry
 //= require simpla.jquery.configuration
 //= require facebox
+//= require jquery_nested_form
 
 /*(function() {
 

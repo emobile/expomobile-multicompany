@@ -60,6 +60,7 @@ es:
         start_date: "Fecha inicial"
       event:
         banner: "Banner"
+        end_date: "Fecha final"
         logo: "Logotipo"
         name: "Nombre"
         place: "Lugar"
@@ -67,6 +68,8 @@ es:
         r_enterprise: "Empresa"
         r_name: "Nombre de contacto"
         r_social_reason: "Razón social"
+        start_date: "Fecha inicial"
+        token_for_id: "Token para ID de registro"
       face_to_face:
         attendee_id: "ID del solicitante"
         end_date: "Fecha final"
@@ -105,8 +108,8 @@ es:
         language: "Lenguaje"
         token: "Token"
       user:
-        address: "Dirección"
         city: "Ciudad"
+        colony: "Colonia"
         country: "País"
         current_password: "Tu contraseña actual"
         email: "Correo electrónico"
@@ -116,6 +119,8 @@ es:
         password_confirmation: "Confirmación de la contraseña"
         phone: "Teléfono"
         state: "Estado"
+        street: "Calle"
+        street_number: "Número de calle"
         username: "Nombre de usuario"
         zip: "Código postal"
       workshop:
@@ -144,9 +149,9 @@ es:
         massive_load:
           attributes:
             excel_file:
-              empty: "no haz seleccionado un archivo."
+              empty: "no has seleccionado un archivo."
             excel_file_file_name:
-              empty: "no haz seleccionado un archivo."
+              empty: "no has seleccionado un archivo."
         user:
           attributes:
             password:
@@ -224,7 +229,7 @@ es:
       zip_code: "C. P."
     gafete: "Gafete"
     generate_gafete: "Generar"
-    id_ok: "Haz proporcionado tu ID correctamente"
+    id_ok: "Has proporcionado tu ID correctamente"
     mail:
       attendee_id_subject: "Tu ID de registro"
       nip_subject: "NIP para ingresar a la aplicación"
@@ -263,7 +268,7 @@ es:
   
   conferences: "Conferencias"
   configuration: "Configuración"
-  confirm_instructions: "¿No haz recibido las instrucciones de confirmación?"
+  confirm_instructions: "¿No has recibido las instrucciones de confirmación?"
   confirmations: "Confirmación"
   contact_info: "INFORMACIÓN DE CONTACTO"
   corporate: "Corporativo"
@@ -334,7 +339,7 @@ es:
     atten_invalid_nip: "No proporcionaste tu NIP correctamente"
     atten_nips_dont_match: "El NIP que proporcionaste no coincide con el que te fue enviado"
     atten_not_exists: "El asistente no existe"
-    atten_email_not_registered: "No haz registrado tu email"
+    atten_email_not_registered: "No has registrado tu email"
     exhibitor_not_assigned: "Expositor no asignado"
     invalid_exhibitor_key: "Clave de expositor inválida"
     invalid_workshop_key: "Clave de taller inválida"
@@ -355,7 +360,6 @@ es:
     email: "Correo electrónico"
     end_date: "Fecha final"
     enterprise: "Empresa"
-    exposition_tolerance: "Tolerancia de exposiciones"
     has_activity: "¿Tiene actividades?"
     has_conference: "¿Tiene conferencias?"
     has_facetoface: "¿Tiene cara a cara?"
@@ -375,10 +379,12 @@ es:
     street: "Calle"
     street_number: "Número de calle"
     time_zone: "Zona horaria"
+    token_for_id: "Token para ID de registro"
     workshop_tolerance: "Tolerancia de talleres"
     zip: "Código postal"
     
   event_configuration: "Configuración del evento"
+  event_data: "Datos del evento"
     
   events: "Eventos"
   
@@ -398,6 +404,7 @@ es:
   face_to_faces: "Cara a cara"
   fair_total: "Total de regulares"
   false_value: "No"
+  forgot_password: "¿Olvidaste tu contraseña"
   gafete_note: "Los gafetes salen a una medida de 8.5cm x 12cm"
   general_info: "INFORMACIÓN GENERAL"
   generate_diary: "Generar agenda"
@@ -548,12 +555,13 @@ es:
   true_value: "Si"
   type_attendee_name: "Introduce el nombre del asistente:"
   unhappy: "¿No estas contento?"
-  unlock_instructions: "¿No haz recibido las instrucciones de desbloqueo?"
+  unlock_instructions: "¿No has recibido las instrucciones de desbloqueo?"
   users: "Usuarios"
   
   user:
     address: "Dirección"
     city: "Ciudad"
+    colony: "Colonia"
     country: "País"
     current_password: "Tu contraseña actual"
     email: "Correo electrónico"
@@ -565,10 +573,12 @@ es:
     phone: "Teléfono"
     role_name: "Nombre del rol"
     state: "Estado"
+    street: Calle"
+    street_number: "Número de calle"
     username: "Nombre de usuario"
     zip: "Código postal"
     
-  user_registration: "Registro del usuario"
+  user_data: "Datos del usuario"
   
   visit:
     attendances_to_exhibitors: "Asistencias a expositores"
@@ -591,8 +601,8 @@ es:
   
   visit_already_registered: "Tu visita ya ha sido registrada"
   visit_not_registered: "No pudiste registrar tu visita, no es la hora apropiada"
-  visit_registered_to_exhibitor: "Haz registrado tu visita con éxito a %{exhibitor_name}"
-  visit_registered_to_workshop: "Haz registrado tu visita con éxito a %{workshop_name}"
+  visit_registered_to_exhibitor: "Has registrado tu visita con éxito a %{exhibitor_name}"
+  visit_registered_to_workshop: "Has registrado tu visita con éxito a %{workshop_name}"
   visits: "Visitas"
   want_to_replace: "¿Quieres sobreescribir la asociación existente?"
   web: "Web"

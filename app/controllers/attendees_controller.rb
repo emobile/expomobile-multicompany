@@ -2,7 +2,7 @@
 
 class AttendeesController < ApplicationController
   before_filter :authenticate_user!, :except => [:register, :register_attendee]
-  before_filter :load_event, :only => [:generate_gafete, :print_gafete_a, :print_gafete_b, :print_gafete_c]
+  before_filter :load_event, :only => [:create, :generate_gafete, :print_gafete_a, :print_gafete_b, :print_gafete_c]
   load_and_authorize_resource :except => [:register, :register_attendee]
 
   def index
@@ -62,12 +62,12 @@ class AttendeesController < ApplicationController
   # POST /attendees
   # POST /attendees.json
   def create
-    unless params[:attendee][:e_city].blank?
-      params[:attendee][:attendee_id] = (params[:attendee][:e_city][0].upcase + Array.new(2){[*'0'..'9'].sample}.join + ["0", "2", "4", "6", "8"].sample)
-      while !@event.attendees.find_by_attendee_id(params[:attendee][:attendee_id]).nil?
-        params[:attendee][:attendee_id] = (params[:attendee][:e_city][0].upcase + Array.new(2){[*'0'..'9'].sample}.join + ["0", "2", "4", "6", "8"].sample)
-      end
+    @last_attendee = Attendee.last
+    inc_id = 1
+    unless @last_attendee.nil?
+      inc_id = @last_attendee.attendee_id[2..-1].to_i + 1
     end
+    params[:attendee][:attendee_id] = @event.token_for_id + "%04d" % inc_id
     params[:attendee][:a_platform] = params[:attendee][:a_platform].join(";") unless params[:attendee][:a_platform].nil?
     params[:attendee][:a_market_segment] = params[:attendee][:a_market_segment].join(";") unless params[:attendee][:a_market_segment].nil?
     @attendee = Attendee.new(params[:attendee])
@@ -309,5 +309,5 @@ class AttendeesController < ApplicationController
   def load_event
     @event = Event.find_by_id(session[:current_event_id])
   end
-
+  
 end
