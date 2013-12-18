@@ -28,11 +28,11 @@ class MobileServicesController < ApplicationController
           end
         end
       
-        @times_sent = (@nip.times_sent.nil?) ? 0: @nip.times_sent
-      
-        if @times_sent < 10
+#        @times_sent = (@nip.times_sent.nil?) ? 0: @nip.times_sent
+#      
+#        if @times_sent < 10
           @can_send_email = false
-          @can_send_email = ((Time.zone.now - @nip.sent) >= 0) unless @nip.sent.nil?
+          @can_send_email = ((Time.now - @nip.sent) >= 0) unless @nip.sent.nil?
       
           if @nip.sent.nil? || @can_send_email
             @name = @attendee.a_name
@@ -62,9 +62,9 @@ class MobileServicesController < ApplicationController
             @msg = { name: nil, email: @email, subgroup_name: @subgroup_name, group_name: @group_name, subgroup_leader: @subgroup_leader, domain: @domain, enterprise: @enterprise, phone: @phone, address: @address, msg: t("errors.atten_email_already_sended"), sent: "no" }
           end
         
-        else
-          @msg = { name: nil, email: @email, subgroup_name: @subgroup_name, group_name: @group_name, subgroup_leader: @subgroup_leader, domain: @domain, enterprise: @enterprise, phone: @phone, address: @address, msg: t("errors.atten_email_maximum_sends"), sent: "no" }
-        end
+#        else
+#          @msg = { name: nil, email: @email, subgroup_name: @subgroup_name, group_name: @group_name, subgroup_leader: @subgroup_leader, domain: @domain, enterprise: @enterprise, phone: @phone, address: @address, msg: t("errors.atten_email_maximum_sends"), sent: "no" }
+#        end
     
       else
         @msg = { name: nil, email: nil, subgroup_name: nil, group_name: nil, subgroup_leader: nil, domain: nil, enterprise: nil, phone: nil, address: nil, msg: t("errors.atten_not_exists"), sent: "no" }
