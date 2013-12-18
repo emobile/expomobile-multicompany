@@ -18,14 +18,11 @@ es:
         a_market_segment: "SEGMENTO DEL MERCADO QUE ATIENDEN"
         a_name: "NOMBRE DEL ASISTENTE"
         a_num_employees: "NÚMERO DE EMPLEADOS"
-        a_other_line: "OTRO GIRO"
         a_platform: "PLATAFORMA"
-        a_sec_line: "GIRO SECUNDARIO"
         e_city: "CIUDAD"
         e_colony: "COLONIA"
         e_ext_number: "NO. EXT"
         e_lada: "LADA"
-        e_main_line: "GIRO PRINCIPAL"
         e_municipality: "DELEGACIÓN / MUNICIPIO"
         e_name: "RAZÓN SOCIAL DE LA EMPRESA / PERSONA FÍSICA CON ACTIVIDADES EMPRESARIALES"
         e_phone: "TELÉFONO"
@@ -241,6 +238,7 @@ es:
     with_conferences: "Con conferencias"
     with_diary: "Con agenda"
     with_logos: "Con logotipos"
+    with_qr_code: "Con código QR"
     
   attendance: "Lista de asistencia"
   attendances: "Asistencias"
@@ -347,6 +345,7 @@ es:
     
   event:
     banner: "Banner"
+    change_logos: "Cambiar el logo y el banner"
     city: "Ciudad"
     colony: "Colonia"
     contact_data: "DATOS DE CONTACTO"
@@ -369,6 +368,7 @@ es:
     job: "Puesto"
     language: "Lenguaje"
     logo: "Logotipo"
+    logos_successfully_updated: "El logo y el banner fueron actualizados exitosamente."
     name: "Nombre"
     phone: "Teléfono"
     place: "Lugar"
@@ -446,6 +446,8 @@ es:
   map: "Mapa"
   
   massive_load:
+    attendees_template: "plantilla_de_asistentes"
+    download_template: "Descargar plantilla"
     excel_file: "Archivo excel"
   
   massive_loads: "Cargas masivas"

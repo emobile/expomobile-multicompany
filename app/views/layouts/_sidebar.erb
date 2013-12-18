@@ -6,7 +6,14 @@
     <%= link_to image_tag("/assets/expomobile.png", :id => "logo", :alt => ""), "/", :style => "display: block;" %>
     <!-- Sidebar Profile links -->
     <div id="profile-links">
-      <%= link_to current_user.fullname, current_user %>, <%= t(:signed_in) %> <br />
+      <% if session[:current_event_id].nil? %>
+        <%= link_to current_user.fullname, current_user %>, <%= t(:signed_in) %>
+      <% else %>
+        <% @event = Event.find_by_id(session[:current_event_id]) %>
+        <%= link_to @event.name, @event %><br/>
+        <%= link_to current_user.fullname, current_user %>, <%= t(:signed_in) %>
+      <% end %>
+      <br />
       <br />
       <%= link_to t(:home), root_path %> | 
       <%= link_to t(:logout), destroy_user_session_path %>
@@ -36,8 +43,7 @@
           <%= link_to t(:configuration), edit_event_path(session[:current_event_id]), :class=> "nav-top-item no-submenu" + (controller_name == "events" ? " current": ""), :id => "2main" %>
         </li>
       <% end %>
-      <% unless session[:current_event_id].nil? %>
-        <% @event = Event.find_by_id(session[:current_event_id]) %>
+      <% unless @event.nil? %>
         <li>
           <a href="#" class="nav-top-item mainlinks<%= " current" if %{attendees groups subgroups massive_loads}.include?(controller_name) %>" id="4main"> <!-- Add the class "current" to current menu item -->
             <%= t(:attendees) %>

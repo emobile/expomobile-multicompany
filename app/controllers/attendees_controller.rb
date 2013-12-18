@@ -253,6 +253,7 @@ class AttendeesController < ApplicationController
     @e_address = params[:e_address]
     @a_web = params[:a_web]
     @with_logos = params[:with_logos]
+    @with_qr_code = params[:with_qr_code]
     @event = Event.find_by_id(session[:current_event_id])
     render layout: false
   end

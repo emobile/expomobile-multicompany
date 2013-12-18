@@ -452,8 +452,7 @@ class MobileServicesController < ApplicationController
   end
   
   def register_visit_to_workshop
-    Time.zone = @event.time_zone
-    current_time = Time.zone.now.time
+    current_time = Time.now.in_time_zone(@event.time_zone).time
     
     if !session[:attendee_id].blank?
 

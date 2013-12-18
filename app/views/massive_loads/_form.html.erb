@@ -4,26 +4,29 @@
 
 <%= render "layouts/first_tab" %>
 <%= form_for(@massive_load) do |f| %>
-<% if @massive_load.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@massive_load.errors.count, "error") %> prohibited this massive_load from being saved:</h2>
+  <% if @massive_load.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@massive_load.errors.count, "error") %> prohibited this massive_load from being saved:</h2>
 
-  <ul>
-    <% @massive_load.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
-
+      <ul>
+        <% @massive_load.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div style="margin: 20px 0px;">
+    <%= t("massive_load.download_template") %>
+    <%= link_to image_tag("/assets/excel-file.png"), "/assets/#{t("massive_load.attendees_template")}.xlsx" %>
+  </div>
   <p class="field">
     <%= f.label t("massive_load.excel_file") %>
     <%= f.file_field :excel_file %>
   </p>
   <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
 
-<div class="form-actions">
-  <%= f.submit nil, :class => 'button' %>
-</div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
 
 <% end %>

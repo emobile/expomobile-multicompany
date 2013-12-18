@@ -72,9 +72,11 @@
       <%= f.label t("event.time_zone") %>
       <%= time_zone_select :event, :time_zone, ["International Date Line West", "Midway Island", "American Samoa", "Hawaii", "Alaska", "Pacific Time (US & Canada)", "Tijuana", "Mountain Time (US & Canada)", "Arizona", "Chihuahua", "Mazatlan", "Central Time (US & Canada)", "Saskatchewan", "Guadalajara", "Mexico City", "Monterrey", "Central America", "Eastern Time (US & Canada)", "Indiana (East)", "Bogota", "Lima", "Quito", "Atlantic Time (Canada)", "Caracas", "La Paz", "Santiago", "Newfoundland", "Brasilia", "Buenos Aires", "Georgetown"].map{ |t| ActiveSupport::TimeZone[t] }.sort_by{ |t| t.name }, :default => "Chihuahua" %>
     </p>
-    <%= f.label t("event.logo") %>
-    <% @file_required = controller.action_name == "new" %>
-    <%= f.file_field :logo, :required => @file_required %><span class="required">*</span>
+    <p class="field">
+      <%= f.label t("event.logo") %>
+      <% @file_required = controller.action_name == "new" %>
+      <%= f.file_field :logo, :required => @file_required %><span class="required">*</span>
+    </p>
     <p class="field">
       <%= f.label t("event.banner") %>
       <%= f.file_field :banner, :required => @file_required %><span class="required">*</span>

@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
   before_filter :authenticate_user!
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:change_logo_edit, :change_logo_update]
 
   def index
     @events = Event.order('id DESC').paginate(:per_page => 10, :page => params[:page])
@@ -96,4 +96,25 @@ class EventsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def change_logo_edit
+    @event = Event.find(params[:id])
+  end
+  
+  def change_logo_update
+    @event = Event.find(params[:id])
+
+    respond_to do |format|
+      if @event.update_attributes(params[:event])
+        I18n.locale = @event.language if current_user.role.is_admin
+        session[:language] = @event.language
+        format.html { redirect_to root_path, notice: t("event.logos_successfully_updated") }
+        format.json { head :no_content }
+      else
+        format.html { render action: "change_logo_edit" }
+        format.json { render json: @event.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
 end

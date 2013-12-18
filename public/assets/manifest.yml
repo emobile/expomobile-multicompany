@@ -1,4 +1,8 @@
 ---
+attendees_template.xlsx: attendees_template-59f7aac49a9d0630dff0171daf0004cd.xlsx
+attendees_template/index.xlsx: attendees_template-59f7aac49a9d0630dff0171daf0004cd.xlsx
+plantilla_de_asistentes.xlsx: plantilla_de_asistentes-2fd7e53c7c4baf1f336ebb4f0a03f7bd.xlsx
+plantilla_de_asistentes/index.xlsx: plantilla_de_asistentes-2fd7e53c7c4baf1f336ebb4f0a03f7bd.xlsx
 actividades.png: actividades-5bf8533c8f2b0a143fe5ebcb581bdf61.png
 actividades/index.png: actividades-5bf8533c8f2b0a143fe5ebcb581bdf61.png
 activities.png: activities-eddb239348415e630ce4d2143a245de4.png
@@ -63,6 +67,8 @@ descarga.jpg: descarga-f08bb33c17f54b57965371c35fec6934.jpg
 descarga/index.jpg: descarga-f08bb33c17f54b57965371c35fec6934.jpg
 diary.png: diary-ec8ccebf92f48cc1ddd91571ceae0235.png
 diary/index.png: diary-ec8ccebf92f48cc1ddd91571ceae0235.png
+excel-file.png: excel-file-fb1e9a839de1fa6a7473703cd22c544f.png
+excel-file/index.png: excel-file-fb1e9a839de1fa6a7473703cd22c544f.png
 expomobile.jpg: expomobile-d502789817f6a5003c07abd833e82929.jpg
 expomobile/index.jpg: expomobile-d502789817f6a5003c07abd833e82929.jpg
 expomobile.png: expomobile-4a61da0f630b6364c6a0363c6e1992a4.png
@@ -75,6 +81,8 @@ exposition.png: exposition-2cdb829e064d1be3541474a27d8dda00.png
 exposition/index.png: exposition-2cdb829e064d1be3541474a27d8dda00.png
 face48.png: face48-c4326a4c52c9e2aa00f444df0838fa6b.png
 face48/index.png: face48-c4326a4c52c9e2aa00f444df0838fa6b.png
+facetoface.png: facetoface-8328a642c233410e12d6f5695de224fd.png
+facetoface/index.png: facetoface-8328a642c233410e12d6f5695de224fd.png
 hp.jpg: hp-75b8476d27bec89591f8d152dd83f49d.jpg
 hp/index.jpg: hp-75b8476d27bec89591f8d152dd83f49d.jpg
 icons/bullet_black.png: icons/bullet_black-383cf8cb6d1f0bf3971cacdff0509de4.png
@@ -191,8 +199,8 @@ subgroups.js: subgroups-1b13569e9620782f423d4cd3ce931750.js
 subgroups/index.js: subgroups-1b13569e9620782f423d4cd3ce931750.js
 workshops.js: workshops-1b13569e9620782f423d4cd3ce931750.js
 workshops/index.js: workshops-1b13569e9620782f423d4cd3ce931750.js
-application.css: application-1a393adb7b6e52912409a3e1fc035ae5.css
-application/index.css: application-1a393adb7b6e52912409a3e1fc035ae5.css
+application.css: application-fd1f47fcdeef4a23f5f8e4bf2de070e8.css
+application/index.css: application-fd1f47fcdeef4a23f5f8e4bf2de070e8.css
 redmond/images/ui-bg_flat_0_aaaaaa_40x100.png: redmond/images/ui-bg_flat_0_aaaaaa_40x100-7d1197a52442bc56fcad60d0390f4b32.png
 redmond/images/ui-bg_flat_0_aaaaaa_40x100/index.png: redmond/images/ui-bg_flat_0_aaaaaa_40x100-7d1197a52442bc56fcad60d0390f4b32.png
 redmond/images/ui-bg_flat_55_fbec88_40x100.png: redmond/images/ui-bg_flat_55_fbec88_40x100-6bd1905222cab173dc4996f12b7a07cb.png

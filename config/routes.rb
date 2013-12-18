@@ -1,5 +1,7 @@
 Expomobile::Application.routes.draw do
 
+  get "events/change_logo_edit"
+  put "events/change_logo_update"
   resources :events
 
   resources :massive_loads

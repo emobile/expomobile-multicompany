@@ -1,0 +1,36 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "events" %>
+<% end %>
+
+<%= render "layouts/first_tab" %>
+<%= form_for(@event, :url => "change_logo_update") do |f| %>
+  <% if @event.errors.any? %>
+    <div id="error_explanation">
+      <% if @event.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.event")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.event"), :count => @event.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <%= hidden_field_tag :id, nil, :value => @event.id %>
+    <h3 style="text-align: center;"><%= t("event.change_logos") %></h3>
+    <p class="field">
+    <%= f.label t("event.logo") %>
+    <%= f.file_field :logo %>
+    </p>
+    <p class="field">
+      <%= f.label t("event.banner") %>
+      <%= f.file_field :banner %>
+    </p>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
+
+<% end %>

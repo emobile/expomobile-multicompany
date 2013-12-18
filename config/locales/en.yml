@@ -18,14 +18,11 @@ en:
         a_market_segment: "MARKET SEGMENT"
         a_name: "ATTENDANT NAME"
         a_num_employees: "EMPLOYEES NUMBER"
-        a_other_line: "OTHER LINE"
         a_platform: "PLATFORM"
-        a_sec_line: "SECONDARY LINE"
         e_city: "CITY"
         e_colony: "COLONY"
         e_ext_number: "EXT NO."
         e_lada: "LADA"
-        e_main_line: "MAIN LINE"
         e_municipality: "DELEGATION / MUNICIPALITY"
         e_name: "NAME OF COMPANY / INDIVIDUAL WITH BUSINESS ACTIVITIES"
         e_phone: "PHONE"
@@ -202,7 +199,7 @@ en:
       is_director: "IS DIRECTOR?"
       main_line: "MAIN LINE"
       market_segment: "MARKET SEGMENT"
-      name: "ATTENDANT NAME"
+      name: "ATTENDEE NAME"
       nip: "PIN"
       num_employees: "EMPLOYEES NUMBER"
       other_line: "OTHER LINE"
@@ -241,6 +238,7 @@ en:
     with_conferences: "With conferences"  
     with_diary: "With diary"  
     with_logos: "With logos"
+    with_qr_code: "With QR code"
     
   attendance: "Attendance"
   attendances: "Attendances"
@@ -347,6 +345,7 @@ en:
     
   event:
     banner: "Banner"
+    change_logos: "Change logo and banner"
     city: "City"
     colony: "Colony"
     contact_data: "CONTACT DATA"
@@ -369,6 +368,7 @@ en:
     job: "Job"
     language: "Language"
     logo: "Logo"
+    logos_successfully_updated: "Logo and banner were updated successfully."
     name: "Name"
     phone: "Phone"
     place: "Place"
@@ -446,6 +446,8 @@ en:
   map: "Map"
   
   massive_load:
+    attendees_template: "attendees_template"
+    download_template: "download template"
     excel_file: "excel file"
     
   massive_loads: "Massive Loads" 

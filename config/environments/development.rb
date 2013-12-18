@@ -31,7 +31,7 @@ Expomobile::Application.configure do
 
   # Do not compress assets
   config.assets.compress = true
-  config.assets.compile = true
+  config.assets.compile = false
   # Expands the lines which load the assets
   config.assets.debug = false
   #config.serve_static_assets = false

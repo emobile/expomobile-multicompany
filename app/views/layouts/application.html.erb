@@ -48,13 +48,11 @@
         <div id="images-container">
           <% unless session[:current_event_id].nil? %>
             <% @event = Event.find_by_id(session[:current_event_id]) %>
-            <div class="logo-div"><%= image_tag @event.logo.url, :class => "logo-img" %></div>
-            <div class="banner-div"><%= image_tag @event.banner.url, :class => "logo-img" %></div>
-            <% if current_user.role.is_admin %>
-              <div id="settings-div">
-                <a href="/events/change_logo"><img src="/assets/settings.png"/></a>
-              </div>
-            <% end %>
+            <div class="logo-div"><%= image_tag @event.logo.url, :class => "logo-img", :height => 94, :style => "height: 94px; -ms-interpolation-mode: bicubic;" %></div>
+            <div class="banner-div"><%= image_tag @event.banner.url, :class => "logo-img", :height => 110, :style => "height: 110px; -ms-interpolation-mode: bicubic;" %></div>
+            <div id="settings-div">
+              <%= link_to image_tag("/assets/settings.png"), events_change_logo_edit_path(:id => @event.id) %>
+            </div>
           <% end %>
         </div>
 
@@ -89,7 +87,7 @@
                       <span><%= image_tag("/assets/#{t(:offerts).downcase}.png") %></span>
                     <% end %></li>
                 <% end %>
-              
+
                 <% if @event.has_facetoface %>
                   <li><%= link_to face_to_faces_path, :class => "shortcut-button" do %>
                       <span><%= image_tag("/assets/#{t(:face_to_faces).gsub(" ", "").downcase}.png") %></span>
