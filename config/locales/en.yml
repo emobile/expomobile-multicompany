@@ -449,6 +449,7 @@ en:
     attendees_template: "attendees_template"
     download_template: "download template"
     excel_file: "excel file"
+    format_error: "Format error in the excel file data."
     
   massive_loads: "Massive Loads" 
   new_record_female: "New %{record}"

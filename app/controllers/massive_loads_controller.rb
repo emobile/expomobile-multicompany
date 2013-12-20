@@ -45,7 +45,13 @@ class MassiveLoadsController < ApplicationController
 
     respond_to do |format|
       if @massive_load.save
+        @has_error = false
         read_excel
+        if @has_error
+          flash[:error] = t("massive_load.format_error")
+          MassiveLoad.destroy(@massive_load)
+          redirect_to new_massive_load_path and return
+        end
         format.html { redirect_to @massive_load, notice: t(:successfully_created) }
         format.json { render json: @massive_load, status: :created, location: @massive_load }
       else

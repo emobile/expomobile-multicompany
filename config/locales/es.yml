@@ -449,6 +449,7 @@ es:
     attendees_template: "plantilla_de_asistentes"
     download_template: "Descargar plantilla"
     excel_file: "Archivo excel"
+    format_error: "Error en el formato de los datos de el archivo de excel."
   
   massive_loads: "Cargas masivas"
   new_record_female: "Nueva %{record}"

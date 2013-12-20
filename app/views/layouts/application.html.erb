@@ -29,7 +29,9 @@
 
   </head>
 
-  <body><div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+  <body>
+    <% @event = Event.find_by_id(session[:current_event_id]) unless session[:current_event_id].nil? %>
+    <div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
       <%= render "layouts/sidebar" %>
       <div id="main-content"> <!-- Main Content Section with everything -->
 
@@ -41,13 +43,11 @@
           </div>
         </noscript>
         <!-- Page Head -->
-        <% if signed_in? && controller_name == "welcome" %>
-          <% @event = Event.find_by_id(session[:current_event_id]) unless session[:current_event_id].nil? %>
+        <% if controller_name == "welcome" %>
           <h2><%= "#{t(:welcome)} #{current_user.fullname}" %><%= " #{t(:to_event)} #{@event.name}" unless @event.nil? %></h2>     
         <% end %>
         <div id="images-container">
-          <% unless session[:current_event_id].nil? %>
-            <% @event = Event.find_by_id(session[:current_event_id]) %>
+          <% unless @event.nil? %>
             <div class="logo-div"><%= image_tag @event.logo.url, :class => "logo-img", :height => 94, :style => "height: 94px; -ms-interpolation-mode: bicubic;" %></div>
             <div class="banner-div"><%= image_tag @event.banner.url, :class => "logo-img", :height => 110, :style => "height: 110px; -ms-interpolation-mode: bicubic;" %></div>
             <div id="settings-div">
@@ -57,7 +57,7 @@
         </div>
 
         <div id="catalogs">
-          <% unless session[:current_event_id].nil? %>
+          <% unless @event.nil? %>
             <p id="page-intro"><%= t(:catalogs) %></p>
             <style>
               /*.shortcut-buttons-set { list-style: none; padding: 0; margin: 0; }*/

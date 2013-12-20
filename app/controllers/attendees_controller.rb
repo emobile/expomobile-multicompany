@@ -71,7 +71,8 @@ class AttendeesController < ApplicationController
     params[:attendee][:a_platform] = params[:attendee][:a_platform].join(";") unless params[:attendee][:a_platform].nil?
     params[:attendee][:a_market_segment] = params[:attendee][:a_market_segment].join(";") unless params[:attendee][:a_market_segment].nil?
     @attendee = Attendee.new(params[:attendee])
-
+    AttendeeMailer.welcome_email(@attendee).deliver!
+    
     respond_to do |format|
       if @attendee.save
         format.html { redirect_to @attendee, notice: t(:successfully_created) }
