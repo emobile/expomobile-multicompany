@@ -18,7 +18,7 @@ class Ability
       @models = Dir['app/models/*.rb'].map { |f| File.basename(f, '.*').camelize.constantize.name }
       @models -= %w{Ability Nip Schedule AttendeeWorkshop AttendeeExposition Rating Role SystemConfiguration}
       @models.each do |m|
-        if %w{Activity Attendee Conference Diary Exhibitor Exposition FaceToFace Group Hour Offert MassiveLoad Room Sponsor Workshop}.include? m
+        if %w{Activity Attendee Conference Diary Exhibitor Exposition FaceToFace Group Hour Offert MailTemplate MassiveLoad Room Sponsor Workshop}.include? m
           can :manage, eval(m) do |object|
             if %w{Activity Conference FaceToFace Offert Workshop}.include? m
               object.event_id == @user.event_id && eval("@user.event.has_#{m.downcase}")

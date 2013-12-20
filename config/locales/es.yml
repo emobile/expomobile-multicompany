@@ -210,6 +210,10 @@ es:
       subgroup: "SUBGRUPO"
       tel_nextel: "TEL. NEXTEL (A 10 DIGITOS)"
       web: "WEB"
+    confirmation:
+      already_confirmed: "Ya haz sido confirmado anteriormente."
+      confirmed: "Tu registro a sido confirmado exitosamente."
+      wrong: "Tus datos de registro son incorrectos."
     enter:
       city: "CIUDAD"
       colony: "COLONIA"

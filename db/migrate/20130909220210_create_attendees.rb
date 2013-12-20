@@ -29,6 +29,8 @@ class CreateAttendees < ActiveRecord::Migration
       t.string :a_other_line
       t.string :a_web
       t.string :a_market_segment,        :null => false
+      t.boolean :confirmed,              :null => false, :default => false
+      t.string :confirmation_token,      :null => false
       t.references :subgroup,            :null => false
       t.references :event,               :null => false
 

@@ -1,0 +1,44 @@
+<div class="tab-content default-tab" id="tab1"> <!-- This is the target div. id must match the href of this div's tab -->
+  <table>
+    <thead>
+      <tr>
+        <%#*<th><input class="check-all" type="checkbox" /></th>%>
+        <th>ID</th>
+                  <th><%= t'mail_template.content' %></th>
+              </tr>
+
+    </thead>
+
+    <%#*<tfoot>%>
+      <%#*<tr>%>
+        <%#*<td colspan="5">%>
+          <%#*<div class="bulk-actions align-left">%>
+            <%#= render "layouts/select_action" %>
+          <%#*</div>%>
+          <%#= render "layouts/pagination" %>
+          <%#*<div class="clear"></div>%>
+        <%#*</td>%>
+      <%#*</tr>%>
+    <%#*</tfoot>%>
+
+    <tbody>
+      <% @mail_templates.each do |mail_template| %>
+      <tr>
+        <%#*<td><input type="checkbox" /></td>%>
+        <%#if can? :show, MailTemplate %>
+        <%#*<td><%=link_to mail_template.id, mail_template, :class => 'button'</td>%>
+        <%#else%>
+        <td><%= label mail_template.id, mail_template.id %></td>
+        <%#end%>
+        
+                
+             <% @model = mail_template %>
+                          
+          <td><%= mail_template.content[0..50] %></td>
+                <%= render "layouts/index_links" %>
+        <% end %>
+    </tbody>
+  </table>
+  <%= render "layouts/action_links" %>
+</div> 
+<%= render "layouts/second_tab" %>

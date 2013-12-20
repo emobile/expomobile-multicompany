@@ -17,6 +17,8 @@
 //= require simpla.jquery.configuration
 //= require facebox
 //= require jquery_nested_form
+//= require markitup
+//= require markitup/sets/xbbcode/set
 
 /*(function() {
 

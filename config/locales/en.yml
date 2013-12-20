@@ -210,6 +210,10 @@ en:
       subgroup: "SUBGROUP"
       tel_nextel: "NEXTEL PHONE (10 NUMBERS)"
       web: "WEB"
+    confirmation:
+      already_confirmed: "You already have been confirmed."
+      confirmed: "You have been confirmed successfully."
+      wrong: "Your confirmation data is wrong."
     enter:
       city: "CITY"
       colony: "COLONY"

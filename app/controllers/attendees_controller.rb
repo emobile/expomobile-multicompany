@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class AttendeesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:register, :register_attendee]
+  before_filter :authenticate_user!, :except => [:register, :register_attendee, :confirm]
   before_filter :load_event, :only => [:create, :generate_gafete, :print_gafete_a, :print_gafete_b, :print_gafete_c]
   load_and_authorize_resource :except => [:register, :register_attendee]
 
@@ -70,6 +70,7 @@ class AttendeesController < ApplicationController
     params[:attendee][:attendee_id] = @event.token_for_id + "%04d" % inc_id
     params[:attendee][:a_platform] = params[:attendee][:a_platform].join(";") unless params[:attendee][:a_platform].nil?
     params[:attendee][:a_market_segment] = params[:attendee][:a_market_segment].join(";") unless params[:attendee][:a_market_segment].nil?
+    params[:attendee][:confirmation_token] = Array.new(10) {[*'0'..'9', *'a'..'z'].sample}.join
     @attendee = Attendee.new(params[:attendee])
     AttendeeMailer.welcome_email(@attendee).deliver!
     
@@ -306,6 +307,20 @@ class AttendeesController < ApplicationController
   def get_subgroups
     @subgroups = Subgroup.where(:event_id => params[:event_id]).select([:id, :name])
     render json: @subgroups
+  end
+  
+  def confirm
+    @attendee = Attendee.find_by_id(params[:id])
+    I18n.locale = @attendee.event.language
+    if !@attendee.confirmed && @attendee.confirmation_token == params[:confirmation_token]
+      @attendee.update_attribute("confirmed", true)
+      flash[:alert] = t("atten.confirmation.confirmed")
+    elsif @attendee.confirmed && @attendee.confirmation_token == params[:confirmation_token]
+      flash[:notice] = t("atten.confirmation.already_confirmed")
+    else
+      flash[:error] = t("atten.confirmation.wrong")
+    end
+    render layout: "devise"
   end
   
   def load_event
