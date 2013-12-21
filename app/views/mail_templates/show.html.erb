@@ -4,12 +4,12 @@
   <table >
     <tr>
       <td>
-        <b><%= t'mail_template.name' %>:<%= @mail_template.name %>
+        <b><%= t("mail_template.#{@mail_template.name}") %>
       </td>
     </tr>
     <tr>
       <td>
-        <b><%= t'mail_template.content' %>:<%= @mail_template.content %>
+        <b><%= t'mail_template.content' %>:<br/><br/><%= @mail_template.content.html_safe %>
       </td>
     </tr>
   </table>

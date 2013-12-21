@@ -3,13 +3,15 @@ namespace :mails do
     @event = Event.find_by_id(args["event_id"])
     #    output = File.open "mail-output.txt", "a"
     #    output.puts(Date.today.to_s)
-    @event.attendees.each do |attendee|
+    #@event.attendees.each do |attendee|
       #      output.puts(@attendee.id)
-      AttendeeMailer.welcome_email(attendee).deliver!
+      attendee = Attendee.find_by_id(1)
       if attendee.a_email =~ /\A[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})\z/
+        AttendeeMailer.welcome_email(attendee).deliver!
       end
       #      output.puts("----------------------------")
       #      output.close
-    end
+    #end
   end
+
 end

@@ -1,7 +1,6 @@
 Expomobile::Application.routes.draw do
-
+  
   resources :mail_templates
-
 
   get "events/change_logo_edit"
   put "events/change_logo_update"
@@ -95,6 +94,7 @@ Expomobile::Application.routes.draw do
 
   resources :exhibitors
   
+  get "attendees/send_mails"
   get "attendees/confirm"
   get "attendees/get_subgroups"
   match "register" => "attendees#register"

@@ -217,3 +217,10 @@ Diary.create([
 SystemConfiguration.create([
     {  :created_at => "2013-11-14 01:28:41", :updated_at => "2013-11-14 01:28:41", :token => "emobile", :language => "es" }
   ], :without_protection => true )
+
+MailTemplate.create([
+    {  :name => "acknowledgment_template", :content => "Content", :event_id => 2 },
+    {  :name => "invitation_template", :content => "Content", :event_id => 2 },
+    {  :name => "general_template", :content => "Content", :event_id => 2 },
+    {  :name => "welcome_template", :content => "Content", :event_id => 2 }
+  ], :without_proction => true )

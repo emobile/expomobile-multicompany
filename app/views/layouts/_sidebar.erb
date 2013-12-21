@@ -54,7 +54,7 @@
             <%= t(:attendees) %>
           </a>
           <ul>
-            <% @models = %w{Attendee Group Subgroup Massive_Load} %>
+            <% @models = %w{Attendee Group Subgroup Massive_Load Mail_Template} %>
             <% @models.each do |model| %>
               <li><%= link_to eval("t(:#{model.pluralize.downcase})"), eval("#{model.downcase.pluralize}_path"), :class => controller_name == model.pluralize.downcase && controller.action_name == "index" ? "current": "" %></li>
               <% if %w{Massive_Load}.include?(model) %>
@@ -62,8 +62,11 @@
               <% else %>
                 <% new_text = t(:new_record_male, :record => eval("t('activerecord.models.#{model.downcase}')")) %>
               <% end %>
-              <li><%= link_to t(new_text, :record => eval("t('activerecord.models.#{model.downcase}')")), eval("new_#{model.downcase}_path"), :class => controller_name == model.pluralize.downcase && controller.action_name == "new" ? "current": "" %></li>
+              <% if %w{Mail_Template}.exclude?(model) %>
+                <li><%= link_to t(new_text, :record => eval("t('activerecord.models.#{model.downcase}')")), eval("new_#{model.downcase}_path"), :class => controller_name == model.pluralize.downcase && controller.action_name == "new" ? "current": "" %></li>
+              <% end %>
             <% end %>
+            <li><%= link_to t(:send_mails), attendees_send_mails_path %></li>
           </ul>
         </li>
         <% if @event.has_workshop %>

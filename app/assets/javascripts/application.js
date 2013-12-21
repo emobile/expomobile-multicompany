@@ -17,8 +17,8 @@
 //= require simpla.jquery.configuration
 //= require facebox
 //= require jquery_nested_form
-//= require markitup
-//= require markitup/sets/xbbcode/set
+//= require jHtmlArea-0.8.0
+//= require jHtmlArea.ColorPickerMenu-0.8.0
 
 /*(function() {
 

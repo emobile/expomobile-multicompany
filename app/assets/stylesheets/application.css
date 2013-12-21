@@ -16,8 +16,8 @@
  *= require blue
  *= require jquery.datetimeentry
  *= require_tree ./redmond
- *= require markitup/skins/markitup/style
- *= require markitup/sets/xbbcode/style
+ *= require jHtmlArea
+ *= require jHtmlArea.ColorPickerMenu
  */
 
 

@@ -1,6 +1,3 @@
-@import url("/assets/markitup/skins/markitup/style.css");
-@import url("/assets/markitup/sets/xbbcode/style.css");
-
 /********************************      Basic Structure      ********************************/
 
 html {
@@ -271,14 +268,14 @@ a.remove-link:hover {
     padding: 10px 0;
 }
 
-/* Unordered List */
+/*Unordered List*/ 
 
 #main-content ul li {
     background: url('/assets/icons/bullet_black.png') center left no-repeat;
     padding: 4px 0 4px 20px;
 }
 
-/* Ordered List */
+/*Ordered List*/
 
 #main-content ol {
     padding: 0 0 0 24px;
@@ -1076,9 +1073,7 @@ form#tolerance_form {
     width: 250px;
     height: 80px;
     background: #FFFFFF;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
+
     border: #7F7F7F solid 1px;
 }
 

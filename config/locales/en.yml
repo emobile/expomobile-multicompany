@@ -80,6 +80,9 @@ en:
       hour:
         end_date: "End date"
         start_date: "Start date"
+      mail_template:
+        name: "Name"
+        content: "Content"
       massive_load:
         excel_file: "excel file"
       offert:
@@ -164,6 +167,7 @@ en:
       face_to_face: "face to face"
       group: "group"
       hour: "schedule"
+      mail_content: "mail content"
       massive_load: "massive load"
       offert: "offert"
       room: "room"
@@ -447,6 +451,12 @@ en:
   interviewee: "Interviewee"
   login: "Login"
   logout: "Logout"
+  
+  mail_content:
+    name: "Name"
+    content: "Content"
+    
+  mail_templates: "Plantillas de correo"
   map: "Map"
   
   massive_load:
@@ -510,6 +520,7 @@ en:
   
   schedules: "Schedules"
   search_by_name: "Search by name"
+  send_mails: "Send mails"
   sessions: "Sessions"
   set_tolerance: "Set tolerance"
   show_record: "Show %{record}"

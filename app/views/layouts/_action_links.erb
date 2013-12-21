@@ -11,20 +11,22 @@
   <%= link_to(t(:return_to_index, :model => eval("t(:#{controller_name})").downcase), eval("#{controller_name}_path"), :class=>"button") if can_index %>
   <%= link_to t(:show_record, :record => eval("t('activerecord.models.#{controller_name.singularize}')")), eval("@#{controller_name.singularize}"), :class=>"button" %>
   <% if current_user.role.is_super_admin || current_user.role.is_admin %>
-    <% if %w{system_configurations}.exclude?(controller_name) %>
+    <% if %w{mail_templates system_configurations}.exclude?(controller_name) %>
       <%= link_to new_text, eval("new_#{controller_name.singularize}_path"), :class=>"button" %>
     <% end %>
   <% end %>
 <% elsif controller.action_name == "show" %>
   <%= link_to(t(:return_to_index, :model => eval("t(:#{controller_name})").downcase), eval("#{controller_name}_path"), :class=>"button") if can_index %>
-  <% if !%w{massive_loads}.include?(controller_name) %>
+  <% if %w{massive_loads}.exclude?(controller_name) %>
     <%= link_to t(:edit_record, :record => eval("t('activerecord.models.#{controller_name.singularize}')")), eval("edit_#{controller_name.singularize}_path(@#{controller_name.singularize})"), :class=>"button" %>
   <% end %>
   <% if current_user.role.is_super_admin || current_user.role.is_admin %>
-    <% if !%w{system_configurations}.include?(controller_name) %>
+    <% if %w{mail_templates system_configurations}.exclude?(controller_name) %>
       <%= link_to new_text, eval("new_#{controller_name.singularize}_path"), :class=>"button" %>
     <% end %>
   <% end %>
 <% elsif controller.action_name == "index" && (current_user.role.is_super_admin || current_user.role.is_admin) %>
-  <%= link_to new_text, eval("new_#{controller_name.singularize}_path"), :class=>"button" %>
+  <% if %w{mail_templates}.exclude?(controller_name) %>
+    <%= link_to new_text, eval("new_#{controller_name.singularize}_path"), :class=>"button" %>
+  <% end %>
 <% end %>

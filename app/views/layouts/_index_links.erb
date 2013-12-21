@@ -6,7 +6,7 @@
       <img src="/assets/icons/pencil.png" alt="Edit" />
     <%end%></td>
 <% end %>
-<% if !%w{system_configurations}.include?(controller_name) %>
+<% if !%w{mail_templates system_configurations}.include?(controller_name) %>
   <td><%=link_to @model, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"nav-header" do%>
       <img src="/assets/icons/cross.png" alt="Delete" />
     <%end%>

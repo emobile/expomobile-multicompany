@@ -2,27 +2,51 @@
   <%= javascript_include_tag "mail_templates" %>
 <% end %>
 
+<style>
+  #main-content ul {
+    padding: 0px;
+}
+
+/*Unordered List*/ 
+
+#main-content ul li {
+    background: none;
+    padding: 0px;
+}
+
+
+</style>
+
 <%= render "layouts/first_tab" %>
 <%= form_for(@mail_template) do |f| %>
-<% if @mail_template.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@mail_template.errors.count, "error") %> prohibited this mail_template from being saved:</h2>
+  <% if @mail_template.errors.any? %>
+    <div id="error_explanation">
+      <% if @mail_template.errors.count == 1 %>
+        <h2><%= t('activerecord.errors.template.header.one', :model => t("activerecord.models.mail_template")) %></h2>
+      <% else %>
+        <h2><%= t('activerecord.errors.template.header.other', :model => t("activerecord.models.mail_template"), :count => @mail_template.errors.count) %></h2>
+      <% end %>
+      <ul>
+        <% @mail_template.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-  <ul>
-    <% @mail_template.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-</div>
-<% end %>
+  <p class="field">
+    <%= f.label t("mail_template.name") %>
+    <%= f.label t("mail_template.#{@mail_template.name}") %>
+  </p>
 
   <p class="field">
     <%= f.label t("mail_template.content") %>
-    <%= f.text_area :content, :class=>"medium-input" %>
+    <%= f.text_area :content, :class=>"medium-input", :required => true %><span class="required">*</span>
   </p>
+  <%= f.hidden_field :event_id, :value => session[:current_event_id] %>
 
-<div class="form-actions">
-  <%= f.submit nil, :class => 'button' %>
-</div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'button' %>
+  </div>
 
 <% end %>
