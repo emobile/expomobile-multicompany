@@ -94,7 +94,8 @@ Expomobile::Application.routes.draw do
 
   resources :exhibitors
   
-  get "attendees/send_mails"
+  get "attendees/select_email_type"
+  post "attendees/send_mails"
   get "attendees/confirm"
   get "attendees/get_subgroups"
   match "register" => "attendees#register"

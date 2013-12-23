@@ -3,7 +3,7 @@ class MailTemplatesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @mail_templates = MailTemplate.all
+    @mail_templates = MailTemplate.where(:event_id => session[:current_event_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,6 +15,11 @@ class MailTemplatesController < ApplicationController
   # GET /mail_templates/1.json
   def show
     @mail_template = MailTemplate.find(params[:id])
+    
+    if @mail_template.event_id != session[:current_event_id].to_i
+      flash[:error] = t(:not_correspond)
+      redirect_to mail_templates_path and return
+    end
 
     respond_to do |format|
       format.html # show.html.erb

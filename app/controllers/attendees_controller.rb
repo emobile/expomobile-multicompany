@@ -218,8 +218,26 @@ class AttendeesController < ApplicationController
     render layout: "devise"
   end
   
+  def select_email_type
+  end
+  
   def send_mails
+    require "rake"
     
+    if %w{welcome acknowledgment invitation general}.include?(params["email_type"])
+      Rake::Task.clear
+      Expomobile::Application.load_tasks
+      Rake::Task["mails:#{params["email_type"]}_email"].reenable
+      begin
+        Rake::Task["mails:#{params["email_type"]}_email"].invoke(params[:event_id])
+        flash[:success] = t("mail_template.emails_sent")
+      rescue
+        flash[:error] = t("mail_template.something_went_wrong")
+      end
+    else
+      flash[:error] = t("mail_template.must_select")
+    end
+    redirect_to attendees_select_email_type_path
   end
   
   def load_event

@@ -241,6 +241,7 @@ en:
     nip_sended: "Your PIN code was sent to %{email}, Please check your email"
     print_gafete: "Print gafete"
     registration_ok: "Your registration has been succesfully, your registration ID is:"
+    select_email_type: "Select an email type:"
     thanks_for_joining: "Thanks for joining and have a great day!"
     type_nip: "Now you can login to the application, just type this PIN:"
     with_conferences: "With conferences"  
@@ -452,11 +453,23 @@ en:
   login: "Login"
   logout: "Logout"
   
-  mail_content:
-    name: "Name"
+  mail_template:
+    acknowledgment: "Acknowledgement"
+    acknowledgment_template: "Acknowledgement template"
     content: "Content"
+    emails_sent: "¡Your emails have been sent!"
+    general: "General"
+    general_template: "General template"
+    invitation: "Invitation"
+    invitation_template: "Invitation template"
+    must_select: "You must select one option of above"
+    name: "Name"
+    something_went_wrong: "Something went wrong"
+    wait_until_sent: "Please wait until emails are sent"
+    welcome: "Welcome"
+    welcome_template: "Welcome template"
     
-  mail_templates: "Plantillas de correo"
+  mail_templates: "Email templates"
   map: "Map"
   
   massive_load:

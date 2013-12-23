@@ -1,11 +1,11 @@
 class MobileServicesController < ApplicationController
   #before_filter :detect_platform
-  before_filter :load_event, :except => [:get_attendee_id]
-  #skip_before_filter :verify_authenticity_token, :only => [:register_visit_to_workshop, :register_visit_to_stand]
+  before_filter :load_event, :except => [:get_attendee_id, :get_attendee_nip]
+  #skip_before_filter :verify_authenticity_token, :only => [:register_visit_to_workshop]
   respond_to :json
   layout false
 
-  def get_attendee_id 
+  def get_attendee_id
     I18n.locale = params[:language]
     session[:language] = params[:language]
     @attendee_id = params[:attendee_id]
@@ -553,6 +553,7 @@ class MobileServicesController < ApplicationController
   end
   
   def get_enabled_options
+    @event = Event.find_by_id(1)
     @options = { :has_activity => @event.has_activity, :has_conference => @event.has_conference, :has_facetoface => @event.has_facetoface, :has_offert => @event.has_offert, :has_workshop => @event.has_workshop }
     render json: @options
   end

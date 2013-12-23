@@ -1,0 +1,29 @@
+<script type="text/javascript">
+  $(function() {
+    $("#send_mails_form").submit(function() {
+      $("#ajax-loader").show();
+    });
+  });
+</script>
+
+<div style="margin: 25px">
+  <%= form_tag attendees_send_mails_path, :method => "post", :id => "send_mails_form" do %>
+    <%= label_tag t("atten.select_email_type"), nil, :style => "margin-bottom: 30px;" %>
+    <%= label_tag t("mail_template.welcome"), nil, :style => "display: inline-block;" %>
+    <%= radio_button_tag "email_type", "welcome", false, :style => "margin-right: 20px;" %>
+    <%= label_tag t("mail_template.acknowledgment"), nil, :style => "display: inline-block;" %>
+    <%= radio_button_tag "email_type", "acknowledgment", false, :style => "margin-right: 20px;" %>
+    <%= label_tag t("mail_template.invitation"), nil, :style => "display: inline-block;" %>
+    <%= radio_button_tag "email_type", "invitation", false, :style => "margin-right: 20px;" %>
+    <%= label_tag t("mail_template.general"), nil, :style => "display: inline-block;" %>
+    <%= radio_button_tag "email_type", "general", false, :style => "margin-right: 20px;" %>
+    <%= hidden_field_tag "event_id", nil, :value => session[:current_event_id] %>
+    <div class="form-actions">
+      <div id="ajax-loader" style="display: none;">
+        <%= t("mail_template.wait_until_sent") %><br/>
+        <%= image_tag "/assets/ajax-loader.gif" %>
+      </div>
+      <%= submit_tag t(:send_mails), :class => 'button' %>
+    </div>
+  <% end %>
+</div>

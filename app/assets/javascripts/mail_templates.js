@@ -7,7 +7,7 @@ $(function() {
             "|",
             "subscript", "superscript",
             "|",
-            "increasefontsize", "decreasefontsize", "forecolor", "backgroundcolor"
+            "increasefontsize", "decreasefontsize", "forecolor",
             "|",
             "unorderedlist", "orderedlist",
             "|",

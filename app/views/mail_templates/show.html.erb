@@ -1,5 +1,12 @@
 <%= render "layouts/first_tab" %>
 
+<style>
+  iframe {
+    width: 100%;
+    height: 500px;
+  }
+</style>
+
 <div class="CSSTableGenerator" >
   <table >
     <tr>
@@ -7,13 +14,8 @@
         <b><%= t("mail_template.#{@mail_template.name}") %>
       </td>
     </tr>
-    <tr>
-      <td>
-        <b><%= t'mail_template.content' %>:<br/><br/><%= @mail_template.content.html_safe %>
-      </td>
-    </tr>
   </table>
 </div>
-
+<%= @mail_template.content.html_safe %>
 
 <%= render "layouts/action_links" %>

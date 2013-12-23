@@ -3,18 +3,47 @@
 <% end %>
 
 <style>
-  #main-content ul {
-    padding: 0px;
-}
+  div.jHtmlArea {
+    display: inline-block !important;
+    overflow: hidden !important;
+    border: solid 1px #aaa !important;
+    width: 1000px !important;
+  }
 
-/*Unordered List*/ 
+  div.jHtmlArea iframe, div.jHtmlArea textarea {
+    border: none !important;
+    width: 100% !important;
+    height: 500px !important;
+  }
 
-#main-content ul li {
-    background: none;
-    padding: 0px;
-}
+  div.jHtmlArea .ToolBar {
+    display: inline-block !important;
+    background: #fbfbfb !important;
+    border-bottom: solid 1px #aaa !important;
+  }
 
+  div.jHtmlArea .ToolBar ul {
+    border: solid 1px #ccc !important;
+    margin: 1px !important;
+    padding: 1px !important;
+    float: left !important;
+    background: #fff url(/assets/jHtmlArea_Toolbar_Group_BG.png) repeat-x !important;
+  }
 
+  div.jHtmlArea .ToolBar ul li {
+    list-style-type: none !important;
+    float: left !important;
+    border: none !important;
+    padding: 1px !important;
+    margin: 1px !important;
+    background-image: none !important;
+  }
+
+  div.jHtmlArea .ToolBar ul li:hover {
+    border: solid 1px #ccc !important;
+    background: #ddd url(/assets/jHtmlArea_Toolbar_Group__Btn_Select_BG.png) !important;
+    padding: 0 !important;
+  }
 </style>
 
 <%= render "layouts/first_tab" %>
@@ -34,13 +63,24 @@
     </div>
   <% end %>
 
+<div style="font-size: 14px;">
+  <span style="color: #c33; font-weight: bold;">Por favor copia y pega los siguientes bloques de código según los valores que necesites:</span>
+  <div style="margin: 20px; color: #000;">
+    <p><%%= @attendee.a_name %> - Para mostrar el nombre del asistente.</p>
+    <p><%%= @attendee.e_tradename %> - Su empresa.</p>
+    <p><%%= @attendee.e_name %> - Su razón social.</p>
+    <p><%%= @attendee.attendee_id %> - Su ID de registro.</p>
+    <p><%%= @attendee.a_email %> - Su email.</p>
+  </div>
+</div>
+
   <p class="field">
-    <%= f.label t("mail_template.name") %>
+    <%= f.label "#{t("mail_template.name")}:" %>
     <%= f.label t("mail_template.#{@mail_template.name}") %>
   </p>
 
   <p class="field">
-    <%= f.label t("mail_template.content") %>
+    <%= f.label "#{t("mail_template.content")}:" %>
     <%= f.text_area :content, :class=>"medium-input", :required => true %><span class="required">*</span>
   </p>
   <%= f.hidden_field :event_id, :value => session[:current_event_id] %>

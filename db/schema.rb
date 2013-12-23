@@ -245,10 +245,10 @@ ActiveRecord::Schema.define(:version => 20131220205522) do
 
   create_table "mail_templates", :force => true do |t|
     t.string   "name"
-    t.string   "content",    :null => false
-    t.integer  "event_id",   :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "content",    :limit => 2147483647, :null => false
+    t.integer  "event_id",                         :null => false
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
   end
 
   add_index "mail_templates", ["event_id"], :name => "mail_templates_event_id_fk"
