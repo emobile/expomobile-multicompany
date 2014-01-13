@@ -63,7 +63,10 @@ doc\:reapp=
 doc\:rerails=
 environment=
 log\:clear=Truncates all *.log files in log/ to zero bytes
-mails\:send[event_id]=
+mails\:acknowledgment_email[event_id]=
+mails\:general_email[event_id]=
+mails\:invitation_email[event_id]=
+mails\:welcome_email[event_id]=
 middleware=Prints out your Rack middleware stack
 notes=Enumerate all annotations (use notes:optimize, :fixme, :todo for focus)
 notes\:custom=Enumerate a custom annotation, specify with ANNOTATION=CUSTOM
