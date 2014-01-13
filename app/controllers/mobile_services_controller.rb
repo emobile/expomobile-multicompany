@@ -1,5 +1,5 @@
 class MobileServicesController < ApplicationController
-  before_filter :detect_platform
+  #before_filter :detect_platform
   before_filter :load_event, :except => [:get_attendee_id, :get_attendee_nip]
   #skip_before_filter :verify_authenticity_token, :only => [:register_visit_to_workshop]
   respond_to :json
